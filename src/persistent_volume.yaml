@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
     name: mongodb-pv
-    namespace: master_thesis
+    namespace: master-thesis
 spec:
   capacity:
     storage: 2Gi
