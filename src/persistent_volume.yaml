@@ -13,11 +13,11 @@ spec:
   storageClassName: mongodb-storageclass
   local:
     path: /mnt/data
-  # nodeAffinity:
-  #   required:
-  #     nodeSelectorTerms:
-  #     - matchExpressions:
-  #       - key: size
-  #         operator: In
-  #         values:
-  #           - large
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: size
+          operator: In
+          values:
+            - large
