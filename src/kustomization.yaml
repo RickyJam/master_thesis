@@ -3,10 +3,10 @@ kind: Kustomization
 namespace: master-thesis
 resources:
   - 00namespace.yaml
+  - storage_class.yaml
   - config_map.yaml  
   - persistent_volume_claim.yaml
   - persistent_volume.yaml
   - secret.yaml
   - service.yaml
   - statefulset.yaml
-  - storage_class.yaml
