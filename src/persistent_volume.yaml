@@ -21,3 +21,23 @@ spec:
           operator: In
           values:
             - large
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dataset
+  namespace: master-thesis
+  labels:
+    type: local
+spec:
+  storageClassName: hostpath
+  volumeMode: Filesystem
+  capacity:
+    storage: 256Mi
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: /mnt/dataset
+  persistentVolumeReclaimPolicy: Retain

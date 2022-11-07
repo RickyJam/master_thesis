@@ -11,3 +11,18 @@ spec:
   resources:
     requests:
       storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dataset-pvc
+  namespace: master-thesis
+spec:
+  storageClassName: hostpath
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 256Mi
