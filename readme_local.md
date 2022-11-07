@@ -4,4 +4,4 @@
   * poi devo creare in minikube la folder data!
      --> ```ssh minikube```
      --> ```sudo mkdir /mnt/FOLDER_DA_CREARE```
-  * 
+  * devo montare la cartella dataset: ```minikube mount Datasets /mnt/dataset``` 
