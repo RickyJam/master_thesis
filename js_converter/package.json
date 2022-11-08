@@ -3,9 +3,6 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
-    "scripts": {
-        "start": "node"
-    },
     "dependencies": {
         "convert-csv-to-json": "^1.3.3"
     }
