@@ -8,25 +8,25 @@ function throughDirectory(currentDir, destinationDir) {
     if (FS.statSync(absolutePath).isDirectory()) {
       const absoluteDestinationPath = Path.join(destinationDir, file);
       createDir(absoluteDestinationPath);
-      return throughDirectory(absolutePath, absoluteDestinationPath);
+      throughDirectory(absolutePath, absoluteDestinationPath);
     } else {
-      if (file.startsWith(".")) {
-        return;
-      }
-      const jsonFileName = file.split(".")[0] + ".json";
-      const absoluteDestinationPath = Path.join(destinationDir, jsonFileName);
-      console.log(absolutePath);
-      console.log(absoluteDestinationPath);
-
-      //TODO: riscrivere prima riga
-      convertFile(absolutePath, absoluteDestinationPath);
-      return;
+      convertFile(absolutePath);
     }
   });
 }
 
-function convertFile(fileInputName, fileOutputName) {
+function convertFile(fileInputName) {
+  if (file.startsWith(".")) {
+    return;
+  }
+  const jsonFileName = file.split(".")[0] + ".json";
+  const fileOutputName = Path.join(destinationDir, jsonFileName);
+
+  //TODO: riscrivere prima riga
+
   generateJsonFileFromCsv(fileInputName, fileOutputName);
+  return;
+
 }
 
 function createDir(dirPath) {
