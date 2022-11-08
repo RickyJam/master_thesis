@@ -1,30 +1,41 @@
-const converter = require("convert-csv-to-json");
+const { generateJsonFileFromCsv } = require("convert-csv-to-json");
 const Path = require("path");
 const FS = require("fs");
 
 function throughDirectory(currentDir, destinationDir) {
   FS.readdirSync(currentDir).forEach((file) => {
     const absolutePath = Path.join(currentDir, file);
-    const absoluteDestinationPath = Path.join(destinationDir, file);
     if (FS.statSync(absolutePath).isDirectory()) {
-        return throughDirectory(absolutePath, absoluteDestinationPath);
+      const absoluteDestinationPath = Path.join(destinationDir, file);
+      createDir(absoluteDestinationPath);
+      return throughDirectory(absolutePath, absoluteDestinationPath);
     } else {
-      if(file.startsWith(".")) {
-        console.log(`Unhandled file ${file}`);
+      if (file.startsWith(".")) {
         return;
       }
+      const jsonFileName = file.split(".")[0] + ".json";
+      const absoluteDestinationPath = Path.join(destinationDir, jsonFileName);
       console.log(absolutePath);
       console.log(absoluteDestinationPath);
-      return;
+
       //TODO: riscrivere prima riga
-      //TODO: gestire conversione
+      convertFile(absolutePath, absoluteDestinationPath);
+      return;
     }
   });
 }
 
 function convertFile(fileInputName, fileOutputName) {
-  converter.generateJsonFileFromCsv(fileInputName, fileOutputName);
+  generateJsonFileFromCsv(fileInputName, fileOutputName);
 }
 
-exports.convertAllFiles = (startDir, destinationDir) =>
+function createDir(dirPath) {
+  if(!FS.existsSync(dirPath)) {
+    FS.mkdirSync(dirPath);
+  }
+}
+
+exports.convertAllFiles = (startDir, destinationDir) => {
+  createDir(destinationDir);
   throughDirectory(startDir, destinationDir);
+};
