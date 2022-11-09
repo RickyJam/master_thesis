@@ -35,7 +35,7 @@ spec:
   storageClassName: hostpath
   volumeMode: Filesystem
   capacity:
-    storage: 256Mi
+    storage: 1Gi
   accessModes:
     - ReadOnlyMany
   hostPath:
