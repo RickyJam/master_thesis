@@ -13,9 +13,8 @@ data:
     const rootPass = cat('/etc/k8-test/admin/MONGO_ROOT_PASSWORD');
     const usersStr = cat('/etc/k8-test/MONGO_USERS_LIST');
     const adminDb = db.getSiblingDB('admin');
-    print("Log a db test");
     adminDb.auth(rootUser, rootPass);
-    print('Successfully authenticated admin user');
+    
     const targetDb = db.getSiblingDB(targetDbStr);
     const customRoles = adminDb
       .getRoles({rolesInfo: 1, showBuiltinRoles: false})
