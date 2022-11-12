@@ -10,3 +10,6 @@
 
 
   ```sudo mkdir /mnt/data```
+
+# troubleshooting
+* caso estremo: ```minikube delete```
