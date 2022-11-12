@@ -5,3 +5,8 @@
      --> ```ssh minikube```
      --> ```sudo mkdir /mnt/FOLDER_DA_CREARE```
   * devo montare la cartella dataset: ```minikube mount Datasets /mnt/dataset``` 
+  mongoimport --db dbName --collection collectionName --file fileName.json --jsonArray
+
+
+
+  ```sudo mkdir /mnt/data```
