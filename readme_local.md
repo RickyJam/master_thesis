@@ -1,11 +1,11 @@
 # TODO piacevoli da fare
-* minikube mount ma fisso, non da far partire sempre
 * script per far partire il tutto .sh
 * automatizzare:
    * creazione db
    * creazione utente
    * import singolo file
    * import tutti file
+* attivare il monitoring di Lens.
 
 
 
