@@ -23,6 +23,10 @@ spec:
               value: /etc/k8-test/admin/MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
               value: /etc/k8-test/admin/MONGO_ROOT_PASSWORD
+            - name: MONGO_HOMEOWNER_USERNAME_FILE
+              value: /etc/k8-test/admin/MONGO_HOMEOWNER_USERNAME
+            - name: MONGO_HOMEOWNER_PASSWORD_FILE
+              value: /etc/k8-test/admin/MONGO_HOMEOWNER_PASSWORD
           volumeMounts:
             - name: k8-test
               mountPath: /etc/k8-test
@@ -51,14 +55,11 @@ spec:
               - key: MONGO_ROOT_PASSWORD
                 path: admin/MONGO_ROOT_PASSWORD
                 mode: 0444
-              - key: MONGO_USERNAME
+              - key: MONGO_HOMEOWNER_USERNAME
                 path: MONGO_USERNAME
                 mode: 0444
-              - key: MONGO_PASSWORD
+              - key: MONGO_HOMEOWNER_PASSWORD
                 path: MONGO_PASSWORD
-                mode: 0444
-              - key: MONGO_USERS_LIST
-                path: MONGO_USERS_LIST
                 mode: 0444
         - name: mongodb-scripts
           configMap:
@@ -66,6 +67,8 @@ spec:
             items:
               - key: ensure-users.js
                 path: ensure-users.js
+              - key: load-files.sh
+                path: load-files.sh
         - name: mongodb-configmap
           configMap:
             name: mongodb-configmap

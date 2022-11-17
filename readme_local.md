@@ -1,11 +1,11 @@
 # TODO piacevoli da fare
-* script per far partire il tutto .sh
 * automatizzare:
    * creazione db
    * creazione utente
    * import singolo file
    * import tutti file
 * attivare il monitoring di Lens.
+* rinominare tutti i k8-test e test che ci sono in giro
 
 
 
