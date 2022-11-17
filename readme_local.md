@@ -1,11 +1,9 @@
 # TODO piacevoli da fare
-* automatizzare:
-   * creazione db
-   * creazione utente
-   * import singolo file
-   * import tutti file
 * attivare il monitoring di Lens.
 * rinominare tutti i k8-test e test che ci sono in giro
+* importare tutti i file?
+* provare ad usare un deployment: (magari non necessario però eh)
+   * provare ad inserire tutto
 
 
 
