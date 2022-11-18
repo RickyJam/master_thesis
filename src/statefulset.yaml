@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb-test
+  name: mongodb-statefulset
   namespace: master-thesis
 spec:
-  serviceName: mongodb-test
+  serviceName: mongodb-statefulset
   replicas: 1
   selector:
     matchLabels:
@@ -13,23 +13,23 @@ spec:
     metadata:
       labels:
         app: database
-        selector: mongodb-test
+        selector: mongodb-statefulset
     spec:
       containers:
-        - name: mongodb-test
+        - name: mongodb-statefulset
           image: mongo:4.0.8
           env:
             - name: MONGO_INITDB_ROOT_USERNAME_FILE
-              value: /etc/k8-test/admin/MONGO_ROOT_USERNAME
+              value: /etc/k8-mounts/admin/MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
-              value: /etc/k8-test/admin/MONGO_ROOT_PASSWORD
+              value: /etc/k8-mounts/admin/MONGO_ROOT_PASSWORD
             - name: MONGO_HOMEOWNER_USERNAME_FILE
-              value: /etc/k8-test/admin/MONGO_HOMEOWNER_USERNAME
+              value: /etc/k8-mounts/admin/MONGO_HOMEOWNER_USERNAME
             - name: MONGO_HOMEOWNER_PASSWORD_FILE
-              value: /etc/k8-test/admin/MONGO_HOMEOWNER_PASSWORD
+              value: /etc/k8-mounts/admin/MONGO_HOMEOWNER_PASSWORD
           volumeMounts:
-            - name: k8-test
-              mountPath: /etc/k8-test
+            - name: k8-mounts
+              mountPath: /etc/k8-mounts
               readOnly: true
             - name: mongodb-scripts
               mountPath: /docker-entrypoint-initdb.d
@@ -45,7 +45,7 @@ spec:
       nodeSelector:
         size: large
       volumes:
-        - name: k8-test
+        - name: k8-mounts
           secret:
             secretName: mongodb-secret
             items:

@@ -8,21 +8,21 @@ data:
     storage:
       dbPath: /data/db
   ensure-users.js: |
-    const rootUser = cat('/etc/k8-test/admin/MONGO_ROOT_USERNAME');
-    const rootPass = cat('/etc/k8-test/admin/MONGO_ROOT_PASSWORD');
+    const rootUser = cat('/etc/k8-mounts/admin/MONGO_ROOT_USERNAME');
+    const rootPass = cat('/etc/k8-mounts/admin/MONGO_ROOT_PASSWORD');
     const adminDb = db.getSiblingDB('admin');
     adminDb.auth(rootUser, rootPass);
     
     const masterDbStr = 'master';
     const masterDb = db.getSiblingDB(masterDbStr);
-    const homeOwnerUser = cat('/etc/k8-test/MONGO_HOMEOWNER_USERNAME');
-    const homeOwnerPass = cat('/etc/k8-test/MONGO_HOMEOWNER_PASSWORD');
+    const homeOwnerUser = cat('/etc/k8-mounts/MONGO_HOMEOWNER_USERNAME');
+    const homeOwnerPass = cat('/etc/k8-mounts/MONGO_HOMEOWNER_PASSWORD');
     masterDb.createUser({user: homeOwnerUser, pwd: homeOwnerPass, roles: [{role: "readWrite", db: masterDbStr}]})
   load-files.sh: |
     DB_MASTER="master"
     COLLECTION="measurements"
-    HOME_OWNER_USER=$(cat /etc/k8-test/MONGO_HOMEOWNER_USERNAME)
-    HOME_OWNER_PASS=$(cat /etc/k8-test/MONGO_HOMEOWNER_PASSWORD)
+    HOME_OWNER_USER=$(cat /etc/k8-mounts/MONGO_HOMEOWNER_USERNAME)
+    HOME_OWNER_PASS=$(cat /etc/k8-mounts/MONGO_HOMEOWNER_PASSWORD)
     DATA_FILE="dataset/HomeA/2014/HomeA-meter2_2014.json" 
     mongoimport -u $HOME_OWNER_USER -p $HOME_OWNER_PASS --db $DB_MASTER --collection $COLLECTION --file $DATA_FILE --jsonArray
 
