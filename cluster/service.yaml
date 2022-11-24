@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: master-thesis
+  labels:
+    app: database
+spec:
+  clusterIP: None
+  selector:
+    app: database
