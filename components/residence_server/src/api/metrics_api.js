@@ -9,24 +9,24 @@ const POWER_PATH = METRICS_PATH + "/power";
 
 const MetricsApi = (server) => ({
     register: () => {
-        server.get(METRICS_PATH, (req, res) => {
-            const data = metricsService.getResidanceMetrics();
-            return data;
+        server.get(METRICS_PATH, async (req, res) => {
+            const data = await metricsService.getResidanceMetrics();
+            res.send(data);
         });
 
-        server.get(KITCHENS_PATH, (req, res) => {
-            const data = metricsService.getResidanceKitchensMetrics();
-            return data;
+        server.get(KITCHENS_PATH, async (req, res) => {
+            const data = await metricsService.getResidanceKitchensMetrics();
+            res.send(data);
         });
 
-        server.get(LAUNDRY_PATH, (req, res) => {
-            const data = metricsService.getResidanceLaundryMetrics();
-            return data;
+        server.get(LAUNDRY_PATH, async (req, res) => {
+            const data = await metricsService.getResidanceLaundryMetrics();
+            res.send(data);
         });
 
-        server.get(POWER_PATH, (req, res) => {
-            const data = metricsService.getResidancePowerMetrics();
-            return data;
+        server.get(POWER_PATH, async (req, res) => {
+            const data = await metricsService.getResidancePowerMetrics();
+            res.send(data);
         });
     }
 });
