@@ -1,21 +1,25 @@
+import MetricsService from '../services/metrics_service';
+
+const metricsService = MetricsService();
+
 METRICS_PATH = "/metrics";
 
 const MetricsApi = (server) => ({
     register: () => {
         server.get('/residence', (req, res) => {
-            //TODO: chiamata al service
+            const data = metricsService.getResidanceMetrics();
         });
 
         server.get('/residence/kitchens', (req, res) => {
-            //TODO: chiamata al service
+            const data = metricsService.getResidanceKitchensMetrics();
         });
 
         server.get('/residence/laundry', (req, res) => {
-            //TODO: chiamata al service
+            const data = metricsService.getResidanceLaundryMetrics();
         });
 
         server.get('/residence/power', (req, res) => {
-            //TODO: chiamata al service
+            const data = metricsService.getResidancePowerMetrics();
         });
     }
 });
