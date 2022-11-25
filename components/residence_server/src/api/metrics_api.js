@@ -2,24 +2,31 @@ import MetricsService from '../services/metrics_service.js';
 
 const metricsService = MetricsService();
 
-METRICS_PATH = "/metrics";
+const METRICS_PATH = "/residence";
+const KITCHENS_PATH = METRICS_PATH + "/kitchens";
+const LAUNDRY_PATH = METRICS_PATH + "/laundry";
+const POWER_PATH = METRICS_PATH + "/power";
 
 const MetricsApi = (server) => ({
     register: () => {
-        server.get('/residence', (req, res) => {
+        server.get(METRICS_PATH, (req, res) => {
             const data = metricsService.getResidanceMetrics();
+            return data;
         });
 
-        server.get('/residence/kitchens', (req, res) => {
+        server.get(KITCHENS_PATH, (req, res) => {
             const data = metricsService.getResidanceKitchensMetrics();
+            return data;
         });
 
-        server.get('/residence/laundry', (req, res) => {
+        server.get(LAUNDRY_PATH, (req, res) => {
             const data = metricsService.getResidanceLaundryMetrics();
+            return data;
         });
 
-        server.get('/residence/power', (req, res) => {
+        server.get(POWER_PATH, (req, res) => {
             const data = metricsService.getResidancePowerMetrics();
+            return data;
         });
     }
 });
