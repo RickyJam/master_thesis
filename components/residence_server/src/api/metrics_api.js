@@ -1,4 +1,4 @@
-import MetricsService from '../services/metrics_service';
+import MetricsService from '../services/metrics_service.js';
 
 const metricsService = MetricsService();
 

@@ -1,4 +1,4 @@
-import MetricsApi from "./api/metrics_api";
+import MetricsApi from "./api/metrics_api.js";
 import express from "express";
 
 const server = express();

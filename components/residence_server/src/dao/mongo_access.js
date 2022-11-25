@@ -1,6 +1,8 @@
-import MongoClient from "mongodb";
+import { MongoClient } from "mongodb";
 
-const client = new MongoClient();
+const uri = "mongodb+srv://sample-hostname:27017/?maxPoolSize=20&w=majority";
+
+const client = new MongoClient(uri);
 
 async function pingDB() {
   try {
