@@ -33,3 +33,14 @@
 
 * eliminazione utente:
   * db.dropUser("mynewuser", {w: "majority", wtimeout: 4000})
+
+
+## Mongo locale come processo:
+* eseguire start_mongo
+* eseguire ```mongosh``` e poi ```use master```
+* eseguire ```db.createUser({user: "admin", pwd: "password", roles: [{role: "readWrite", db: "master"}]})```
+* uscire scrivendo ```exit```
+* eseguire il comando: ```mongoimport -u admin -p password --db master --collection measurements --file dataset/HomeA/2014/HomeA-meter2_2014.json --jsonArray``` per importare i dati.
+* db popolato!
+
+* per spegnere entrare e scrivere ```shutdown```
