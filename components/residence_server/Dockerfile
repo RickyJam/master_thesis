@@ -1,4 +1,4 @@
-# dopo usare alpine
+#TODO: dopo usare alpine
 FROM node:19
 
 WORKDIR /app/node_server
