@@ -1,8 +1,8 @@
-import { pingDB } from "../dao/mongo_access.js";
+import { getLastTenMetrics } from "../dao/mongo_access.js";
 
 const MetricsService = () => ({
   getResidanceMetrics: async () => {
-    return await pingDB();
+    return await getLastTenMetrics();
   },
   getResidanceKitchensMetrics: () => {},
   getResidanceLaundryMetrics: () => {},
