@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "DEV=true node server.js"
   },
   "author": "",
   "license": "ISC",
