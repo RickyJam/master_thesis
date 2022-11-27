@@ -10,3 +10,4 @@ resources:
   - secret.yaml
   - mongo_service.yaml
   - statefulset.yaml
+  - node_deployment.yaml
