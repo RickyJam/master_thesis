@@ -1,5 +1,4 @@
 # TODO piacevoli da fare
-* importare tutti i file?
 * provare ad usare un deployment: (magari non necessario però eh)
    * provare ad inserire tutto
 
