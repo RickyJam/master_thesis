@@ -3,7 +3,7 @@ import isDev from "../utils/enviroment.js";
 
 const DB_NAME = "master";
 const COLLECTION_NAME = "measurements";
-const k8s_host = 'mongodb-service';
+const k8s_host = 'mongodb-service:27017';
 const dev_host = 'localhost:27017';
 
 function getDbUri() {
