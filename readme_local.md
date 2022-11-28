@@ -28,7 +28,7 @@
 
 # Usefull query
 * creazione utente:
-   * db.createUser({user: "homeOwner", pwd: "password", roles: [{role: "readWrite", db: "master"}]})
+   * db.createUser({user: "admin", pwd: "password", roles: [{role: "readWrite", db: "master"}]})
    * /dataset/HomeA/2014/HomeA-meter2_2014.json
 
 * eliminazione utente:
