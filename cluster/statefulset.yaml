@@ -56,10 +56,10 @@ spec:
                 path: admin/MONGO_ROOT_PASSWORD
                 mode: 0444
               - key: MONGO_MASTER_USERNAME
-                path: MONGO_USERNAME
+                path: MONGO_MASTER_USERNAME
                 mode: 0444
               - key: MONGO_MASTER_PASSWORD
-                path: MONGO_PASSWORD
+                path: MONGO_MASTER_PASSWORD
                 mode: 0444
         - name: mongodb-scripts
           configMap:
@@ -67,8 +67,8 @@ spec:
             items:
               - key: ensure-users.js
                 path: ensure-users.js
-              - key: load-files.sh
-                path: load-files.sh
+              - key: load-files-all.sh
+                path: load-files-all.sh
         - name: mongodb-configmap
           configMap:
             name: mongodb-configmap
