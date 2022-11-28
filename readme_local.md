@@ -2,11 +2,6 @@
 * importare tutti i file?
 * provare ad usare un deployment: (magari non necessario però eh)
    * provare ad inserire tutto
-* gestione utenza:
-   * o lato db, allora devo passare le info da fuori per usare un utente lato db
-   * oppure ho un modulo che mi controlla ste cose ed uso un utente comune..
-      * per ora faccio che uso l'utente admin bom... ma da capire
-
 
 
 * cose notate:
