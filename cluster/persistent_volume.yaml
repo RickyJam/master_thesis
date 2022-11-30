@@ -5,7 +5,7 @@ metadata:
     namespace: master-thesis
 spec:
   capacity:
-    storage: 2Gi
+    storage: 6Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
