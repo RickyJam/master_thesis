@@ -1,6 +1,8 @@
 # TODO piacevoli da fare
 * provare ad usare un deployment: (magari non necessario però eh)
    * provare ad inserire tutto
+* dividere i file grossi, o trovare il modo di inseririli tutti
+* sort basata su date/time del db...
 
 
 * cose notate:
@@ -38,9 +40,3 @@
 * db popolato!
 
 * per spegnere entrare e scrivere ```shutdown```
-
-
-## file da dividere
-* HomeA-meter4_2016.csv
-* HomeB-meter1_2016.csv
-* HomeB-meter2_2016.csv
