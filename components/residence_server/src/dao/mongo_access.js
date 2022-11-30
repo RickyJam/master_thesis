@@ -16,9 +16,13 @@ function getDbUri() {
   return `mongodb://admin:password@${hostname}/?authMechanism=DEFAULT&authSource=${DB_NAME}`;
 }
 
-async function getAllLastTenMetrics() {
+function getMongoClient() {
   const uri = getDbUri();
-  const client = new MongoClient(uri);
+  return new MongoClient(uri);
+}
+
+async function getAllLastTenMetrics() {
+  const client = getMongoClient();
   try {
     await client.connect();
     const db = client.db(DB_NAME);
