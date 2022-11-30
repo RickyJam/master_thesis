@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import isDev from "../utils/enviroment.js";
 
-const DB_NAME = "master";
+export const DB_NAME = "master";
 const k8s_host = "mongodb-service:27017";
 const dev_host = "localhost:27017";
 
@@ -15,19 +15,4 @@ function getMongoClient() {
   return new MongoClient(uri);
 }
 
-async function getLastTenMetricsFrom(collectionName) {
-  const client = getMongoClient();
-  try {
-    await client.connect();
-    const db = client.db(DB_NAME);
-
-    return await db.collection(collectionName).find().limit(10).toArray();
-  } catch {
-    console.log("Error");
-    return [];
-  } finally {
-    await client.close();
-  }
-}
-
-export { getLastTenMetricsFrom };
+export default getMongoClient;

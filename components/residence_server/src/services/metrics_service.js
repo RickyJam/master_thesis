@@ -1,4 +1,4 @@
-import { getLastTenMetricsFrom } from "../dao/mongo_access.js";
+import { getLastTenMetricsFrom } from "../dao/mongo_metrics.js";
 
 const HOMEA_COLLECTION = "homeA";
 const HOMEB_COLLECTION = "homeB";
@@ -19,7 +19,10 @@ const MetricsService = () => ({
     };
     return { data };
   },
-  getResidanceKitchensMetrics: () => {},
+  getResidanceKitchensMetrics: async () => {
+    const data = await {};
+    return { data };
+  },
   getResidanceLaundryMetrics: () => {},
   getResidancePowerMetrics: () => {},
 });
