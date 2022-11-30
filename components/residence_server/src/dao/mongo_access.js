@@ -16,7 +16,7 @@ function getDbUri() {
   return `mongodb://admin:password@${hostname}/?authMechanism=DEFAULT&authSource=${DB_NAME}`;
 }
 
-async function getLastTenMetrics() {
+async function getAllLastTenMetrics() {
   const uri = getDbUri();
   const client = new MongoClient(uri);
   try {
@@ -43,4 +43,4 @@ async function getLastTenMetricsFrom(collection){
   return await collection.find().sort({ "Date&Time": -1 }).limit(10).toArray();
 }
 
-export { getLastTenMetrics };
+export { getAllLastTenMetrics };

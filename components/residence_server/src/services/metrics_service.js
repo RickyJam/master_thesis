@@ -1,8 +1,8 @@
-import { getLastTenMetrics } from "../dao/mongo_access.js";
+import { getAllLastTenMetrics } from "../dao/mongo_access.js";
 
 const MetricsService = () => ({
   getResidanceMetrics: async () => {
-    return await getLastTenMetrics();
+    return await getAllLastTenMetrics();
   },
   getResidanceKitchensMetrics: () => {},
   getResidanceLaundryMetrics: () => {},
