@@ -1,4 +1,4 @@
-import MetricsApi from "./src/api/metrics_api.js";
+import MetricsApi, { getPaths } from "./src/api/metrics_api.js";
 import express from "express";
 import isDev from "./src/utils/enviroment.js";
 
@@ -15,5 +15,11 @@ server.listen(PORT, () =>
 
 server.get("/", async (req, res) => {
   const enviroment = isDev() ? "DEV" : "PROD";
-  res.send(`OK - ${enviroment}`);
+  const response = {
+    enviroment,
+    path: {
+      metrics: getPaths(),
+    },
+  };
+  res.send(response);
 });
