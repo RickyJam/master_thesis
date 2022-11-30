@@ -2,7 +2,12 @@ import { MongoClient } from "mongodb";
 import isDev from "../utils/enviroment.js";
 
 const DB_NAME = "master";
-const COLLECTION_NAME = "measurements";
+const HOMEA_COLLECTION = "homeA";
+const HOMEB_COLLECTION = "homeB";
+const HOMEC_COLLECTION = "homeC";
+const HOMED_COLLECTION = "homeD";
+const HOMEE_COLLECTION = "homeE";
+const HOMEF_COLLECTION = "homeF";
 const k8s_host = 'mongodb-service:27017';
 const dev_host = 'localhost:27017';
 
@@ -17,15 +22,25 @@ async function getLastTenMetrics() {
   try {
     await client.connect();
     const db = client.db(DB_NAME);
-    const collection = db.collection(COLLECTION_NAME);
 
-    return await collection.find().limit(10).toArray();
+    return {
+      HOMEA_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEA_COLLECTION)), 
+      HOMEB_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEB_COLLECTION)),
+      HOMEC_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEC_COLLECTION)),
+      HOMED_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMED_COLLECTION)),
+      HOMEE_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEE_COLLECTION)),
+      HOMEF_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEF_COLLECTION))
+    }
   } catch {
-    console.log("ERRORE RISCONTRATO");
+    console.log("Error");
     return [];
   } finally {
     await client.close();
   }
+}
+
+async function getLastTenMetricsFrom(collection){
+  return await collection.find().sort({ "Date&Time": -1 }).limit(10).toArray();
 }
 
 export { getLastTenMetrics };
