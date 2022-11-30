@@ -2,14 +2,8 @@ import { MongoClient } from "mongodb";
 import isDev from "../utils/enviroment.js";
 
 const DB_NAME = "master";
-const HOMEA_COLLECTION = "homeA";
-const HOMEB_COLLECTION = "homeB";
-const HOMEC_COLLECTION = "homeC";
-const HOMED_COLLECTION = "homeD";
-const HOMEE_COLLECTION = "homeE";
-const HOMEF_COLLECTION = "homeF";
-const k8s_host = 'mongodb-service:27017';
-const dev_host = 'localhost:27017';
+const k8s_host = "mongodb-service:27017";
+const dev_host = "localhost:27017";
 
 function getDbUri() {
   const hostname = isDev() ? dev_host : k8s_host;
@@ -21,20 +15,13 @@ function getMongoClient() {
   return new MongoClient(uri);
 }
 
-async function getAllLastTenMetrics() {
+async function getLastTenMetricsFrom(collectionName) {
   const client = getMongoClient();
   try {
     await client.connect();
     const db = client.db(DB_NAME);
 
-    return {
-      HOMEA_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEA_COLLECTION)), 
-      HOMEB_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEB_COLLECTION)),
-      HOMEC_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEC_COLLECTION)),
-      HOMED_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMED_COLLECTION)),
-      HOMEE_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEE_COLLECTION)),
-      HOMEF_COLLECTION: await getLastTenMetricsFrom(db.collection(HOMEF_COLLECTION))
-    }
+    return await db.collection(collectionName).find().limit(10).toArray();
   } catch {
     console.log("Error");
     return [];
@@ -43,8 +30,4 @@ async function getAllLastTenMetrics() {
   }
 }
 
-async function getLastTenMetricsFrom(collection){
-  return await collection.find().sort({ "Date&Time": -1 }).limit(10).toArray();
-}
-
-export { getAllLastTenMetrics };
+export { getLastTenMetricsFrom };
