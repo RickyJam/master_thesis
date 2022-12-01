@@ -18,7 +18,7 @@ function throughDirectory(currentDir, destinationDir) {
 
 function replaceHeaderLine(file) {
   const data = FS.readFileSync(file, { encoding: "utf8", flag: "r" });
-  const result = replaceHeaders(data);
+  const result = replaceHeaders(file, data);
   FS.writeFileSync(file, result, { encoding: "utf8" });
 }
 
@@ -30,7 +30,7 @@ function convertFile(fileInputName, file, destinationDir) {
   const jsonFileName = file.split(".")[0] + ".json";
   const fileOutputName = Path.join(destinationDir, jsonFileName);
 
-  replaceHeaderLine(fileInputName);
+  replaceHeaderLine(fileInputName, jsonFileName);
 
   converter.fieldDelimiter(",");
   converter.generateJsonFileFromCsv(fileInputName, fileOutputName);
