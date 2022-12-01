@@ -1,26 +1,32 @@
-import { getLastTenMetricsFrom } from "../dao/mongo_metrics.js";
+import collections from "../utils/mongo_helper.js";
+import {
+  getLastTenMetricsFrom,
+  getPowerMetrics,
+} from "../dao/mongo_metrics.js";
 
-const HOMEA_COLLECTION = "homeA";
-const HOMEB_COLLECTION = "homeB";
-const HOMEC_COLLECTION = "homeC";
-const HOMED_COLLECTION = "homeD";
-const HOMEE_COLLECTION = "homeE";
-const HOMEF_COLLECTION = "homeF";
+const { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF } = collections;
 
 const MetricsService = () => ({
   getResidanceMetrics: async () => {
     const data = {
-      HOMEA_COLLECTION: await getLastTenMetricsFrom(HOMEA_COLLECTION),
-      HOMEB_COLLECTION: await getLastTenMetricsFrom(HOMEB_COLLECTION),
-      HOMEC_COLLECTION: await getLastTenMetricsFrom(HOMEC_COLLECTION),
-      HOMED_COLLECTION: await getLastTenMetricsFrom(HOMED_COLLECTION),
-      HOMEE_COLLECTION: await getLastTenMetricsFrom(HOMEE_COLLECTION),
-      HOMEF_COLLECTION: await getLastTenMetricsFrom(HOMEF_COLLECTION),
+      HOMEA: await getLastTenMetricsFrom(HOMEA),
+      HOMEB: await getLastTenMetricsFrom(HOMEB),
+      HOMEC: await getLastTenMetricsFrom(HOMEC),
+      HOMED: await getLastTenMetricsFrom(HOMED),
+      HOMEE: await getLastTenMetricsFrom(HOMEE),
+      HOMEF: await getLastTenMetricsFrom(HOMEF),
     };
     return { data };
   },
   getResidanceKitchensMetrics: async () => {
-    const data = await {};
+    const data = {
+      HOMEA: await getPowerMetrics(HOMEA),
+      HOMEB: await getPowerMetrics(HOMEB),
+      HOMEC: await getPowerMetrics(HOMEC),
+      HOMED: await getPowerMetrics(HOMED),
+      HOMEE: await getPowerMetrics(HOMEE),
+      HOMEF: await getPowerMetrics(HOMEF),
+    };
     return { data };
   },
   getResidanceLaundryMetrics: () => {},
