@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-server
+  namespace: master-thesis
+spec:
+  selector:
+    matchLabels:
+      app: node-server
+  template:
+    metadata:
+      labels:
+        app: node-server
+    spec:
+      containers:
+        - name: node-server
+          image: thesis/node-server
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 3000

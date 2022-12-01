@@ -1,11 +1,7 @@
 const converter = require("convert-csv-to-json");
 const Path = require("path");
 const FS = require("fs");
-
-const stringToBeReplaced =
-  "Date&Time,use[kW],gen[kW],FurnaceHRV[kW],CellarOutlets[kW],WashingMachine[kW],FridgeRange[kW],DisposalDishwasher[kW],KitchenLights[kW],BedroomOutlets[kW],BedroomLights[kW],MasterOutlets[kW],MasterLights[kW],DuctHeaterHRV[kW]";
-const replacementString =
-  "dateTime,usedKw,generateKw,furnaceHRVKw,cellarOutletsKw,washingMachineKw,fridgeRangeKw,disposalDishwasherKw,kitchenLightsKw,bedroomOutletsKw,bedroomLightsKw,masterOutletsKw,masterLightsKw,ductHeaterHRVKw";
+const { replaceHeaders } = require("./stringReplacement");
 
 function throughDirectory(currentDir, destinationDir) {
   FS.readdirSync(currentDir).forEach((file) => {
@@ -22,7 +18,7 @@ function throughDirectory(currentDir, destinationDir) {
 
 function replaceHeaderLine(file) {
   const data = FS.readFileSync(file, { encoding: "utf8", flag: "r" });
-  const result = data.replace(stringToBeReplaced, replacementString);
+  const result = replaceHeaders(file, data);
   FS.writeFileSync(file, result, { encoding: "utf8" });
 }
 
@@ -34,7 +30,7 @@ function convertFile(fileInputName, file, destinationDir) {
   const jsonFileName = file.split(".")[0] + ".json";
   const fileOutputName = Path.join(destinationDir, jsonFileName);
 
-  replaceHeaderLine(fileInputName);
+  replaceHeaderLine(fileInputName, jsonFileName);
 
   converter.fieldDelimiter(",");
   converter.generateJsonFileFromCsv(fileInputName, fileOutputName);

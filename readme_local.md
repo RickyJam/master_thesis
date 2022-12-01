@@ -1,8 +1,8 @@
 # TODO piacevoli da fare
-* importare tutti i file?
 * provare ad usare un deployment: (magari non necessario però eh)
    * provare ad inserire tutto
-
+* dividere i file grossi, o trovare il modo di inseririli tutti
+* sort basata su date/time del db...
 
 
 * cose notate:
@@ -24,8 +24,19 @@
 
 # Usefull query
 * creazione utente:
-   * db.createUser({user: "homeOwner", pwd: "password", roles: [{role: "readWrite", db: "master"}]})
+   * db.createUser({user: "admin", pwd: "password", roles: [{role: "readWrite", db: "master"}]})
    * /dataset/HomeA/2014/HomeA-meter2_2014.json
 
 * eliminazione utente:
   * db.dropUser("mynewuser", {w: "majority", wtimeout: 4000})
+
+
+## Mongo locale come processo:
+* eseguire start_mongo
+* eseguire ```mongosh``` e poi ```use master```
+* eseguire ```db.createUser({user: "admin", pwd: "password", roles: [{role: "readWrite", db: "master"}]})```
+* uscire scrivendo ```exit```
+* eseguire il comando: ```mongoimport -u admin -p password --db master --collection homeA --file dataset/HomeA/2014/HomeA-meter2_2014.json --jsonArray``` per importare i dati.
+* db popolato!
+
+* per spegnere entrare e scrivere ```shutdown```

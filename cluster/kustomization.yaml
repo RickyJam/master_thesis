@@ -8,5 +8,6 @@ resources:
   - persistent_volume_claim.yaml
   - persistent_volume.yaml
   - secret.yaml
-  - service.yaml
+  - mongo_service.yaml
   - statefulset.yaml
+  - node_deployment.yaml
