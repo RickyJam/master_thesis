@@ -1,3 +1,4 @@
+import { filterParams } from "../utils/mongo_helper.js";
 import getMongoClient, { DB_NAME } from "./mongo_access.js";
 
 async function getLastTenMetricsFrom(collectionName) {
@@ -6,8 +7,14 @@ async function getLastTenMetricsFrom(collectionName) {
   );
 }
 
-async function getKitchenMetrics(collectionName) {
-  return onMasterDB((db) => {});
+async function getPowerMetrics(collectionName) {
+  return await onMasterDB((db) =>
+    db
+      .collection(collectionName)
+      .find({}, filterParams[collectionName].kitchen)
+      .limit(1)
+      .toArray()
+  );
 }
 
 async function onMasterDB(callback) {
@@ -25,4 +32,4 @@ async function onMasterDB(callback) {
   }
 }
 
-export { getLastTenMetricsFrom };
+export { getLastTenMetricsFrom, getPowerMetrics };
