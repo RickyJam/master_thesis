@@ -1,0 +1,11 @@
+{
+  "name": "dataset_loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "loader.js",
+  "scripts": {
+    "start": "node loader.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
