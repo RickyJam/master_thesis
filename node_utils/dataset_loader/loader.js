@@ -35,16 +35,30 @@ async function openFile(filePath) {
   return fileReader;
 }
 
-async function handleSingleFolder(fileReaders) {
+function mergeLines(lineRecords) {
+  const firstDefinedElement = lineRecords.find((record) => record !== undefined)
+  if(firstDefinedElement === undefined) return;
+  const mergedLineRecord = firstDefinedElement.deepClone({ header: true });
+  lineRecords.forEach((record) => {
+    if (record) {
+      mergedLineRecord.specificMetrics = [
+        ...mergedLineRecord.specificMetrics,
+        ...record.specificMetrics,
+      ];
+    }
+  });
+}
 
-  let haveRecords = true;
+async function handleSingleFolder(fileReaders) {
+  let lineRecords;
   do {
-    let lineRecords = [];
+    lineRecords = [];
     for (const index in fileReaders) {
       lineRecords.push(await getNewLineWithFixedTime(fileReaders[index]));
     }
-    haveRecords = lineRecords.every((record) => record != undefined)
-  } while (haveRecords);
+
+    mergeLines(lineRecords);
+  } while (lineRecords.every((record) => record != undefined));
 }
 
 async function job(basePath) {
@@ -60,5 +74,5 @@ async function job(basePath) {
   await handleSingleFolder(fileReaders);
 }
 
-job("../../Datasets/csv/HomeA/2014/");
-
+// job("../../Datasets/csv/HomeA/2014/");
+job("../../HomeA/2014/");
