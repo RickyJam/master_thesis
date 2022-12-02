@@ -3,9 +3,9 @@ import readline from "readline";
 
 class FileReader {
   header;
-  constructor() {
+  constructor(fileName) {
     this.readStream = fs.createReadStream(
-      "../../Datasets/csv/HomeA/2014/HomeA-meter2_2014.csv",
+      fileName,
       "utf-8"
     );
     this.readL = readline.createInterface({ input: this.readStream });
