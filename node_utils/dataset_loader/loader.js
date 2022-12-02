@@ -35,12 +35,6 @@ async function openFile(filePath) {
   return fileReader;
 }
 
-function emptyLineRecords(arr) {
-  while (arr.length) {
-    arr.pop();
-  }
-}
-
 async function handleSingleFolder(fileReaders) {
 
   let haveRecords = true;
