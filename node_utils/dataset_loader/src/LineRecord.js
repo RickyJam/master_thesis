@@ -16,6 +16,15 @@ class LineRecord {
     this.useKW = useKW;
     this.specificMetrics = specificMetrics;
   }
+
+  deepClone() {
+    const clone = new LineRecord(this.line);
+    clone.dateTime = this.dateTime;
+    clone.genKW = this.genKW;
+    clone.useKW = this.useKW;
+    clone.specificMetrics = [...this.specificMetrics];
+    return clone;
+  }
 }
 
 export default LineRecord;
