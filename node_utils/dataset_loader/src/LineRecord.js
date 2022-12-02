@@ -11,7 +11,7 @@ class LineRecord {
 
   parseLine() {
     const [dateTime, useKW, genKW, ...specificMetrics] = this.line.split(",");
-    this.dateTime = Date.parse(dateTime);
+    this.dateTime = new Date(dateTime);
     this.genKW = genKW;
     this.useKW = useKW;
     this.specificMetrics = specificMetrics;
