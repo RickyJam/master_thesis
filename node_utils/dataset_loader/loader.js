@@ -68,7 +68,7 @@ function insertLineInMongo(mergedHeaders, mergedLine) {
   console.log("inserimento di un obj");
 }
 
-async function handleSingleFolder(fileReaders) {
+async function importFiles(fileReaders, mongoCollection) {
   const mergedHeaders = mergeHeaders(fileReaders);
 
   let lineRecords;
@@ -79,21 +79,50 @@ async function handleSingleFolder(fileReaders) {
     }
 
     const mergedLine = mergeLines(lineRecords);
-    insertLineInMongo(mergedHeaders, mergedLine);
+    insertLineInMongo(mergedHeaders, mergedLine, mongoCollection);
   } while (lineRecords.every((record) => record != undefined));
 }
 
-async function job(basePath) {
+async function importFolder(path, mongoCollection) {
   const fileReaders = [];
-  const files = FS.readdirSync(basePath);
+  const files = FS.readdirSync(path);
   for (const index in files) {
     if (files[index] === ".DS_Store") {
       continue;
     }
-    fileReaders.push(await openFile(basePath + files[index]));
+    fileReaders.push(await openFile(path + files[index]));
   }
 
-  await handleSingleFolder(fileReaders);
+  await importFiles(fileReaders, mongoCollection);
 }
 
-job("../../Datasets/csv/HomeA/2014/");
+function importYearFolders(path, mongoCollection) {
+  FS.readdirSync(path).forEach((yearFolderName) => {
+    if (yearFolderName !== ".DS_Store") {
+      importFolder(path + yearFolderName + "/", mongoCollection);
+    }
+  });
+}
+
+// "../../Datasets/csv/"
+function importHomeFolders(basePath) {
+  FS.readdirSync(basePath).forEach((homefolderName) => {
+    if (homefolderName !== ".DS_Store") {
+      importYearFolders(
+        basePath + homefolderName + "/",
+        collectionName[homefolderName]
+      );
+    }
+  });
+}
+
+const collectionName = {
+  HomeA: "homeA",
+  HomeB: "homeB",
+  HomeC: "homeC",
+  HomeD: "homeD",
+  HomeE: "homeE",
+  HomeF: "homeF",
+};
+
+importHomeFolders("../../Datasets/csv/");
