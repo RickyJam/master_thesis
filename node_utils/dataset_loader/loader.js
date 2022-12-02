@@ -60,8 +60,12 @@ function mergeHeaders(fileReaders) {
     const [_, __, ___, ...metricsHeader] = reader.header.split(",");
     header = [...header, ...metricsHeader];
   });
-  
-   return header;
+
+  return header;
+}
+
+function insertLineInMongo(mergedHeaders, mergedLine) {
+  console.log("inserimento di un obj");
 }
 
 async function handleSingleFolder(fileReaders) {
@@ -75,6 +79,7 @@ async function handleSingleFolder(fileReaders) {
     }
 
     const mergedLine = mergeLines(lineRecords);
+    insertLineInMongo(mergedHeaders, mergedLine);
   } while (lineRecords.every((record) => record != undefined));
 }
 
@@ -91,5 +96,4 @@ async function job(basePath) {
   await handleSingleFolder(fileReaders);
 }
 
-// job("../../Datasets/csv/HomeA/2014/");
-job("../../HomeA/2014/");
+job("../../Datasets/csv/HomeA/2014/");
