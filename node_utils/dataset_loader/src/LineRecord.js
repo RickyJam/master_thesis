@@ -26,6 +26,8 @@ class LineRecord {
     }
     if (specificMetrics) {
       clone.specificMetrics = [...this.specificMetrics];
+    } else {
+      clone.specificMetrics = [];
     }
     return clone;
   }
