@@ -17,12 +17,16 @@ class LineRecord {
     this.specificMetrics = specificMetrics;
   }
 
-  deepClone() {
+  deepClone({ header = false, specificMetrics = false }) {
     const clone = new LineRecord(this.line);
-    clone.dateTime = this.dateTime;
-    clone.genKW = this.genKW;
-    clone.useKW = this.useKW;
-    clone.specificMetrics = [...this.specificMetrics];
+    if (header) {
+      clone.dateTime = this.dateTime;
+      clone.genKW = this.genKW;
+      clone.useKW = this.useKW;
+    }
+    if (specificMetrics) {
+      clone.specificMetrics = [...this.specificMetrics];
+    }
     return clone;
   }
 }
