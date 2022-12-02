@@ -36,8 +36,10 @@ async function openFile(filePath) {
 }
 
 function mergeLines(lineRecords) {
-  const firstDefinedElement = lineRecords.find((record) => record !== undefined)
-  if(firstDefinedElement === undefined) return;
+  const firstDefinedElement = lineRecords.find(
+    (record) => record !== undefined
+  );
+  if (firstDefinedElement === undefined) return;
   const mergedLineRecord = firstDefinedElement.deepClone({ header: true });
   lineRecords.forEach((record) => {
     if (record) {
@@ -47,9 +49,24 @@ function mergeLines(lineRecords) {
       ];
     }
   });
+  return mergedLineRecord;
+}
+
+function mergeHeaders(fileReaders) {
+  const [first, ...remaining] = fileReaders;
+  let header = first.header.split(",");
+
+  remaining?.forEach((reader) => {
+    const [_, __, ___, ...metricsHeader] = reader.header.split(",");
+    header = [...header, ...metricsHeader];
+  });
+  
+   return header;
 }
 
 async function handleSingleFolder(fileReaders) {
+  const mergedHeaders = mergeHeaders(fileReaders);
+
   let lineRecords;
   do {
     lineRecords = [];
@@ -57,7 +74,7 @@ async function handleSingleFolder(fileReaders) {
       lineRecords.push(await getNewLineWithFixedTime(fileReaders[index]));
     }
 
-    mergeLines(lineRecords);
+    const mergedLine = mergeLines(lineRecords);
   } while (lineRecords.every((record) => record != undefined));
 }
 
