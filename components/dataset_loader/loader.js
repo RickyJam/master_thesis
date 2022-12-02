@@ -1,5 +1,5 @@
-import FileReader from "./src/FileReader.js";
-import LineRecord from "./src/LineRecord.js";
+import FileReader from "./src/file_reader.js";
+import LineRecord from "./src/line_record.js";
 import FS from "fs";
 
 async function getLineRecordFromFile(fileReader) {
@@ -64,8 +64,8 @@ function mergeHeaders(fileReaders) {
   return header;
 }
 
-function insertLineInMongo(mergedHeaders, mergedLine) {
-  console.log("inserimento di un obj");
+function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
+  console.log("inserimento di un obj in: " + mongoCollection);
 }
 
 async function importFiles(fileReaders, mongoCollection) {
