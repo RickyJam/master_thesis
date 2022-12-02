@@ -6,7 +6,7 @@ class LineRecord {
   specificMetrics;
 
   constructor(line) {
-    this.line = line;
+    this.line = line || "";
   }
 
   parseLine() {
