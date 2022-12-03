@@ -71,6 +71,7 @@ function mergeHeaders(fileReaders) {
 
 function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
   console.log("inserimento di un obj in: " + mongoCollection);
+  formatDocument(mergedHeaders, mergedLine);
 }
 
 async function importFiles(fileReaders, mongoCollection) {
