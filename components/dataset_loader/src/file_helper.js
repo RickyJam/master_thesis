@@ -82,7 +82,9 @@ async function importFiles(fileReaders, mongoCollection) {
     }
 
     const mergedLine = mergeLines(lineRecords);
-    insertLineInMongo(mergedHeaders, mergedLine, mongoCollection);
+    if (mergedLine) {
+      insertLineInMongo(mergedHeaders, mergedLine, mongoCollection);
+    }
   } while (lineRecords.every((record) => record != undefined));
 }
 
