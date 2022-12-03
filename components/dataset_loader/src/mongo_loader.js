@@ -1,4 +1,4 @@
-import getMongoClient from "./mongo_access.js";
+import getMongoClient, { DB_NAME } from "./mongo_access.js";
 
 let client;
 export async function openConnection() {
