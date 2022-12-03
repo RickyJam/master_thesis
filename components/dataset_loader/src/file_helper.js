@@ -91,34 +91,36 @@ async function importFiles(fileReaders, mongoCollection) {
 async function importFolder(path, mongoCollection) {
   const fileReaders = [];
   const files = FS.readdirSync(path);
-  for (const index in files) {
-    if (files[index] === ".DS_Store") {
+  for (const file of files) {
+    if (file === ".DS_Store") {
       continue;
     }
-    fileReaders.push(await openFile(path + files[index]));
+    fileReaders.push(await openFile(path + file));
   }
 
   await importFiles(fileReaders, mongoCollection);
 }
 
-function importYearFolders(path, mongoCollection) {
-  FS.readdirSync(path).forEach((yearFolderName) => {
+async function importYearFolders(path, mongoCollection) {
+  const yearDirs = FS.readdirSync(path);
+  for (const yearFolderName of yearDirs) {
     if (yearFolderName !== ".DS_Store") {
-      importFolder(path + yearFolderName + "/", mongoCollection);
+      await importFolder(path + yearFolderName + "/", mongoCollection);
     }
-  });
+  }
 }
 
 // "../../Datasets/csv/"
-function importHomeFolders(basePath) {
-  FS.readdirSync(basePath).forEach((homefolderName) => {
+async function importHomeFolders(basePath) {
+  const homeDirs = FS.readdirSync(basePath);
+  for (const homefolderName of homeDirs) {
     if (homefolderName !== ".DS_Store") {
-      importYearFolders(
+      await importYearFolders(
         basePath + homefolderName + "/",
         collectionName[homefolderName]
       );
     }
-  });
+  }
 }
 
 const collectionName = {
