@@ -31,6 +31,14 @@ class LineRecord {
     }
     return clone;
   }
+
+  getNumberOfParameters() {
+    let total = this.specificMetrics.length;
+    total += this.useKW != undefined ? 1 : 0;
+    total += this.dateTime != undefined ? 1 : 0;
+    total += this.genKW != undefined ? 1 : 0;
+    return total;
+  }
 }
 
 export default LineRecord;
