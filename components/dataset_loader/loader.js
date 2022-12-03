@@ -130,6 +130,8 @@ const collectionName = {
   HomeF: "homeF",
 };
 
-openConnection();
-importHomeFolders("../../Datasets/csv/");
-closeConnection(); // potrebbero esserci problemi di chiusura anticipata per via delle funzion async... vedere
+const isOpen = await openConnection();
+if (isOpen) {
+  importHomeFolders("../../Datasets/csv/");
+  closeConnection(); // potrebbero esserci problemi di chiusura anticipata per via delle funzion async... vedere
+}
