@@ -1,7 +1,6 @@
 import FileReader from "./src/file_reader.js";
 import LineRecord from "./src/line_record.js";
 import FS from "fs";
-import formatDocument from "./src/document_formatter.js";
 import insertDocIn, {
   closeConnection,
   openConnection,
@@ -71,7 +70,7 @@ function mergeHeaders(fileReaders) {
 
 function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
   console.log("inserimento di un obj in: " + mongoCollection);
-  formatDocument(mergedHeaders, mergedLine);
+  const doc = mergedLine.toDocument(mergedHeaders);
 }
 
 async function importFiles(fileReaders, mongoCollection) {
