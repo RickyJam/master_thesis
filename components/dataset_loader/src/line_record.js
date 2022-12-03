@@ -39,6 +39,21 @@ class LineRecord {
     total += this.genKW != undefined ? 1 : 0;
     return total;
   }
+
+  toDocument(headers) {
+    const [dateHeader, useKwHeader, genKwHeader, ...remainingHeader] = headers;
+    const doc = {
+      [dateHeader]: this.dateTime,
+      [useKwHeader]: this.useKW,
+      [genKwHeader]: this.genKW,
+    };
+    for (const index in remainingHeader) {
+      const header = remainingHeader[index];
+      const value = this.specificMetrics[index];
+      doc[header] = value;
+    }
+    return doc;
+  }
 }
 
 export default LineRecord;
