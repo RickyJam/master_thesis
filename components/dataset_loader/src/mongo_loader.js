@@ -1,17 +1,23 @@
 import getMongoClient from "./mongo_access.js";
 
 let client;
-export function openConnection() {
-    client = getMongoClient();
+export async function openConnection() {
+  client = getMongoClient();
+  try {
+    await client.connect();
+    return true;
+  } catch {
+    console.log("Error opening connection");
+    return false;
+  }
 }
 
 export function closeConnection() {
-    client.close();
+  client.close();
 }
 
 const insertDocIn = async (collection, doc) => {
   try {
-    await client.connect();
     const db = client.db(DB_NAME);
 
     db.collection(collection).insertOne(doc);
