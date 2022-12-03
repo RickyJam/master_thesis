@@ -65,10 +65,10 @@ function mergeHeaders(fileReaders) {
   return header;
 }
 
-function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
+async function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
   console.log("inserimento di un obj in: " + mongoCollection);
   const doc = mergedLine.toDocument(mergedHeaders);
-  insertDocIn(mongoCollection, doc);
+  await insertDocIn(mongoCollection, doc);
 }
 
 async function importFiles(fileReaders, mongoCollection) {
@@ -83,7 +83,7 @@ async function importFiles(fileReaders, mongoCollection) {
 
     const mergedLine = mergeLines(lineRecords);
     if (mergedLine) {
-      insertLineInMongo(mergedHeaders, mergedLine, mongoCollection);
+      await insertLineInMongo(mergedHeaders, mergedLine, mongoCollection);
     }
   } while (lineRecords.every((record) => record != undefined));
 }

@@ -20,7 +20,7 @@ const insertDocIn = async (collection, doc) => {
   try {
     const db = client.db(DB_NAME);
 
-    db.collection(collection).insertOne(doc);
+    await db.collection(collection).insertOne(doc);
   } catch {
     console.log("Error insert in: " + collection);
     return undefined;
