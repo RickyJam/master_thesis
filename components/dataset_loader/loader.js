@@ -1,6 +1,11 @@
 import FileReader from "./src/file_reader.js";
 import LineRecord from "./src/line_record.js";
 import FS from "fs";
+import formatDocument from "./src/document_formatter.js";
+import insertDocIn, {
+  closeConnection,
+  openConnection,
+} from "./src/mongo_loader.js";
 
 async function getLineRecordFromFile(fileReader) {
   const line = await fileReader.readLine();
@@ -125,4 +130,6 @@ const collectionName = {
   HomeF: "homeF",
 };
 
+openConnection();
 importHomeFolders("../../Datasets/csv/");
+closeConnection(); // potrebbero esserci problemi di chiusura anticipata per via delle funzion async... vedere
