@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# this value dynamicaly change at each minikube restart 
+PORT=12345
+
 # start Minikube container
 minikibe start
 
@@ -10,7 +13,7 @@ kubectl label nodes minikube size=large
 kubectl config set-context minikube --namespace=master-thesis
 
 # creazione folder dataset
-ssh -t -i ~/.minikube/machines/minikube/id_rsa -p 55988 docker@127.0.0.1 "sudo mkdir /mnt/dataset && sudo chmod 777 /mnt/dataset"
+ssh -t -i ~/.minikube/machines/minikube/id_rsa -p $PORT docker@127.0.0.1 "sudo mkdir /mnt/dataset && sudo chmod 777 /mnt/dataset"
 
 # creazione mount data
-ssh -t -i ~/.minikube/machines/minikube/id_rsa -p 55988 docker@127.0.0.1 "sudo mkdir /mnt/data"
+ssh -t -i ~/.minikube/machines/minikube/id_rsa -p $PORT docker@127.0.0.1 "sudo mkdir /mnt/data"
