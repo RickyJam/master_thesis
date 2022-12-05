@@ -1,6 +1,7 @@
 import FileReader from "./file_reader.js";
 import LineRecord from "./line_record.js";
 import FS from "fs";
+import getHeaderByCollection from "./converted_headers.js";
 import insertDocIn from "./mongo_loader.js";
 
 async function getLineRecordFromFile(fileReader) {
@@ -53,26 +54,13 @@ function mergeLines(lineRecords) {
   return mergedLineRecord;
 }
 
-function mergeHeaders(fileReaders) {
-  const [first, ...remaining] = fileReaders;
-  let header = first.header.split(",");
-
-  remaining?.forEach((reader) => {
-    const [_, __, ___, ...metricsHeader] = reader.header.split(",");
-    header = [...header, ...metricsHeader];
-  });
-
-  return header;
-}
-
 async function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
-  console.log("inserimento di un obj in: " + mongoCollection);
   const doc = mergedLine.toDocument(mergedHeaders);
-  await insertDocIn(mongoCollection, doc);
+  // await insertDocIn(mongoCollection, doc);
 }
 
 async function importFiles(fileReaders, mongoCollection) {
-  const mergedHeaders = mergeHeaders(fileReaders);
+  const mergedHeaders = getHeaderByCollection(mongoCollection).split(',');//mergeHeaders(fileReaders);
 
   let lineRecords;
   do {
@@ -104,13 +92,13 @@ async function importFolder(path, mongoCollection) {
 async function importYearFolders(path, mongoCollection) {
   const yearDirs = FS.readdirSync(path);
   for (const yearFolderName of yearDirs) {
+    console.log("import folder: " + yearFolderName + "/", mongoCollection);
     if (yearFolderName !== ".DS_Store") {
       await importFolder(path + yearFolderName + "/", mongoCollection);
     }
   }
 }
 
-// "../../Datasets/csv/"
 async function importHomeFolders(basePath) {
   const homeDirs = FS.readdirSync(basePath);
   for (const homefolderName of homeDirs) {

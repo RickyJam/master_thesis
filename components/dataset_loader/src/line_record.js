@@ -41,11 +41,11 @@ class LineRecord {
   }
 
   toDocument(headers) {
-    const [dateHeader, useKwHeader, genKwHeader, ...remainingHeader] = headers;
+    const [_, __, ___, ...remainingHeader] = headers;
     const doc = {
-      [dateHeader]: this.dateTime,
-      [useKwHeader]: this.useKW,
-      [genKwHeader]: this.genKW,
+      dateTime: this.dateTime,
+      usedKw: this.useKW,
+      generateKw: this.genKW,
     };
     for (const index in remainingHeader) {
       const header = remainingHeader[index];

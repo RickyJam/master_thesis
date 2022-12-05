@@ -7,6 +7,8 @@ const adaptedHeader = {
   homeF: "_id, dateTime, usedKw, generateKw, waterHeaterKw, solarKw, refrigeratorKw, microwaveKw, furnaceKw, waterHeater3Kw, waterHeater2Kw, waterHeater1Kw, masterBdrmKw, frontBdrmKw, kitStoveWallKw, dishwasherDisposalKw, kitSinkWallKw, familyRmKw, kitHalfBathFoyerKw, washingMachineKw, guestBdrmSmkDetKw, dryerKw, basementKw, phaseBKw, phaseAKw, netMeterKw, voltKw, garageEKw, garageWKw",
 };
 
-const getHeaderByCollection = (collectionName) => adaptedHeader[collectionName]; 
+function getHeaderByCollection(collectionName) {
+  return adaptedHeader[collectionName]; 
+}
 
 export default getHeaderByCollection;
