@@ -64,8 +64,6 @@ spec:
             items:
               - key: ensure-users.js
                 path: ensure-users.js
-              - key: load-files-all.sh
-                path: load-files-all.sh
         - name: mongodb-configmap
           configMap:
             name: mongodb-configmap
