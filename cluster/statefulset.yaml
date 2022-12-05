@@ -39,9 +39,6 @@ spec:
               readOnly: true
             - name: mongodb-data
               mountPath: /data/db
-            - name: dataset
-              mountPath: /dataset
-              readOnly: true
       nodeSelector:
         size: large
       volumes:
@@ -67,8 +64,6 @@ spec:
             items:
               - key: ensure-users.js
                 path: ensure-users.js
-              - key: load-files-all.sh
-                path: load-files-all.sh
         - name: mongodb-configmap
           configMap:
             name: mongodb-configmap
@@ -78,7 +73,3 @@ spec:
         - name: mongodb-data
           persistentVolumeClaim:
             claimName: mongodb-pvc
-        - name: dataset
-          persistentVolumeClaim:
-            claimName: dataset-pvc
-            readOnly: true

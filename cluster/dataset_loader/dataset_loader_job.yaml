@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dataset-loader-job
+  namespace: master-thesis
+spec:
+  template:
+    spec:
+      subdomain: dataset-loader-service
+      containers:
+        - name: dataset-loader-job
+          image: thesis/dataset_loader
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: dataset-csv
+              mountPath: /dataset
+              readOnly: true
+      volumes:
+        - name: dataset-csv
+          persistentVolumeClaim:
+            claimName: dataset-csv-pvc
+            readOnly: true
+      restartPolicy: Never
+  backoffLimit: 0

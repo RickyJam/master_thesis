@@ -27,7 +27,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: dataset
+  name: csv-dataset
   namespace: master-thesis
   labels:
     type: local
@@ -39,5 +39,5 @@ spec:
   accessModes:
     - ReadOnlyMany
   hostPath:
-    path: /mnt/dataset
+    path: /mnt/csv_dataset
   persistentVolumeReclaimPolicy: Retain

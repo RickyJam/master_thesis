@@ -1,7 +1,5 @@
 # TODO piacevoli da fare
 * provare ad usare un deployment: (magari non necessario però eh)
-   * provare ad inserire tutto
-* dividere i file grossi, o trovare il modo di inseririli tutti
 * sort basata su date/time del db...
 
 
