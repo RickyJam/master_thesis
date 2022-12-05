@@ -56,7 +56,7 @@ function mergeLines(lineRecords) {
 
 async function insertLineInMongo(mergedHeaders, mergedLine, mongoCollection) {
   const doc = mergedLine.toDocument(mergedHeaders);
-  // await insertDocIn(mongoCollection, doc);
+  await insertDocIn(mongoCollection, doc);
 }
 
 async function importFiles(fileReaders, mongoCollection) {
