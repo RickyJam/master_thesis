@@ -1,6 +1,6 @@
 # TODO piacevoli da fare
 * provare ad usare un deployment: (magari non necessario però eh)
-* sort basata su date/time del db...
+* fare replace dei nomi dei campi prtima di inserirli
 
 
 * cose notate:
@@ -13,8 +13,6 @@
   mongoimport --db dbName --collection collectionName --file fileName.json --jsonArray
 
 
-
-  ```sudo mkdir /mnt/data```
 
 # troubleshooting
 * caso estremo: ```minikube delete```
