@@ -4,7 +4,8 @@
   "description": "",
   "main": "loader.js",
   "scripts": {
-    "start": "DEV=true node loader.js"
+    "start": "DEV=true node loader.js",
+    "build": "docker build . -t thesis/dataset_loader"
   },
   "author": "",
   "license": "ISC",
