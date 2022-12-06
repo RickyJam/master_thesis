@@ -7,11 +7,9 @@ const basePath = isDev() ? "../../Datasets/csv/" : "/dataset/";
 
 try {
   const homeDirs = FS.readdirSync(basePath);
-  for (const homefolderName of homeDirs) {
-    console.log(homefolderName);
-  }
 } catch {
   console.log("impossibile trovare la directory: " + basePath);
+  return;
 }
 
 const isOpen = await openConnection();
