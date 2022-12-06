@@ -1,6 +1,5 @@
 # TODO piacevoli da fare
 * provare ad usare un deployment: (magari non necessario però eh)
-* fare replace dei nomi dei campi prtima di inserirli
 
 
 * cose notate:
