@@ -2,6 +2,8 @@ import collections from "../utils/mongo_helper.js";
 import {
   getLastTenMetricsFrom,
   getKitchenMetrics,
+  getLaundryMetrics,
+  getSolarMetrics
 } from "../dao/mongo_metrics.js";
 
 const { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF } = collections;
@@ -29,8 +31,28 @@ const MetricsService = () => ({
     };
     return { data };
   },
-  getResidanceLaundryMetrics: () => {},
-  getResidancePowerMetrics: () => {},
+  getResidanceLaundryMetrics: async () => {
+    const data = {
+      HOMEA: await getLaundryMetrics(HOMEA),
+      HOMEB: await getLaundryMetrics(HOMEB),
+      HOMEC: await getLaundryMetrics(HOMEC),
+      HOMED: await getLaundryMetrics(HOMED),
+      HOMEE: await getLaundryMetrics(HOMEE),
+      HOMEF: await getLaundryMetrics(HOMEF),
+    };
+    return { data };
+  },
+  getResidancePowerMetrics: async () => {
+    const data = {
+      HOMEA: await getSolarMetrics(HOMEA),
+      HOMEB: await getSolarMetrics(HOMEB),
+      HOMEC: await getSolarMetrics(HOMEC),
+      HOMED: await getSolarMetrics(HOMED),
+      HOMEE: await getSolarMetrics(HOMEE),
+      HOMEF: await getSolarMetrics(HOMEF),
+    };
+    return { data };
+  },
 });
 
 export default MetricsService;

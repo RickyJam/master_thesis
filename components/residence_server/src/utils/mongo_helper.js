@@ -18,6 +18,16 @@ export const filterParams = {
       furnaceHRVKw: 1,
       microwaveKw: 1,
     },
+    kitchenAvg: {
+      kitchenOutletsEastKwAvg: { $avg: "kitchenOutletsEastKw" },
+      kitchenOutletsSouthKwAvg: { $avg: "kitchenOutletsSouthKw" },
+      refrigeratorKwAvg: { $avg: "refrigeratorKw" },
+      kitchenDenLightsKwAvg: { $avg: "kitchenDenLightsKw" },
+      kitchenLightsKwAvg: { $avg: "kitchenLightsKw" },
+      fridgeRangeKwAvg: { $avg: "fridgeRangeKw" },
+      furnaceHRVKwAvg: { $avg: "furnaceHRVKw" },
+      microwaveKwAvg: { $avg: "microwaveKw" },
+    },
     laundry: {
       dateTime: 1,
       dishwasherDisposalSinkLightKw: 1,
@@ -75,16 +85,32 @@ export const filterParams = {
       refrigeratorKw: 1,
       kitchenIslandKw: 1,
     },
+    kitchenAvg: {
+      kitchenLightingKwAvg: { $avg: "$kitchenLightingKw" },
+      kitchenReceptaclesKwAvg: { $avg: "$kitchenReceptaclesKw" },
+      microwaveKwAvg: { $avg: "$microwaveKw" },
+      refrigeratorKwAvg: { $avg: "$refrigeratorKw" },
+      kitchenIslandKwAvg: { $avg: "$kitchenIslandKw" },
+    },
     laundry: {
       dateTime: 1,
       dryerKw: 1,
       washingMachineKw: 1,
       freshAirVentilationKw: 1,
     },
+    laundryAvg: {
+      dryerKwAvg: { $avg: "$dryerKw" },
+      washingMachineKwAvg: { $avg: "$washingMachineKw" },
+      freshAirVentilationKwAvg: { $avg: "$freshAirVentilationKw" },
+    },
     solar: {
       dateTime: 1,
       photovoltaicsKw: 1,
       housePanelKw: 1,
+    },
+    solarAvg: {
+      photovoltaicsKwAvg: { $avg: "$photovoltaicsKw" },
+      housePanelKwAvg: { $avg: "$housePanelKw" },
     },
   },
   [HOMEE]: {
@@ -109,7 +135,7 @@ export const filterParams = {
     kitchen: {
       dateTime: 1,
       refrigeratorKw: 1,
-      microwaveKw: 1, 
+      microwaveKw: 1,
       furnaceKw: 1,
       kitStoveWallKw: 1,
       kitSinkWallKw: 1,
@@ -129,6 +155,15 @@ export const filterParams = {
       solarKw: 1,
     },
   },
+};
+
+export const addFields = (params, suffix, operation) => {
+  const result = {};
+  for (const key in params) {
+    result[[`${key}${suffix}`]] = { [operation]: key };
+  }
+  return result;
+  z;
 };
 
 export default { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF };
