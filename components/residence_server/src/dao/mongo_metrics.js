@@ -1,6 +1,8 @@
 import {
   avgAll,
-  getKitchenParam,
+  getKitchenParams,
+  getLaundryParams,
+  getSolarParams,
 } from "../utils/mongo_helper.js";
 import getMongoClient, { DB_NAME } from "./mongo_access.js";
 
@@ -15,40 +17,57 @@ async function getLastTenMetricsFrom(collectionName) {
 }
 
 async function getLaundryMetrics(collectionName, sort = asc, date = lastDate) {
-  const lastWeekDate = new Date(date);
-  lastWeekDate.setDate(date.getDate() - 30);
-  //TODO: replicare lo stesso meccanismo anche qui
-  return await onMasterDB((db) =>
-    db.collection(collectionName).find().limit(10).toArray()
-  );
-}
-
-async function getSolarMetrics(collectionName, sort = asc, date = lastDate) {
-  const lastWeekDate = new Date(date);
-  lastWeekDate.setDate(date.getDate() - 30);
-  //TODO: replicare lo stesso meccanismo anche qui
-  return await onMasterDB((db) =>
-    db.collection(collectionName).find().limit(10).toArray()
-  );
-}
-
-async function getKitchenMetrics(collectionName, sort = asc, date = lastDate) {
-  const lastMonthDate = new Date(date);
-  lastMonthDate.setDate(date.getDate() - 30);
-  
   return await onMasterDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
         getAggregationParams(
           date,
-          lastMonthDate,
-          getKitchenParam(collectionName)
+          getLastMonthDate(date),
+          getLaundryParams(collectionName)
         )
       )
       .sort({ dateTime: sort })
       .toArray()
   );
+}
+
+async function getSolarMetrics(collectionName, sort = asc, date = lastDate) {
+  return await onMasterDB((db) =>
+    db
+      .collection(collectionName)
+      .aggregate(
+        getAggregationParams(
+          date,
+          getLastMonthDate(date),
+          getSolarParams(collectionName)
+        )
+      )
+      .sort({ dateTime: sort })
+      .toArray()
+  );
+}
+
+async function getKitchenMetrics(collectionName, sort = asc, date = lastDate) {
+  return await onMasterDB((db) =>
+    db
+      .collection(collectionName)
+      .aggregate(
+        getAggregationParams(
+          date,
+          getLastMonthDate(date),
+          getKitchenParams(collectionName)
+        )
+      )
+      .sort({ dateTime: sort })
+      .toArray()
+  );
+}
+
+function getLastMonthDate(startDate) {
+  const lastMonthDate = new Date(startDate);
+  lastMonthDate.setDate(startDate.getDate() - 30);
+  return lastMonthDate;
 }
 
 function getAggregationParams(date, lastMonthDate, params) {

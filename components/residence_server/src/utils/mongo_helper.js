@@ -5,7 +5,7 @@ const HOMED = "homeD";
 const HOMEE = "homeE";
 const HOMEF = "homeF";
 
-export const filterParams = {
+const filterParams = {
   [HOMEA]: {
     kitchen: {
       kitchenOutletsEastKw: 1,
@@ -117,8 +117,16 @@ export const filterParams = {
   },
 };
 
-export function getKitchenParam(collection) {
+export function getKitchenParams(collection) {
   return filterParams[collection].kitchen;
+}
+
+export function getLaundryParams(collection) {
+  return filterParams[collection].laundry;
+}
+
+export function getSolarParams(collection) {
+  return filterParams[collection].solar;
 }
 
 const operators = {
