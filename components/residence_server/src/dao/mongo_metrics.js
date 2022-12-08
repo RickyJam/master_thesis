@@ -13,7 +13,7 @@ async function getLastTenMetricsFrom(collectionName) {
 }
 
 async function getLaundryMetrics(collectionName, sort, fromDate, toDate) {
-  const averageData = await onMasterDB((db) =>
+  const doc = await onMasterDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
@@ -26,7 +26,7 @@ async function getLaundryMetrics(collectionName, sort, fromDate, toDate) {
 }
 
 async function getSolarMetrics(collectionName, sort, fromDate, toDate) {
-  const averageData = await onMasterDB((db) =>
+  const doc = await onMasterDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
