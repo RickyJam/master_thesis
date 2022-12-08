@@ -6,13 +6,13 @@ import {
 } from "../utils/mongo_helper.js";
 import getMongoClient, { DB_NAME } from "./mongo_access.js";
 
-async function getLastTenMetricsFrom(collectionName) {
+async function getLastTenConsumptionFrom(collectionName) {
   return await onMasterDB((db) =>
     db.collection(collectionName).find().limit(10).toArray()
   );
 }
 
-async function getLaundryMetrics(collectionName, sort, fromDate, toDate) {
+async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
   const doc = await onMasterDB((db) =>
     db
       .collection(collectionName)
@@ -25,7 +25,7 @@ async function getLaundryMetrics(collectionName, sort, fromDate, toDate) {
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getSolarMetrics(collectionName, sort, fromDate, toDate) {
+async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
   const doc = await onMasterDB((db) =>
     db
       .collection(collectionName)
@@ -38,7 +38,7 @@ async function getSolarMetrics(collectionName, sort, fromDate, toDate) {
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getKitchenMetrics(collectionName, sort, fromDate, toDate) {
+async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
   const doc = await onMasterDB((db) =>
     db
       .collection(collectionName)
@@ -96,8 +96,8 @@ async function onMasterDB(query) {
 }
 
 export {
-  getLastTenMetricsFrom,
-  getKitchenMetrics,
-  getLaundryMetrics,
-  getSolarMetrics,
+  getLastTenConsumptionFrom,
+  getKitchenConsumption,
+  getLaundryConsumption,
+  getSolarConsumption,
 };
