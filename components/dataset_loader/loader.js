@@ -2,14 +2,15 @@ import isDev from "./src/enviroment.js";
 import importHomeFolders from "./src/file_helper.js";
 import { closeConnection, openConnection } from "./src/mongo_loader.js";
 import FS from "fs";
+import { exit } from "process";
 
 const basePath = isDev() ? "../../Datasets/csv/" : "/dataset/";
 
 try {
-  const homeDirs = FS.readdirSync(basePath);
+  FS.readdirSync(basePath);
 } catch {
   console.log("impossibile trovare la directory: " + basePath);
-  return;
+  exit();
 }
 
 const isOpen = await openConnection();
