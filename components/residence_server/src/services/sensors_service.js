@@ -1,3 +1,9 @@
+import {
+  getLastTenConsumptionFrom,
+  getKitchenConsumption,
+  getLaundryConsumption,
+} from "../dao/mongo_sensors.js";
+
 const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
 const ASC = 1;
 const DESC = -1;
@@ -5,36 +11,21 @@ const DESC = -1;
 const SensorsService = () => ({
   getHomeSensors: async (home) => {
     const data = {
-      HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),
-      HOMEB: null, // await getLastTenConsumptionFrom(HOMEB),
-      HOMEC: null, // await getLastTenConsumptionFrom(HOMEC),
-      HOMED: null, // await getLastTenConsumptionFrom(HOMED),
-      HOMEE: null, // await getLastTenConsumptionFrom(HOMEE),
-      HOMEF: null, // await getLastTenConsumptionFrom(HOMEF),
+      [home]: await getLastTenConsumptionFrom(home),
     };
     return { data };
   },
   getHomeKitchenSensors: async (home, toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = {
-      HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),
-      HOMEB: null, // await getLastTenConsumptionFrom(HOMEB),
-      HOMEC: null, // await getLastTenConsumptionFrom(HOMEC),
-      HOMED: null, // await getLastTenConsumptionFrom(HOMED),
-      HOMEE: null, // await getLastTenConsumptionFrom(HOMEE),
-      HOMEF: null, // await getLastTenConsumptionFrom(HOMEF),
+      [home]: await getKitchenConsumption(home),
     };
     return { data };
   },
   getHomeLaundrySensors: async (home, toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = {
-      HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),
-      HOMEB: null, // await getLastTenConsumptionFrom(HOMEB),
-      HOMEC: null, // await getLastTenConsumptionFrom(HOMEC),
-      HOMED: null, // await getLastTenConsumptionFrom(HOMED),
-      HOMEE: null, // await getLastTenConsumptionFrom(HOMEE),
-      HOMEF: null, // await getLastTenConsumptionFrom(HOMEF),
+      [home]: await getLaundryConsumption(home),
     };
     return { data };
   },
