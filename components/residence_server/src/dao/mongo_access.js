@@ -15,4 +15,19 @@ function getMongoClient() {
   return new MongoClient(uri);
 }
 
-export default getMongoClient;
+async function onMasterDB(query) {
+  const client = getMongoClient();
+  try {
+    await client.connect();
+    const db = client.db(DB_NAME);
+
+    return await query(db);
+  } catch (e) {
+    console.log("Error: " + e);
+    return undefined;
+  } finally {
+    await client.close();
+  }
+}
+
+export default onMasterDB;

@@ -4,7 +4,7 @@ import {
   getLaundryParams,
   getSolarParams,
 } from "../utils/mongo_helper.js";
-import getMongoClient, { DB_NAME } from "./mongo_access.js";
+import onMasterDB from "./mongo_access.js";
 
 async function getLastTenConsumptionFrom(collectionName) {
   return await onMasterDB((db) =>
@@ -78,21 +78,6 @@ function getAggregationParams(date, lastMonthDate, params) {
       },
     },
   ];
-}
-
-async function onMasterDB(query) {
-  const client = getMongoClient();
-  try {
-    await client.connect();
-    const db = client.db(DB_NAME);
-
-    return await query(db);
-  } catch (e) {
-    console.log("Error: " + e);
-    return undefined;
-  } finally {
-    await client.close();
-  }
 }
 
 export {
