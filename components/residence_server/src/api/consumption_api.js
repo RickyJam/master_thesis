@@ -2,14 +2,14 @@ import ConsumptionService from "../services/consumption_service.js";
 
 const consumptionService = ConsumptionService();
 
-const METRICS_PATH = "/residence";
-const KITCHENS_PATH = METRICS_PATH + "/kitchens";
-const LAUNDRY_PATH = METRICS_PATH + "/laundry";
-const POWER_PATH = METRICS_PATH + "/power";
+const CONSUMPTION_PATH = "/residence";
+const KITCHENS_PATH = CONSUMPTION_PATH + "/kitchens";
+const LAUNDRY_PATH = CONSUMPTION_PATH + "/laundry";
+const POWER_PATH = CONSUMPTION_PATH + "/power";
 
 const ConsumptionApi = (server) => ({
   register: () => {
-    server.get(METRICS_PATH, async (req, res) => {
+    server.get(CONSUMPTION_PATH, async (req, res) => {
       const data = await consumptionService.getResidanceConsumption();
       res.send(data);
     });
@@ -31,8 +31,8 @@ const ConsumptionApi = (server) => ({
   },
 });
 
-export const getPaths = () => [
-  METRICS_PATH,
+export const getConsumptionPaths = () => [
+  CONSUMPTION_PATH,
   KITCHENS_PATH,
   LAUNDRY_PATH,
   POWER_PATH,

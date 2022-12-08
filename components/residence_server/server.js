@@ -1,4 +1,4 @@
-import MetricsApi, { getPaths } from "./src/api/consumption_api.js";
+import MetricsApi, { getConsumptionPaths } from "./src/api/consumption_api.js";
 import express from "express";
 import isDev from "./src/utils/enviroment.js";
 
@@ -18,7 +18,7 @@ server.get("/", async (req, res) => {
   const response = {
     enviroment,
     path: {
-      consumption: getPaths(),
+      consumption: getConsumptionPaths(),
     },
   };
   res.send(response);
