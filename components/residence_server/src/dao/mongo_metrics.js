@@ -1,4 +1,7 @@
-import { filterParams, addFields } from "../utils/mongo_helper.js";
+import {
+  avgAll,
+  getKitchenParam,
+} from "../utils/mongo_helper.js";
 import getMongoClient, { DB_NAME } from "./mongo_access.js";
 
 const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
@@ -11,7 +14,7 @@ async function getLastTenMetricsFrom(collectionName) {
   );
 }
 
-async function getLaundryMetrics(collectionName) {
+async function getLaundryMetrics(collectionName, sort = asc, date = lastDate) {
   const lastWeekDate = new Date(date);
   lastWeekDate.setDate(date.getDate() - 30);
   //TODO: replicare lo stesso meccanismo anche qui
@@ -20,7 +23,7 @@ async function getLaundryMetrics(collectionName) {
   );
 }
 
-async function getSolarMetrics(collectionName) {
+async function getSolarMetrics(collectionName, sort = asc, date = lastDate) {
   const lastWeekDate = new Date(date);
   lastWeekDate.setDate(date.getDate() - 30);
   //TODO: replicare lo stesso meccanismo anche qui
@@ -30,39 +33,41 @@ async function getSolarMetrics(collectionName) {
 }
 
 async function getKitchenMetrics(collectionName, sort = asc, date = lastDate) {
-  const lastWeekDate = new Date(date);
-  lastWeekDate.setDate(date.getDate() - 30);
+  const lastMonthDate = new Date(date);
+  lastMonthDate.setDate(date.getDate() - 30);
+  
   return await onMasterDB((db) =>
     db
       .collection(collectionName)
-      // .project(filterParams[[collectionName]].kitchen)
-      .aggregate([
-        {
-          $match: {
-            dateTime: {
-              $lt: date,
-              $gte: lastWeekDate,
-            },
-          }
-        },
-        {
-          $addFields: {
-            (addFields())
-          }
-        },
-        // {
-        //   $project: 
-        // }
-        {
-          $group: {
-            _id: null,
-            ...filterParams[[collectionName]].kitchenAvg
-          },
-        },
-      ])
+      .aggregate(
+        getAggregationParams(
+          date,
+          lastMonthDate,
+          getKitchenParam(collectionName)
+        )
+      )
       .sort({ dateTime: sort })
       .toArray()
   );
+}
+
+function getAggregationParams(date, lastMonthDate, params) {
+  return [
+    {
+      $match: {
+        dateTime: {
+          $lt: date,
+          $gte: lastMonthDate,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        ...avgAll(params),
+      },
+    },
+  ];
 }
 
 async function onMasterDB(query) {
@@ -72,7 +77,7 @@ async function onMasterDB(query) {
     const db = client.db(DB_NAME);
 
     return await query(db);
-  } catch (e){
+  } catch (e) {
     console.log("Error: " + e);
     return undefined;
   } finally {
@@ -80,4 +85,9 @@ async function onMasterDB(query) {
   }
 }
 
-export { getLastTenMetricsFrom, getKitchenMetrics, getLaundryMetrics, getSolarMetrics };
+export {
+  getLastTenMetricsFrom,
+  getKitchenMetrics,
+  getLaundryMetrics,
+  getSolarMetrics,
+};
