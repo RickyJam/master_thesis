@@ -3,7 +3,7 @@ const ASC = 1;
 const DESC = -1;
 
 const SensorsService = () => ({
-  getHomeSensors: async () => {
+  getHomeSensors: async (home) => {
     const data = {
       HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),
       HOMEB: null, // await getLastTenConsumptionFrom(HOMEB),
@@ -14,7 +14,7 @@ const SensorsService = () => ({
     };
     return { data };
   },
-  getHomeKitchenSensors: async (toDate = lastDate, sort = DESC) => {
+  getHomeKitchenSensors: async (home, toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = {
       HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),
@@ -26,7 +26,7 @@ const SensorsService = () => ({
     };
     return { data };
   },
-  getHomeLaundrySensors: async (toDate = lastDate, sort = DESC) => {
+  getHomeLaundrySensors: async (home, toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = {
       HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),

@@ -17,7 +17,7 @@ const SensorsApi = (server) => ({
         res.status(404).send("Unvalid home provided - " + home);
       }
 
-      const data = await sensorsService.getHomeSensors();
+      const data = await sensorsService.getHomeSensors(home);
       res.send(data);
     });
 
@@ -27,7 +27,7 @@ const SensorsApi = (server) => ({
         res.status(404).send("Unvalid home provided - " + home);
       }
 
-      const data = await sensorsService.getHomeKitchenSensors();
+      const data = await sensorsService.getHomeKitchenSensors(home);
       res.send(data);
     });
 
@@ -37,7 +37,7 @@ const SensorsApi = (server) => ({
         res.status(404).send("Unvalid home provided - " + home);
       }
 
-      const data = await sensorsService.getHomeLaundrySensors();
+      const data = await sensorsService.getHomeLaundrySensors(home);
       res.send(data);
     });
   },
