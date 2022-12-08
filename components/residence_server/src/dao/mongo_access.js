@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import isDev from "../utils/enviroment.js";
 
-export const DB_NAME = "master";
+const DB_NAME = "master";
 const k8s_host = "mongodb-service:27017";
 const dev_host = "localhost:27017";
 
