@@ -14,6 +14,7 @@ async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
   return await onMasterDB((db) =>
     db
       .collection(collectionName)
+      .find()
       .project(getLaundryParams(collectionName))
       .sort({ dateTime: sort })
       .toArray()
@@ -24,6 +25,7 @@ async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
   return await onMasterDB((db) =>
     db
       .collection(collectionName)
+      .find()
       .project(getSolarParams(collectionName))
       .sort({ dateTime: sort })
       .toArray()
@@ -34,6 +36,7 @@ async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
   return await onMasterDB((db) =>
     db
       .collection(collectionName)
+      .find()
       .project(getKitchenParams(collectionName))
       .sort({ dateTime: sort })
       .toArray()
