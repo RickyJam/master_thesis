@@ -15,6 +15,7 @@ const SensorsApi = (server) => ({
       const home = req.params[HOME_KEY];
       if (!validateHomeParam(home)) {
         res.status(404).send("Unvalid home provided - " + home);
+        return;
       }
 
       const data = await sensorsService.getHomeSensors(home);
@@ -25,6 +26,7 @@ const SensorsApi = (server) => ({
       const home = req.params[HOME_KEY];
       if (!validateHomeParam(home)) {
         res.status(404).send("Unvalid home provided - " + home);
+        return;
       }
 
       const data = await sensorsService.getHomeKitchenSensors(home);
@@ -35,6 +37,7 @@ const SensorsApi = (server) => ({
       const home = req.params[HOME_KEY];
       if (!validateHomeParam(home)) {
         res.status(404).send("Unvalid home provided - " + home);
+        return;
       }
 
       const data = await sensorsService.getHomeLaundrySensors(home);
