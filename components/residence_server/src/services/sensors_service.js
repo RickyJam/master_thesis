@@ -18,7 +18,7 @@ const SensorsService = () => ({
     };
     return { data };
   },
-  getHomeKitchensConsumption: async (toDate = lastDate, sort = DESC) => {
+  getHomeKitchenConsumption: async (toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = {
       HOMEA: null, // await getLastTenConsumptionFrom(HOMEA),
