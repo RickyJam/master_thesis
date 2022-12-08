@@ -44,7 +44,7 @@ const SensorsApi = (server) => ({
 });
 
 function validateHomeParam(homeParam) {
-  return collections.hasOwnProperty(homeParam);
+  return Object.values(collections).includes(homeParam);
 }
 
 export const getSensorsPaths = [SENSORS_PATH, KITCHENS_PATH, LAUNDRY_PATH];
