@@ -17,6 +17,7 @@ async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
       .find()
       .project(getLaundryParams(collectionName))
       .sort({ dateTime: sort })
+      .limit(100)
       .toArray()
   );
 }
@@ -28,6 +29,7 @@ async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
       .find()
       .project(getSolarParams(collectionName))
       .sort({ dateTime: sort })
+      .limit(100)
       .toArray()
   );
 }
@@ -39,6 +41,7 @@ async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
       .find()
       .project(getKitchenParams(collectionName))
       .sort({ dateTime: sort })
+      .limit(100)
       .toArray()
   );
 }
