@@ -44,16 +44,21 @@ class LineRecord {
     const [_, __, ___, ...remainingHeader] = headers;
     const doc = {
       dateTime: this.dateTime,
-      usedKw: this.useKW,
-      generateKw: this.genKW,
+      usedKw: convertValue(this.useKW),
+      generateKw: convertValue(this.genKW),
     };
     for (const index in remainingHeader) {
       const header = remainingHeader[index];
-      const value = this.specificMetrics[index];
+      const value = convertValue(this.specificMetrics[index]);
       doc[header] = value;
     }
     return doc;
   }
+}
+
+const convertValue = (value) => {
+  if(!value) return 0.0;
+  return parseFloat(value);
 }
 
 export default LineRecord;
