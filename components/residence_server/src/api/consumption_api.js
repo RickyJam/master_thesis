@@ -31,7 +31,7 @@ const ConsumptionApi = (server) => ({
   },
 });
 
-export const getConsumptionPaths = () => [
+export const getConsumptionPaths = [
   CONSUMPTION_PATH,
   KITCHENS_PATH,
   LAUNDRY_PATH,

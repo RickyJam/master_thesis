@@ -1,6 +1,7 @@
 import ConsumptionApi, { getConsumptionPaths } from "./src/api/consumption_api.js";
 import express from "express";
 import isDev from "./src/utils/enviroment.js";
+import { getSensorsPaths } from "./src/api/sensors_api.js";
 
 const PORT = 3000;
 
@@ -18,7 +19,8 @@ server.get("/", async (req, res) => {
   const response = {
     enviroment,
     path: {
-      consumption: getConsumptionPaths(),
+      consumption: getConsumptionPaths,
+      sensors: getSensorsPaths
     },
   };
   res.send(response);

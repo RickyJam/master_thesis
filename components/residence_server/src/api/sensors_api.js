@@ -25,7 +25,7 @@ const SensorsApi = (server) => ({
   },
 });
 
-export const getSensorsPaths = () => [
+export const getSensorsPaths = [
   SENSORS_PATH,
   KITCHENS_PATH,
   LAUNDRY_PATH,
