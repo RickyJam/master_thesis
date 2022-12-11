@@ -16,7 +16,7 @@ kubectl config set-context minikube --namespace=master-thesis
 ssh -t -i ~/.minikube/machines/minikube/id_rsa -p $PORT docker@127.0.0.1 "sudo mkdir /mnt/dataset && sudo chmod 777 /mnt/dataset"
 
 # creazione mount data db-dataset
-ssh -t -i ~/.minikube/machines/minikube/id_rsa -p $PORT docker@127.0.0.1 "sudo mkdir /mnt/data"
+ssh -t -i ~/.minikube/machines/minikube/id_rsa -p $PORT docker@127.0.0.1 "sudo mkdir /mnt/users"
 
 # creazione mount data db-users
 ssh -t -i ~/.minikube/machines/minikube/id_rsa -p $PORT docker@127.0.0.1 "sudo mkdir /mnt/data"
