@@ -37,7 +37,7 @@ spec:
             - name: mongodb-configmap
               mountPath: /config
               readOnly: true
-            - name: users-data #TODO: creare!
+            - name: users-data
               mountPath: /data/db
       nodeSelector:
         size: large
