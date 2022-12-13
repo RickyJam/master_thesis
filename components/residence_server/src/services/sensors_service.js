@@ -2,7 +2,7 @@ import {
   getLastTenConsumptionFrom,
   getKitchenConsumption,
   getLaundryConsumption,
-} from "../dao/mongo_sensors.js";
+} from "../dao/data_sensors.js";
 
 const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
 const ASC = 1;

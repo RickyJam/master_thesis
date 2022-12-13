@@ -4,7 +4,7 @@ import {
   getKitchenConsumption,
   getLaundryConsumption,
   getSolarConsumption,
-} from "../dao/mongo_consumption.js";
+} from "../dao/data_consumption.js";
 
 const { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF } = collections;
 
