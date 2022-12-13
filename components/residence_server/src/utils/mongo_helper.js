@@ -5,80 +5,142 @@ const HOMED = "homeD";
 const HOMEE = "homeE";
 const HOMEF = "homeF";
 
-export const filterParams = {
+const filterParams = {
   [HOMEA]: {
     kitchen: {
-      "KitchenDenLights[kW]": 1,
-      "KitchenOutletsEast[kW]": 1,
-      "KitchenOutletsSouth[kW]": 1,
-      "Refrigerator[kW]": 1,
-      "Microwave[kW]": 1,
+      kitchenOutletsEastKw: 1,
+      kitchenOutletsSouthKw: 1,
+      refrigeratorKw: 1,
+      kitchenDenLightsKw: 1,
+      kitchenLightsKw: 1,
+      fridgeRangeKw: 1,
+      furnaceHRVKw: 1,
+      microwaveKw: 1,
     },
     laundry: {
-      "DishwasherDisposalSinkLight[kW]": 1,
+      dishwasherDisposalSinkLightKw: 1,
+      disposalDishwasherKw: 1,
+      dryerKw: 1,
+      washingMachineKw: 1,
     },
     solar: {},
   },
   [HOMEB]: {
     kitchen: {
-      "Microwave[kW]": 1,
-      "Fridge[kW]": 1,
+      furnaceKw: 1,
+      microwaveRKw: 1,
+      fridgeRKw: 1,
+      microwaveKw: 1,
+      fridgeKw: 1,
     },
     laundry: {
-      "Dishwasher[kW]": 1,
+      washerKw: 1,
+      dryerEgaugeKw: 1,
+      dishwasherKw: 1,
+      tubWhirpoolKw: 1,
     },
     solar: {},
   },
   [HOMEC]: {
     kitchen: {
-      "Microwave[kW]": 1,
+      kitchenTwelweKw: 1,
+      kitchenFourteenKw: 1,
+      kitchenThirtyEigthtKw: 1,
+      microwaveKw: 1,
+      furnaceOneKw: 1,
+      furnaceTwoKw: 1,
+      fridgeKw: 1,
+      wineCellarKw: 1,
     },
     laundry: {
-      "WasherDrier[kW]": "3.3333e-05",
+      dishwasherKw: 1,
+      washerDrierKw: 1,
     },
     solar: {
-      "Solar[kW]": "0.004483333",
+      solarKw: 1,
     },
   },
   [HOMED]: {
-    kitchen: {},
-    laundry: {},
-    solar: {},
+    kitchen: {
+      kitchenLightingKw: 1,
+      kitchenReceptaclesKw: 1,
+      microwaveKw: 1,
+      refrigeratorKw: 1,
+      kitchenIslandKw: 1,
+    },
+    laundry: {
+      dryerKw: 1,
+      washingMachineKw: 1,
+      freshAirVentilationKw: 1,
+    },
+    solar: {
+      photovoltaicsKw: 1,
+      housePanelKw: 1,
+    },
   },
   [HOMEE]: {
     kitchen: {
-      "Furnace(29)[kW]": 1,
-      "KitchenOutlet/Espresso(32)[kW]": 1,
-      "Fridge+EntLights(west)(20)[kW]": 1,
+      kitchenKw: 1,
+      furnaceKw: 1,
+      ovenKw: 1,
+      fridgeEntLightsKw: 1,
     },
     laundry: {
-      "ClothesWashingMachine(10)[kW]": 1,
-      "Dishwasher(17)[kW]": 1,
-      "HotWaterHeater(22)[kW]": 1,
+      hotWaterHeaterKw: 1,
+      dishwasherKw: 1,
+      dryerKw: 1,
+      clothesWashingMachineKw: 1,
+      elecHeatKw: 1,
     },
     solar: {},
   },
   [HOMEF]: {
     kitchen: {
-      "Refrigerator[kW]": 1,
-      "Microwave[kW]": 1,
-      "Furnace[kW]": 1,
-      "Kit_StoveWall[kW]": 1,
-      "Kit_SinkWall[kW]": 1,
+      refrigeratorKw: 1,
+      microwaveKw: 1,
+      furnaceKw: 1,
+      kitStoveWallKw: 1,
+      kitSinkWallKw: 1,
     },
     laundry: {
-      "WaterHeater[kW]": 1,
-      "WaterHeater3[kW]": 1,
-      "WaterHeater2[kW]": 1,
-      "WaterHeater1[kW]": 1,
-      "Dryer[kW]": 1,
-      "Dishwasher_Disposal[kW]": 1,
-      "Washing_Machine[kW]": 1,
+      waterHeaterKw: 1,
+      waterHeater3Kw: 1,
+      waterHeater2Kw: 1,
+      waterHeater1Kw: 1,
+      dishwasherDisposalKw: 1,
+      dryerKw: 1,
+      washingMachineKw: 1,
     },
     solar: {
-      "Solar[kW]": 1,
+      solarKw: 1,
     },
   },
 };
+
+export function getKitchenParams(collection) {
+  return filterParams[collection].kitchen;
+}
+
+export function getLaundryParams(collection) {
+  return filterParams[collection].laundry;
+}
+
+export function getSolarParams(collection) {
+  return filterParams[collection].solar;
+}
+
+const operators = {
+  avg: "avg",
+};
+
+const operate = (params, suffix, operation) => {
+  const result = {};
+  for (const key in params) {
+    result[[`${key}${suffix}`]] = { [`$${operation}`]: `$${key}` };
+  }
+  return result;
+};
+
+export const avgAll = (params) => operate(params, "Avg", operators.avg);
 
 export default { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF };

@@ -27,6 +27,32 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+    name: users-pv
+    namespace: master-thesis
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: mongodb-storageclass
+  local:
+    path: /mnt/users
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: size
+          operator: In
+          values:
+            - large
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: csv-dataset
   namespace: master-thesis
   labels:

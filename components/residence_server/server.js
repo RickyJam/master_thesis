@@ -1,13 +1,16 @@
-import MetricsApi, { getPaths } from "./src/api/metrics_api.js";
+import ConsumptionApi, { getConsumptionPaths } from "./src/api/consumption_api.js";
 import express from "express";
 import isDev from "./src/utils/enviroment.js";
+import SensorsApi, { getSensorsPaths } from "./src/api/sensors_api.js";
 
 const PORT = 3000;
 
 const server = express();
-const metrics_api = MetricsApi(server);
+const consumption_api = ConsumptionApi(server);
+const sensors_api = SensorsApi(server);
 
-metrics_api.register();
+consumption_api.register();
+sensors_api.register();
 
 server.listen(PORT, () =>
   console.log("Node server started and listening on port 3000")
@@ -18,7 +21,8 @@ server.get("/", async (req, res) => {
   const response = {
     enviroment,
     path: {
-      metrics: getPaths(),
+      consumption: getConsumptionPaths,
+      sensors: getSensorsPaths
     },
   };
   res.send(response);

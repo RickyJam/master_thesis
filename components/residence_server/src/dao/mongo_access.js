@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import isDev from "../utils/enviroment.js";
 
-export const DB_NAME = "master";
+const DB_NAME = "master";
 const k8s_host = "mongodb-service:27017";
 const dev_host = "localhost:27017";
 
@@ -15,4 +15,19 @@ function getMongoClient() {
   return new MongoClient(uri);
 }
 
-export default getMongoClient;
+async function onMasterDB(query) {
+  const client = getMongoClient();
+  try {
+    await client.connect();
+    const db = client.db(DB_NAME);
+
+    return await query(db);
+  } catch (e) {
+    console.log("Error: " + e);
+    return undefined;
+  } finally {
+    await client.close();
+  }
+}
+
+export default onMasterDB;

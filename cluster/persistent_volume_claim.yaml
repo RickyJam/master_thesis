@@ -14,6 +14,22 @@ spec:
 
 ---
 
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: users-pvc
+  namespace: master-thesis
+spec:
+  storageClassName: mongodb-storageclass
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
