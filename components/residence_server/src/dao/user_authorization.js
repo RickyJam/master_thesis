@@ -10,7 +10,23 @@ async function getUser(userId) {
 }
 
 async function getAuthorizationsFor(user) {
+  return await onUserDB((db) =>
+    db
+      .collection(AUTHORIZATIONS_COLLECTION)
+      .find(getAuthorizationsFilters(user))
+      .toArray()
+  );
+}
 
+function getAuthorizationsFilters(user) {
+  console.log(user);
+  const filters = {
+    relatedRole: user.role,
+  };
+  if(user.home != "all") {
+    filters.home = user.home;
+  }
+  return filters;
 }
 
 export { getAuthorizationsFor, getUser };
