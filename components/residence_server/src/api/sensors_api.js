@@ -8,6 +8,7 @@ const KITCHENS_PATH = SENSORS_PATH + "/kitchens";
 const LAUNDRY_PATH = SENSORS_PATH + "/laundry";
 
 const HOME_KEY = "home";
+const USERID_KEY = "userId";
 
 const SensorsApi = (server) => ({
   register: () => {
