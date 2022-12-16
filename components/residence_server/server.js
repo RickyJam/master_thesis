@@ -16,7 +16,7 @@ server.listen(PORT, () =>
   console.log("Node server started and listening on port 3000")
 );
 
-server.get("/", async (req, res) => {
+server.get("/", async (_, res) => {
   const enviroment = isDev() ? "DEV" : "PROD";
   const response = {
     enviroment,
