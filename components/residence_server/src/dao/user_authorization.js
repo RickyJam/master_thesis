@@ -19,11 +19,10 @@ async function getAuthorizationsFor(user) {
 }
 
 function getAuthorizationsFilters(user) {
-  console.log(user);
   const filters = {
     relatedRole: user.role,
   };
-  if(user.home != "all") {
+  if (user.home != "all") {
     filters.home = user.home;
   }
   return filters;
