@@ -20,9 +20,17 @@ async function getAuthorizationsFor(user) {
   );
 }
 
+// used for test
 async function getAllAuthorizations() {
   return await onUserDB((db) =>
     db.collection(AUTHORIZATIONS_COLLECTION).find().toArray()
+  );
+}
+
+// used for test
+async function getAllUsers() {
+  return await onUserDB((db) =>
+    db.collection(USERS_COLLECTION).find().toArray()
   );
 }
 
@@ -36,4 +44,4 @@ function getAuthorizationsFilters(user) {
   return filters;
 }
 
-export { getAuthorizationsFor, getUser, getAllAuthorizations };
+export { getAuthorizationsFor, getUser, getAllAuthorizations, getAllUsers };
