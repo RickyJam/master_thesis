@@ -30,5 +30,5 @@ const UsersApi = (server) => ({
 });
 
 
-export const getUsersPaths = [USERS_PATH, LOGIN_PATH, LAUNDRY_PATH];
+export const getUsersPaths = [USERS_PATH, LOGIN_PATH, AUTHORIZATIONS_PATH];
 export default UsersApi;
