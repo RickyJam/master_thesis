@@ -1,4 +1,4 @@
-const ResidenceOwner = [
+export const ResidenceOwner = [
   {
     relatedRode: "ResidenceOwner",
     home: "homeA",
@@ -101,7 +101,7 @@ const ResidenceOwner = [
   },
 ];
 
-const HomeOwner = [
+export const HomeOwner = [
   {
     relatedRode: "HomeOwner",
     home: "homeA",
@@ -317,7 +317,7 @@ const HomeOwner = [
   },
 ];
 
-const UnderageResident = [
+export const UnderageResident = [
   {
     relatedRode: "UnderageResident",
     home: "homeA",
@@ -440,7 +440,7 @@ const UnderageResident = [
   },
 ];
 
-const Tenant = [
+export const Tenant = [
   {
     relatedRode: "Tenant",
     home: "homeA",
@@ -656,7 +656,7 @@ const Tenant = [
   },
 ];
 
-const CleaningCompanyEmployee = [
+export const CleaningCompanyEmployee = [
   {
     relatedRode: "CleaningCompanyEmployee",
     home: "homeA",
@@ -760,7 +760,7 @@ const CleaningCompanyEmployee = [
   },
 ];
 
-const adaptedHeader = {
+export const adaptedHeader = {
   homeA: [
     "dateTime",
     "usedKw",
