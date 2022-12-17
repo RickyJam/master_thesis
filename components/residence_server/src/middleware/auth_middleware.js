@@ -7,8 +7,9 @@ const AuthMiddleware = (server) => ({
   register: () => {
     const auth = async (req, res, next) => {
       const userId = req.query[USERID_KEY];
-
+      console.log("MIDDLEWARE");
       const user = await usersService.authenticate(userId);
+      console.log(user);
       if (invalidUser(user)) {
         res.status(401).send("User not found!");
         return;
@@ -18,12 +19,12 @@ const AuthMiddleware = (server) => ({
       next();
     };
 
-    server.use(auth);
+    server.use('/residence', auth);
   },
 });
 
 function invalidUser(user) {
-  return user === undefined;
+  return user === null || user === undefined;
 }
 
 export default AuthMiddleware;
