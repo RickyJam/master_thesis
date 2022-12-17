@@ -1,10 +1,10 @@
 {
-  "name": "user_loader",
+  "name": "users_loader",
   "version": "1.0.0",
   "description": "",
-  "main": "user_loader.js",
+  "main": "users_loader.js",
   "scripts": {
-    "start": "DEV=true node user_loader.js"
+    "start": "DEV=true node users_loader.js"
   },
   "author": "",
   "license": "ISC",
