@@ -2,7 +2,7 @@ import UsersService from "../services/users_service.js";
 
 const usersService = UsersService();
 
-const USERS_PATH = "/residence/users";
+const USERS_PATH = "/users";
 const LOGIN_PATH = USERS_PATH + "/login";
 const AUTHORIZATIONS_PATH = USERS_PATH + "/authorizations";
 
