@@ -1,14 +1,17 @@
+import UsersService from "../services/users_service.js";
 import SensorsService from "../services/sensors_service.js";
 import collections from "../utils/mongo_helper.js";
 
-const sensorsService = SensorsService();
+const usersService = UsersService();
+const sensorsService = SensorsService(usersService);
 
 const SENSORS_PATH = "/residence/:home";
 const KITCHENS_PATH = SENSORS_PATH + "/kitchens";
 const LAUNDRY_PATH = SENSORS_PATH + "/laundry";
+const LOGIN_PATH = SENSORS_PATH + "/authorizations";
 
 const HOME_KEY = "home";
-const USERID_KEY = "userId";
+
 
 const SensorsApi = (server) => ({
   register: () => {
@@ -44,8 +47,16 @@ const SensorsApi = (server) => ({
       const data = await sensorsService.getHomeLaundrySensors(home);
       res.send(data);
     });
+
+    // just a test routes, useless for application scope
+    server.get(LOGIN_PATH, async (req, res) => {
+      const authorizations = await usersService.getAuthorizations(req.user);
+
+      res.send({ data: authorizations });
+    });
   },
 });
+
 
 function validateHomeParam(homeParam) {
   return Object.values(collections).includes(homeParam);
