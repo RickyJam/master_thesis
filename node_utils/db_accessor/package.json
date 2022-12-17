@@ -1,0 +1,11 @@
+{
+  "name": "db_accessor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "accessor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "riccardo.pacifico",
+  "license": "ISC"
+}
