@@ -1,0 +1,15 @@
+{
+  "name": "user_loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "user_loader.js",
+  "scripts": {
+    "start": "DEV=true node user_loader.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "db_accessor": "^1.0.4"
+  }
+}
