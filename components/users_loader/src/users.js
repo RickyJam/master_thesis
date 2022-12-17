@@ -6,20 +6,22 @@
 // 		"from": DateTime,
 // 		"to": undefined | DateTime
 // 		},
-// 		"accessTimePermission": { # definito solo per ruoli ad accesso programmato 
+// 		"accessTimePermission": { # definito solo per ruoli ad accesso programmato
 // 			"from": DateTime,
 // 			"to": DateTime
 // 		}
 // }
-// ResidenceOwner, HomeOwner, UnderageResident, Tenant, CleaningCompanyEmployee 
+// ResidenceOwner, HomeOwner, UnderageResident, Tenant, CleaningCompanyEmployee
 
 const users = [
+  // ResidanceOwner
   {
-    "userId": "homeOwner",
-    "home": "none",
-    "role": "HomeOwner"
-  }
+    userId: "residenceOwner",
+    home: "all",
+    role: "ResidenceOwner",
+    lengthOfStay: undefined,
+    accessTimePermission: undefined,
+  },
 ];
-
 
 export default users;
