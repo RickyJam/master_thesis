@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "accessor.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "type": "module",
   "author": "riccardo.pacifico",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "start": "DEV=true node accessor.js"
+  },
+  "dependencies": {
+    "mongodb": "^4.12.1"
+  }
 }
