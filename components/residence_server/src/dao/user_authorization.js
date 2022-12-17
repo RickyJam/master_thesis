@@ -1,4 +1,6 @@
-import onUserDB from "./user_access.js";
+import db_accessor from "db_accessor";
+
+const { onUserDB } = db_accessor;
 
 const AUTHORIZATIONS_COLLECTION = "authorizations";
 const USERS_COLLECTION = "users";
