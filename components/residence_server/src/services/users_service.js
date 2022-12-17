@@ -2,6 +2,7 @@ import {
   getUser,
   getAuthorizationsFor,
   getAllAuthorizations,
+  getAllUsers,
 } from "../dao/user_authorization.js";
 
 const UsersService = () => ({
@@ -22,6 +23,13 @@ const UsersService = () => ({
 
     return authorizations;
   },
+
+  // used for test
+  getAllUsers: async () => {
+    const users = await getAllUsers();
+
+    return users;
+  }
 });
 
 export default UsersService;
