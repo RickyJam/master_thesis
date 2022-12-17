@@ -8,7 +8,7 @@ const sensorsService = SensorsService(usersService);
 const SENSORS_PATH = "/residence/:home";
 const KITCHENS_PATH = SENSORS_PATH + "/kitchens";
 const LAUNDRY_PATH = SENSORS_PATH + "/laundry";
-const LOGIN_PATH = SENSORS_PATH + "/authorizations";
+const AUTHORIZATIONS_PATH = SENSORS_PATH + "/authorizations";
 
 const HOME_KEY = "home";
 
@@ -49,7 +49,7 @@ const SensorsApi = (server) => ({
     });
 
     // just a test routes, useless for application scope
-    server.get(LOGIN_PATH, async (req, res) => {
+    server.get(AUTHORIZATIONS_PATH, async (req, res) => {
       const authorizations = await usersService.getAuthorizations(req.user);
 
       res.send({ data: authorizations });
