@@ -20,6 +20,12 @@ async function getAuthorizationsFor(user) {
   );
 }
 
+async function getAllAuthorizations() {
+  return await onUserDB((db) =>
+    db.collection(AUTHORIZATIONS_COLLECTION).find().toArray()
+  );
+}
+
 function getAuthorizationsFilters(user) {
   const filters = {
     relatedRole: user.role,
@@ -30,4 +36,4 @@ function getAuthorizationsFilters(user) {
   return filters;
 }
 
-export { getAuthorizationsFor, getUser };
+export { getAuthorizationsFor, getUser, getAllAuthorizations };
