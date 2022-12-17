@@ -4,7 +4,9 @@ import {
   getLaundryParams,
   getSolarParams,
 } from "../utils/mongo_helper.js";
-import onDataDB from "./data_access.js";
+import db_accessor from "db_accessor";
+
+const { onDataDB } = db_accessor;
 
 async function getLastTenConsumptionFrom(collectionName) {
   return await onDataDB((db) =>

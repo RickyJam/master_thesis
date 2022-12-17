@@ -1,17 +1,16 @@
-import {
-  getKitchenParams,
-  getLaundryParams,
-} from "../utils/mongo_helper.js";
-import onMasterDB from "./mongo_access.js";
+import { getKitchenParams, getLaundryParams } from "../utils/mongo_helper.js";
+import db_accessor from "db_accessor";
+
+const { onDataDB } = db_accessor;
 
 async function getLastTenConsumptionFrom(collectionName) {
-  return await onMasterDB((db) =>
+  return await onDataDB((db) =>
     db.collection(collectionName).find().limit(10).toArray()
   );
 }
 
 async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
-  return await onMasterDB((db) =>
+  return await onDataDB((db) =>
     db
       .collection(collectionName)
       .find()
@@ -23,7 +22,7 @@ async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
 }
 
 async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
-  return await onMasterDB((db) =>
+  return await onDataDB((db) =>
     db
       .collection(collectionName)
       .find()
@@ -35,7 +34,7 @@ async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
 }
 
 async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
-  return await onMasterDB((db) =>
+  return await onDataDB((db) =>
     db
       .collection(collectionName)
       .find()
