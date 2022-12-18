@@ -21,7 +21,7 @@ const SensorsApi = (server) => ({
         return;
       }
 
-      const data = await sensorsService.getHomeSensors(home);
+      const data = await sensorsService.getHomeSensors(home, user);
       res.send(data);
     });
 
@@ -33,7 +33,7 @@ const SensorsApi = (server) => ({
         return;
       }
 
-      const data = await sensorsService.getHomeKitchenSensors(home);
+      const data = await sensorsService.getHomeKitchenSensors(home, user);
       res.send(data);
     });
 
@@ -45,7 +45,7 @@ const SensorsApi = (server) => ({
         return;
       }
 
-      const data = await sensorsService.getHomeLaundrySensors(home);
+      const data = await sensorsService.getHomeLaundrySensors(home, user);
       res.send(data);
     });
   },

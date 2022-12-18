@@ -9,18 +9,18 @@ const ASC = 1;
 const DESC = -1;
 
 const SensorsService = (usersService) => ({
-  getHomeSensors: async (home) => {
+  getHomeSensors: async (home, user) => {
     const data = await getLastTenConsumptionFrom(home);
 
     return { ...data };
   },
-  getHomeKitchenSensors: async (home, toDate = lastDate, sort = DESC) => {
+  getHomeKitchenSensors: async (home, user, toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = await getKitchenConsumption(home);
 
     return { data };
   },
-  getHomeLaundrySensors: async (home, toDate = lastDate, sort = DESC) => {
+  getHomeLaundrySensors: async (home, user, toDate = lastDate, sort = DESC) => {
     const fromDate = getLastMonthDate(toDate);
     const data = await getLaundryConsumption(home);
 
