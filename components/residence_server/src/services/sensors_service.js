@@ -10,17 +10,20 @@ const DESC = -1;
 
 const SensorsService = (usersService) => ({
   getHomeSensors: async (home, user) => {
+    const authorizations = usersService.getAuthorizations(user);
     const data = await getLastTenConsumptionFrom(home);
 
     return { ...data };
   },
   getHomeKitchenSensors: async (home, user, toDate = lastDate, sort = DESC) => {
+    const authorizations = usersService.getAuthorizations(user);
     const fromDate = getLastMonthDate(toDate);
     const data = await getKitchenConsumption(home);
 
     return { data };
   },
   getHomeLaundrySensors: async (home, user, toDate = lastDate, sort = DESC) => {
+    const authorizations = usersService.getAuthorizations(user);
     const fromDate = getLastMonthDate(toDate);
     const data = await getLaundryConsumption(home);
 
