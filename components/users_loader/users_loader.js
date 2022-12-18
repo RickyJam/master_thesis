@@ -9,8 +9,10 @@ async function loadAuths() {
   }
 }
 
-// async function loadUsers() {
-//   await insertUsers(auths);
-// }
+async function loadUsers() {
+  console.log("inserting users");
+  await insertUsers(auths);
+}
 
+await loadAuths();
 await loadAuths();
