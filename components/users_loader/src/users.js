@@ -1,23 +1,3 @@
-// {
-// 	userId: "abcdefghi",
-// 	home: [all|homeA|homeB|homeC|homeD|homeE|homeF],
-// 	role: "Role name",
-// 	lengthOfStay: undefined | { # definito solo se sei un abitante
-// 		from: DateTime,
-// 		to: undefined | DateTime
-// 		},
-// }
-// ResidenceOwner, HomeOwner, UnderageResident, Tenant, CleaningCompanyEmployee
-
-// Casa A: c'è una coppia
-// Casa B: c'è un singolo
-// Casa C: una coppia ed un minore
-// Casa D: un affittuario nel 2015 ed uno nuovo nel 2015
-// Casa E: un affittuario nel 2016
-// Casa F: un affittuario nel 2014, due adulti ed un minore
-
-// 1 ResidanceOwner
-// 3 CleaningCompanyEmployee
 const HomeA = [
   {
     userId: "homeOwnerA",
