@@ -15,4 +15,4 @@ async function loadUsers() {
 }
 
 await loadAuths();
-await loadAuths();
+await loadUsers();
