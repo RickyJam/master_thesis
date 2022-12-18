@@ -35,12 +35,17 @@ async function getAllUsers() {
 }
 
 function getAuthorizationsFilters(user) {
+  const { home, role } = user;
   const filters = {
-    relatedRole: user.role,
+    $and: [
+      {
+        relatedRole: { $eq: role },
+      },
+      {
+        home: { $in: home },
+      },
+    ],
   };
-  if (user.home != "all") {
-    filters.home = user.home;
-  }
   return filters;
 }
 
