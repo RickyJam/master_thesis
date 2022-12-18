@@ -19,6 +19,12 @@ const UsersService = () => ({
     return authorizations;
   },
   
+  getAuthorizations: async (user) => {
+    const authorizations = await getAuthorizationsFor(user);
+
+    return authorizations;
+  },
+  
   // used for test
   getAllAuthorizations: async () => {
     const authorizations = await getAllAuthorizations();
