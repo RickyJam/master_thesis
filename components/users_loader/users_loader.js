@@ -1,5 +1,6 @@
 import { insertAuthorizations, insertUsers } from "./src/mongo_loader.js";
 import authorizations from "./src/authorizations.js";
+import users from "./src/users.js";
 
 
 async function loadAuths() {
@@ -11,7 +12,7 @@ async function loadAuths() {
 
 async function loadUsers() {
   console.log("inserting users");
-  await insertUsers(auths);
+  await insertUsers(users);
 }
 
 await loadAuths();
