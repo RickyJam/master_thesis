@@ -676,6 +676,10 @@ const CleaningCompanyEmployee = [
       "dishwasherDisposalSinkLightKw",
       "officeLightsKw",
     ],
+    accessTimePermission: {
+      from: "9",
+      to: "10"
+    },
   },
   {
     relatedRode: "CleaningCompanyEmployee",
@@ -693,6 +697,10 @@ const CleaningCompanyEmployee = [
       "mBedKBedLightsMasterBathkw",
       "livingRoomKitchenLightsKw",
     ],
+    accessTimePermission: {
+      from: "9",
+      to: "10"
+    },
   },
   {
     relatedRode: "CleaningCompanyEmployee",
@@ -704,6 +712,10 @@ const CleaningCompanyEmployee = [
       "livingRoomKw",
       "washerDrierKw",
     ],
+    accessTimePermission: {
+      from: "10",
+      to: "11"
+    },
   },
   {
     relatedRode: "CleaningCompanyEmployee",
@@ -724,6 +736,10 @@ const CleaningCompanyEmployee = [
       "dryerKw",
       "kitchenLightingKw",
     ],
+    accessTimePermission: {
+      from: "9",
+      to: "10"
+    },
   },
   {
     relatedRode: "CleaningCompanyEmployee",
@@ -742,6 +758,10 @@ const CleaningCompanyEmployee = [
       "dryerKw",
       "basementFamilyRoomKw",
     ],
+    accessTimePermission: {
+      from: "10",
+      to: "11"
+    },
   },
   {
     relatedRode: "CleaningCompanyEmployee",
@@ -757,6 +777,10 @@ const CleaningCompanyEmployee = [
       "dryerKw",
       "basementKw",
     ],
+    accessTimePermission: {
+      from: "11",
+      to: "12"
+    },
   },
 ];
 
