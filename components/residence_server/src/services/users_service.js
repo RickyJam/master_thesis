@@ -11,7 +11,7 @@ const UsersService = () => ({
 
     return user;
   },
-  getAuthorizations: async (userId) => {
+  getAuthorizationsById: async (userId) => {
     const user = await getUser(userId);
 
     const authorizations = await getAuthorizationsFor(user);

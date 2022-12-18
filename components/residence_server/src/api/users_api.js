@@ -16,7 +16,7 @@ const UsersApi = (server) => ({
       });
 
     server.get(LOGIN_PATH, async (req, res) => {
-      const authorizations = await usersService.getAuthorizations(req.query['userId']);
+      const authorizations = await usersService.getAuthorizationsById(req.query['userId']);
 
       res.send({ data: authorizations });
     });
