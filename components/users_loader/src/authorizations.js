@@ -1,6 +1,6 @@
 const ResidenceOwner = [
   {
-    relatedRode: "ResidenceOwner",
+    relatedRole: "ResidenceOwner",
     home: "homeA",
     fields: [
       "kitchenOutletsEastKw",
@@ -18,7 +18,7 @@ const ResidenceOwner = [
     ],
   },
   {
-    relatedRode: "ResidenceOwner",
+    relatedRole: "ResidenceOwner",
     home: "homeB",
     fields: [
       "furnaceKw",
@@ -33,7 +33,7 @@ const ResidenceOwner = [
     ],
   },
   {
-    relatedRode: "ResidenceOwner",
+    relatedRole: "ResidenceOwner",
     home: "homeC",
     fields: [
       "kitchenTwelweKw",
@@ -50,7 +50,7 @@ const ResidenceOwner = [
     ],
   },
   {
-    relatedRode: "ResidenceOwner",
+    relatedRole: "ResidenceOwner",
     home: "homeD",
     fields: [
       "kitchenLightingKw",
@@ -66,7 +66,7 @@ const ResidenceOwner = [
     ],
   },
   {
-    relatedRode: "ResidenceOwner",
+    relatedRole: "ResidenceOwner",
     home: "homeE",
     fields: [
       "kitchenKw",
@@ -81,7 +81,7 @@ const ResidenceOwner = [
     ],
   },
   {
-    relatedRode: "ResidenceOwner",
+    relatedRole: "ResidenceOwner",
     home: "homeF",
     fields: [
       "refrigeratorKw",
@@ -103,7 +103,7 @@ const ResidenceOwner = [
 
 const HomeOwner = [
   {
-    relatedRode: "HomeOwner",
+    relatedRole: "HomeOwner",
     home: "homeA",
     fields: [
       "dateTime",
@@ -143,7 +143,7 @@ const HomeOwner = [
     ],
   },
   {
-    relatedRode: "HomeOwner",
+    relatedRole: "HomeOwner",
     home: "homeB",
     fields: [
       "dateTime",
@@ -180,7 +180,7 @@ const HomeOwner = [
     ],
   },
   {
-    relatedRode: "HomeOwner",
+    relatedRole: "HomeOwner",
     home: "homeC",
     fields: [
       "dateTime",
@@ -207,7 +207,7 @@ const HomeOwner = [
     ],
   },
   {
-    relatedRode: "HomeOwner",
+    relatedRole: "HomeOwner",
     home: "homeD",
     fields: [
       "dateTime",
@@ -254,7 +254,7 @@ const HomeOwner = [
     ],
   },
   {
-    relatedRode: "HomeOwner",
+    relatedRole: "HomeOwner",
     home: "homeE",
     fields: [
       "dateTime",
@@ -282,7 +282,7 @@ const HomeOwner = [
     ],
   },
   {
-    relatedRode: "HomeOwner",
+    relatedRole: "HomeOwner",
     home: "homeF",
     fields: [
       "dateTime",
@@ -319,7 +319,7 @@ const HomeOwner = [
 
 const UnderageResident = [
   {
-    relatedRode: "UnderageResident",
+    relatedRole: "UnderageResident",
     home: "homeA",
     fields: [
       "dateTime",
@@ -340,7 +340,7 @@ const UnderageResident = [
     ],
   },
   {
-    relatedRode: "UnderageResident",
+    relatedRole: "UnderageResident",
     home: "homeB",
     fields: [
       "dateTime",
@@ -360,7 +360,7 @@ const UnderageResident = [
     ],
   },
   {
-    relatedRode: "UnderageResident",
+    relatedRole: "UnderageResident",
     home: "homeC",
     fields: [
       "dateTime",
@@ -374,7 +374,7 @@ const UnderageResident = [
     ],
   },
   {
-    relatedRode: "UnderageResident",
+    relatedRole: "UnderageResident",
     home: "homeD",
     fields: [
       "dateTime",
@@ -400,7 +400,7 @@ const UnderageResident = [
     ],
   },
   {
-    relatedRode: "UnderageResident",
+    relatedRole: "UnderageResident",
     home: "homeE",
     fields: [
       "dateTime",
@@ -419,7 +419,7 @@ const UnderageResident = [
     ],
   },
   {
-    relatedRode: "UnderageResident",
+    relatedRole: "UnderageResident",
     home: "homeF",
     fields: [
       "dateTime",
@@ -442,7 +442,7 @@ const UnderageResident = [
 
 const Tenant = [
   {
-    relatedRode: "Tenant",
+    relatedRole: "Tenant",
     home: "homeA",
     fields: [
       "dateTime",
@@ -482,7 +482,7 @@ const Tenant = [
     ],
   },
   {
-    relatedRode: "Tenant",
+    relatedRole: "Tenant",
     home: "homeB",
     fields: [
       "dateTime",
@@ -519,7 +519,7 @@ const Tenant = [
     ],
   },
   {
-    relatedRode: "Tenant",
+    relatedRole: "Tenant",
     home: "homeC",
     fields: [
       "dateTime",
@@ -546,7 +546,7 @@ const Tenant = [
     ],
   },
   {
-    relatedRode: "Tenant",
+    relatedRole: "Tenant",
     home: "homeD",
     fields: [
       "dateTime",
@@ -593,7 +593,7 @@ const Tenant = [
     ],
   },
   {
-    relatedRode: "Tenant",
+    relatedRole: "Tenant",
     home: "homeE",
     fields: [
       "dateTime",
@@ -621,7 +621,7 @@ const Tenant = [
     ],
   },
   {
-    relatedRode: "Tenant",
+    relatedRole: "Tenant",
     home: "homeF",
     fields: [
       "dateTime",
@@ -658,7 +658,7 @@ const Tenant = [
 
 const CleaningCompanyEmployee = [
   {
-    relatedRode: "CleaningCompanyEmployee",
+    relatedRole: "CleaningCompanyEmployee",
     home: "homeA",
     fields: [
       "dateTime",
@@ -682,7 +682,7 @@ const CleaningCompanyEmployee = [
     },
   },
   {
-    relatedRode: "CleaningCompanyEmployee",
+    relatedRole: "CleaningCompanyEmployee",
     home: "homeB",
     fields: [
       "dateTime",
@@ -703,7 +703,7 @@ const CleaningCompanyEmployee = [
     },
   },
   {
-    relatedRode: "CleaningCompanyEmployee",
+    relatedRole: "CleaningCompanyEmployee",
     home: "homeC",
     fields: [
       "dateTime",
@@ -718,7 +718,7 @@ const CleaningCompanyEmployee = [
     },
   },
   {
-    relatedRode: "CleaningCompanyEmployee",
+    relatedRole: "CleaningCompanyEmployee",
     home: "homeD",
     fields: [
       "dateTime",
@@ -742,7 +742,7 @@ const CleaningCompanyEmployee = [
     },
   },
   {
-    relatedRode: "CleaningCompanyEmployee",
+    relatedRole: "CleaningCompanyEmployee",
     home: "homeE",
     fields: [
       "dateTime",
@@ -764,7 +764,7 @@ const CleaningCompanyEmployee = [
     },
   },
   {
-    relatedRode: "CleaningCompanyEmployee",
+    relatedRole: "CleaningCompanyEmployee",
     home: "homeF",
     fields: [
       "dateTime",
