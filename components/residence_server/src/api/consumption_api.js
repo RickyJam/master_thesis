@@ -10,21 +10,25 @@ const POWER_PATH = CONSUMPTION_PATH + "/power";
 const ConsumptionApi = (server) => ({
   register: () => {
     server.get(CONSUMPTION_PATH, async (req, res) => {
+      const user = req.user;
       const data = await consumptionService.getResidanceConsumption();
       res.send(data);
     });
 
     server.get(KITCHENS_PATH, async (req, res) => {
+      const user = req.user;
       const data = await consumptionService.getResidanceKitchensConsumption();
       res.send(data);
     });
 
     server.get(LAUNDRY_PATH, async (req, res) => {
+      const user = req.user;
       const data = await consumptionService.getResidanceLaundryConsumption();
       res.send(data);
     });
 
     server.get(POWER_PATH, async (req, res) => {
+      const user = req.user;
       const data = await consumptionService.getResidancePowerConsumption();
       res.send(data);
     });

@@ -15,6 +15,7 @@ const SensorsApi = (server) => ({
   register: () => {
     server.get(SENSORS_PATH, async (req, res) => {
       const home = req.params[HOME_KEY];
+      const user = req.user;
       if (!validateHomeParam(home)) {
         res.status(404).send("Unvalid home provided - " + home);
         return;
@@ -26,6 +27,7 @@ const SensorsApi = (server) => ({
 
     server.get(KITCHENS_PATH, async (req, res) => {
       const home = req.params[HOME_KEY];
+      const user = req.user;
       if (!validateHomeParam(home)) {
         res.status(404).send("Unvalid home provided - " + home);
         return;
@@ -37,6 +39,7 @@ const SensorsApi = (server) => ({
 
     server.get(LAUNDRY_PATH, async (req, res) => {
       const home = req.params[HOME_KEY];
+      const user = req.user;
       if (!validateHomeParam(home)) {
         res.status(404).send("Unvalid home provided - " + home);
         return;
