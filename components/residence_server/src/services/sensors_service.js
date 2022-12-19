@@ -10,20 +10,31 @@ const DESC = -1;
 
 const SensorsService = (usersService) => ({
   getHomeSensors: async (home, user) => {
-    const authorizations = usersService.getAuthorizations(user);
+    const authorizations = await usersService.getAuthorizations(user);
+    if (isNotAuthorized(authorizations, user)) {
+      return undefined;
+    }
+
     const data = await getLastTenConsumptionFrom(home);
 
     return { ...data };
   },
   getHomeKitchenSensors: async (home, user, toDate = lastDate, sort = DESC) => {
-    const authorizations = usersService.getAuthorizations(user);
+    const authorizations = await usersService.getAuthorizations(user);
+    if (isNotAuthorized(authorizations, user)) {
+      return undefined;
+    }
     const fromDate = getLastMonthDate(toDate);
     const data = await getKitchenConsumption(home);
 
     return { data };
   },
   getHomeLaundrySensors: async (home, user, toDate = lastDate, sort = DESC) => {
-    const authorizations = usersService.getAuthorizations(user);
+    const authorizations = await usersService.getAuthorizations(user);
+    if (isNotAuthorized(authorizations, user)) {
+      return undefined;
+    }
+    
     const fromDate = getLastMonthDate(toDate);
     const data = await getLaundryConsumption(home);
 
@@ -35,6 +46,10 @@ function getLastMonthDate(startDate) {
   const lastMonthDate = new Date(startDate);
   lastMonthDate.setDate(startDate.getDate() - 30);
   return lastMonthDate;
+}
+
+function isNotAuthorized(authorizations, home) {
+  return !authorizations.find((auth) => auth.home === home);
 }
 
 export default SensorsService;
