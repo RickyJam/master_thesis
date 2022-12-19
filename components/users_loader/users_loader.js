@@ -5,7 +5,7 @@ import users from "./src/users.js";
 
 async function loadAuths() {
   for (const auths of authorizations) {
-    console.log("inserting: " + auths[0].relatedRode);
+    console.log("inserting: " + auths[0].relatedRole);
     await insertAuthorizations(auths);
   }
 }
