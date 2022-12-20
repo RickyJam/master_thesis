@@ -3,6 +3,7 @@ import {
   getKitchenParams,
   getLaundryParams,
   getSolarParams,
+  mergeFieldsWithParams,
 } from "../utils/mongo_helper.js";
 import db_accessor from "db_accessor";
 
@@ -15,12 +16,16 @@ async function getLastTenConsumptionFrom(collectionName) {
   );
 }
 
-async function getLaundryConsumption(collectionName, fromDate, toDate) {
+async function getLaundryConsumption(collectionName, fields, fromDate, toDate) {
+  const searchFields = mergeFieldsWithParams(
+    fields,
+    getLaundryParams(collectionName)
+  );
   const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
-        getAggregationParams(toDate, fromDate, getLaundryParams(collectionName))
+        getAggregationParams(toDate, fromDate, searchFields)
       )
       .sort({ dateTime: DESC })
       .toArray()
@@ -28,12 +33,16 @@ async function getLaundryConsumption(collectionName, fromDate, toDate) {
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getSolarConsumption(collectionName, fromDate, toDate) {
+async function getSolarConsumption(collectionName, fields, fromDate, toDate) {
+  const searchFields = mergeFieldsWithParams(
+    fields,
+    getSolarParams(collectionName)
+  );
   const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
-        getAggregationParams(toDate, fromDate, getSolarParams(collectionName))
+        getAggregationParams(toDate, fromDate, searchFields)
       )
       .sort({ dateTime: DESC })
       .toArray()
@@ -41,12 +50,16 @@ async function getSolarConsumption(collectionName, fromDate, toDate) {
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getKitchenConsumption(collectionName, fromDate, toDate) {
+async function getKitchenConsumption(collectionName, fields, fromDate, toDate) {
+  const searchFields = mergeFieldsWithParams(
+    fields,
+    getKitchenParams(collectionName)
+  );
   const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
-        getAggregationParams(toDate, fromDate, getKitchenParams(collectionName))
+        getAggregationParams(toDate, fromDate, searchFields)
       )
       .sort({ dateTime: DESC })
       .toArray()
