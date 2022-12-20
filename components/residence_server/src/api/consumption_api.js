@@ -11,19 +11,19 @@ const ConsumptionApi = (server) => ({
   register: () => {
     server.get(CONSUMPTION_PATH, async (req, res) => {
       const user = req.user;
-      const data = await consumptionService.getResidanceConsumption();
+      const data = await consumptionService.getResidanceConsumption(user);
       res.send(data);
     });
 
     server.get(KITCHENS_PATH, async (req, res) => {
       const user = req.user;
-      const data = await consumptionService.getResidanceKitchensConsumption();
+      const data = await consumptionService.getResidanceKitchensConsumption(user);
       res.send(data);
     });
 
     server.get(LAUNDRY_PATH, async (req, res) => {
       const user = req.user;
-      const data = await consumptionService.getResidanceLaundryConsumption();
+      const data = await consumptionService.getResidanceLaundryConsumption(user);
       res.send(data);
     });
 
