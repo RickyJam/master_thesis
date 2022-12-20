@@ -5,14 +5,17 @@ import {
   getLaundryConsumption,
   getSolarConsumption,
 } from "../dao/data_consumption.js";
+import { ResidenceOwner } from "../utils/roles.js";
 
 const { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF } = collections;
 
 const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
-const DESC = -1;
 
 const ConsumptionService = () => ({
-  getResidanceConsumption: async () => {
+  getResidanceConsumption: async (user) => {
+    if (user.role !== ResidenceOwner) {
+      return { data: {} };
+    }
     const data = {
       HOMEA: await getLastTenConsumptionFrom(HOMEA),
       HOMEB: await getLastTenConsumptionFrom(HOMEB),
@@ -23,7 +26,10 @@ const ConsumptionService = () => ({
     };
     return { data };
   },
-  getResidanceKitchensConsumption: async (toDate = lastDate, sort = DESC) => {
+  getResidanceKitchensConsumption: async (user, toDate = lastDate) => {
+    if (user.role !== ResidenceOwner) {
+      return { data: {} };
+    }
     const fromDate = getLastMonthDate(toDate);
     const data = {
       HOMEA: await getKitchenConsumption(HOMEA, sort, fromDate, toDate),
@@ -35,7 +41,10 @@ const ConsumptionService = () => ({
     };
     return { data };
   },
-  getResidanceLaundryConsumption: async (toDate = lastDate, sort = DESC) => {
+  getResidanceLaundryConsumption: async (user, toDate = lastDate) => {
+    if (user.role !== ResidenceOwner) {
+      return { data: {} };
+    }
     const fromDate = getLastMonthDate(toDate);
     const data = {
       HOMEA: await getLaundryConsumption(HOMEA, sort, fromDate, toDate),
@@ -47,7 +56,10 @@ const ConsumptionService = () => ({
     };
     return { data };
   },
-  getResidancePowerConsumption: async (toDate = lastDate, sort = DESC) => {
+  getResidancePowerConsumption: async (user, toDate = lastDate) => {
+    if (user.role !== ResidenceOwner) {
+      return { data: {} };
+    }
     const fromDate = getLastMonthDate(toDate);
     const data = {
       HOMEA: await getSolarConsumption(HOMEA, sort, fromDate, toDate),
