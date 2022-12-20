@@ -19,22 +19,20 @@ const AuthMiddleware = (server) => ({
       next();
     };
 
-    const homeRestriction = async (req, res, next) => {
-      const user = req.user;
-
-      if (user.role === ResidenceOwner) {
-        res.status(401).send("Unauthorized");
-        return;
-      }
-
-      req.user = user;
-      next();
-    };
-
     server.use("/residence", auth);
-    server.use("/residence/:home", homeRestriction);
   },
 });
+
+export const homeRestriction = async (req, res, next) => {
+  const user = req.user;
+
+  if (user.role === ResidenceOwner) {
+    res.status(401).send("Unauthorized");
+    return;
+  }
+  
+  next();
+};
 
 function invalidUser(user) {
   return user === null || user === undefined;
