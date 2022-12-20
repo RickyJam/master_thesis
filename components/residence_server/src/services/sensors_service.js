@@ -26,7 +26,7 @@ const SensorsService = (usersService) => ({
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
-    const fromDate = getLastMonthDate(toDate);
+    // const fromDate = getLastMonthDate(toDate);
     const data = await getKitchenConsumption(home, authFields);
 
     return { data };
@@ -39,7 +39,7 @@ const SensorsService = (usersService) => ({
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
-    const fromDate = getLastMonthDate(toDate);
+    // const fromDate = getLastMonthDate(toDate);
     const data = await getLaundryConsumption(home, authFields);
 
     return { data };
