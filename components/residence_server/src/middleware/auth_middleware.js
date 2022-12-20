@@ -1,4 +1,5 @@
 import UsersService from "../services/users_service.js";
+import { ResidenceOwner } from "../utils/roles.js";
 
 const USERID_KEY = "userId";
 const usersService = UsersService();
@@ -10,7 +11,7 @@ const AuthMiddleware = (server) => ({
 
       const user = await usersService.authenticate(userId);
       if (invalidUser(user)) {
-        res.status(401).send("User not found!");
+        res.status(404).send("User not found!");
         return;
       }
 
@@ -18,7 +19,20 @@ const AuthMiddleware = (server) => ({
       next();
     };
 
-    server.use('/residence', auth);
+    const homeRestriction = async (req, res, next) => {
+      const user = req.user;
+
+      if (user.role === ResidenceOwner) {
+        res.status(401).send("Unauthorized");
+        return;
+      }
+
+      req.user = user;
+      next();
+    };
+
+    server.use("/residence", auth);
+    server.use("/residence/:home", homeRestriction);
   },
 });
 
