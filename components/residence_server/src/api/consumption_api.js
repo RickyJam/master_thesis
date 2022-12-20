@@ -29,7 +29,7 @@ const ConsumptionApi = (server) => ({
 
     server.get(POWER_PATH, async (req, res) => {
       const user = req.user;
-      const data = await consumptionService.getResidancePowerConsumption();
+      const data = await consumptionService.getResidancePowerConsumption(user);
       res.send(data);
     });
   },
