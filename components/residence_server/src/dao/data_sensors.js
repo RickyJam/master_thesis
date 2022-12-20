@@ -1,7 +1,14 @@
-import { getKitchenParams, getLaundryParams } from "../utils/mongo_helper.js";
+import {
+  getKitchenParams,
+  getLaundryParams,
+  getSolarParams,
+  mergeFieldsWithParams,
+} from "../utils/mongo_helper.js";
 import db_accessor from "db_accessor";
 
 const { onDataDB } = db_accessor;
+
+const DESC = -1;
 
 async function getLastTenConsumptionFrom(collectionName) {
   return await onDataDB((db) =>
@@ -9,37 +16,64 @@ async function getLastTenConsumptionFrom(collectionName) {
   );
 }
 
-async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
+async function getLaundryConsumption(
+  collectionName,
+  authFields,
+  fromDate,
+  toDate
+) {
+  const searchFields = mergeFieldsWithParams(
+    authFields,
+    getLaundryParams(collectionName)
+  );
   return await onDataDB((db) =>
     db
       .collection(collectionName)
       .find()
-      .project(getLaundryParams(collectionName))
-      .sort({ dateTime: sort })
+      .project(searchFields)
+      .sort({ dateTime: DESC })
       .limit(100)
       .toArray()
   );
 }
 
-async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
+async function getSolarConsumption(
+  collectionName,
+  authFields,
+  fromDate,
+  toDate
+) {
+  const searchFields = mergeFieldsWithParams(
+    authFields,
+    getSolarParams(collectionName)
+  );
   return await onDataDB((db) =>
     db
       .collection(collectionName)
       .find()
-      .project(getSolarParams(collectionName))
-      .sort({ dateTime: sort })
+      .project(searchFields)
+      .sort({ dateTime: DESC })
       .limit(100)
       .toArray()
   );
 }
 
-async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
+async function getKitchenConsumption(
+  collectionName,
+  authFields,
+  fromDate,
+  toDate
+) {
+  const searchFields = mergeFieldsWithParams(
+    authFields,
+    getKitchenParams(collectionName)
+  );
   return await onDataDB((db) =>
     db
       .collection(collectionName)
       .find()
-      .project(getKitchenParams(collectionName))
-      .sort({ dateTime: sort })
+      .project(searchFields)
+      .sort({ dateTime: DESC })
       .limit(100)
       .toArray()
   );

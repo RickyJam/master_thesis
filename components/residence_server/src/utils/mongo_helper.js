@@ -143,4 +143,18 @@ const operate = (params, suffix, operation) => {
 
 export const avgAll = (params) => operate(params, "Avg", operators.avg);
 
+export const mergeFieldsWithParams = (fields, params) => {
+  const keys = Object.keys(params);
+  console.log(keys);
+  return toSearchParams(keys.filter((value) => fields.includes(value)));
+};
+
+function toSearchParams(keys) {
+  const searchParams = {};
+  for (const key of keys) {
+    searchParams[key] = 1;
+  }
+  return searchParams;
+}
+
 export default { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF };
