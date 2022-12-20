@@ -6,9 +6,5 @@ export function mergeAllAuthFields(authorizations) {
 }
 
 export function getAuthForHome(authorizations, home) {
-  return (
-    authorizations.find((auth) => {
-      return auth.home === home;
-    }) || undefined
-  );
+  return authorizations.find((auth) => auth.home === home) || undefined;
 }
