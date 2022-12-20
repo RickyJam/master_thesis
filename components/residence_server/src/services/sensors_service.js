@@ -3,7 +3,10 @@ import {
   getKitchenConsumption,
   getLaundryConsumption,
 } from "../dao/data_sensors.js";
-import { getAuthForHome, mergeAllAuthFields } from "../utils/authorizations_helper.js";
+import {
+  getAuthForHome,
+  mergeAllAuthFields,
+} from "../utils/authorizations_helper.js";
 
 const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
 
@@ -12,7 +15,7 @@ const SensorsService = (usersService) => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
-      return undefined;
+      return { data: [] };
     }
 
     const data = await getLastTenConsumptionFrom(home);
@@ -23,7 +26,7 @@ const SensorsService = (usersService) => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
-      return undefined;
+      return { data: [] };
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
@@ -36,7 +39,7 @@ const SensorsService = (usersService) => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
-      return undefined;
+      return { data: [] };
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
@@ -46,8 +49,6 @@ const SensorsService = (usersService) => ({
     return { data };
   },
 });
-
-
 
 function getLastMonthDate(startDate) {
   const lastMonthDate = new Date(startDate);
