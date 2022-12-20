@@ -9,7 +9,6 @@ import {
 const { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF } = collections;
 
 const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
-const ASC = 1;
 const DESC = -1;
 
 const ConsumptionService = () => ({

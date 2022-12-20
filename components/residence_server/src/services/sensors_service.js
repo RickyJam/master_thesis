@@ -40,7 +40,7 @@ const SensorsService = (usersService) => ({
 
     const authFields = mergeAllAuthFields(userAuthorizations);
     const fromDate = getLastMonthDate(toDate);
-    const data = await getLaundryConsumption(home, relatedAuths);
+    const data = await getLaundryConsumption(home, authFields);
 
     return { data };
   },
