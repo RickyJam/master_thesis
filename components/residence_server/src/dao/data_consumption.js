@@ -7,6 +7,7 @@ import {
 import db_accessor from "db_accessor";
 
 const { onDataDB } = db_accessor;
+const DESC = -1;
 
 async function getLastTenConsumptionFrom(collectionName) {
   return await onDataDB((db) =>
@@ -14,40 +15,40 @@ async function getLastTenConsumptionFrom(collectionName) {
   );
 }
 
-async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
+async function getLaundryConsumption(collectionName, fromDate, toDate) {
   const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
         getAggregationParams(toDate, fromDate, getLaundryParams(collectionName))
       )
-      .sort({ dateTime: sort })
+      .sort({ dateTime: DESC })
       .toArray()
   );
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
+async function getSolarConsumption(collectionName, fromDate, toDate) {
   const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
         getAggregationParams(toDate, fromDate, getSolarParams(collectionName))
       )
-      .sort({ dateTime: sort })
+      .sort({ dateTime: DESC })
       .toArray()
   );
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
+async function getKitchenConsumption(collectionName, fromDate, toDate) {
   const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
         getAggregationParams(toDate, fromDate, getKitchenParams(collectionName))
       )
-      .sort({ dateTime: sort })
+      .sort({ dateTime: DESC })
       .toArray()
   );
   return parseDocument(fromDate, toDate, doc[0]);
