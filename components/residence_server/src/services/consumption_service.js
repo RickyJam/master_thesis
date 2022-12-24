@@ -20,7 +20,7 @@ const ConsumptionService = () => ({
       return EMPTY_DATA;
     }
 
-    const { toDate, fromDate} = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getDates(user.lengthOfStay);
 
     const data = {};
     for (const home of collections) {
