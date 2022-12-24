@@ -8,17 +8,25 @@ export function getLastMonthDate(startDate) {
 
 function getFollowingThirtyDays(fromDate) {
   const lastMonthDate = new Date(fromDate);
-  lastMonthDate.setDate(startDate.getDate() + 30);
+  lastMonthDate.setDate(fromDate.getDate() + 30);
   return lastMonthDate;
 }
 
 function getPastThirtyDays(toDate) {
   const lastMonthDate = new Date(toDate);
-  lastMonthDate.setDate(startDate.getDate() - 30);
+  lastMonthDate.setDate(toDate.getDate() - 30);
   return lastMonthDate;
 }
 
-export function getDates({ from, to }) {
+export function getUserDates(user) {
+  const lengthOfStay = {
+    from: user.lengthOfStay?.from,
+    to: user.lengthOfStay?.to,
+  };
+  return getDates(lengthOfStay);
+}
+
+function getDates({ from = undefined, to = undefined } = {}) {
   if (from) {
     return { fromDate: from, toDate: getFollowingThirtyDays(from) };
   } else if (to) {

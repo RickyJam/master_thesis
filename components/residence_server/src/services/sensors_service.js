@@ -7,7 +7,7 @@ import {
   getAuthForHome,
   mergeAllAuthFields,
 } from "../utils/authorizations_helper.js";
-import { getDates } from "../utils/date_helper.js";
+import { getUserDates } from "../utils/date_helper.js";
 
 const EMPTY_DATA = { data: {} };
 
@@ -18,7 +18,7 @@ const SensorsService = (usersService) => ({
     if (!relatedAuths) {
       return EMPTY_DATA;
     }
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
     const data = await getLastTenConsumptionFrom(home, fromDate, toDate);
 
@@ -33,9 +33,14 @@ const SensorsService = (usersService) => ({
 
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
-    const data = await getKitchenConsumption(home, authFields, fromDate, toDate);
+    const data = await getKitchenConsumption(
+      home,
+      authFields,
+      fromDate,
+      toDate
+    );
 
     return { data };
   },
@@ -48,9 +53,14 @@ const SensorsService = (usersService) => ({
 
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
-    const data = await getLaundryConsumption(home, authFields, fromDate, toDate);
+    const data = await getLaundryConsumption(
+      home,
+      authFields,
+      fromDate,
+      toDate
+    );
 
     return { data };
   },

@@ -8,7 +8,7 @@ import {
 import { ResidenceOwner } from "../utils/roles.js";
 import UsersService from "./users_service.js";
 import { mergeAllAuthFields } from "../utils/authorizations_helper.js";
-import { getDates } from "../utils/date_helper.js";
+import { getUserDates } from "../utils/date_helper.js";
 
 const EMPTY_DATA = { data: {} };
 
@@ -20,7 +20,7 @@ const ConsumptionService = () => ({
       return EMPTY_DATA;
     }
 
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
     const data = {};
     for (const home of collections) {
@@ -36,7 +36,7 @@ const ConsumptionService = () => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
     const data = {};
     for (const home of collections) {
@@ -58,7 +58,7 @@ const ConsumptionService = () => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
     const data = {};
     for (const home of collections) {
@@ -72,15 +72,16 @@ const ConsumptionService = () => ({
 
     return { data };
   },
+  
   getResidencePowerConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
-      return { data: {} };
+      return EMPTY_DATA;
     }
 
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    const { toDate, fromDate } = getDates(user.lengthOfStay);
+    const { toDate, fromDate } = getUserDates(user);
 
     const data = {};
     for (const home of collections) {
