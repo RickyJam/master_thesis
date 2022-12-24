@@ -1,6 +1,11 @@
 # TODO piacevoli da fare
 * provare ad usare un deployment: (magari non necessario però eh)
 
+* residence_server:
+    * possibilità di passare date come parametri, da controllare con date sull'utente 
+
+
+
 # troubleshooting
 * caso estremo: ```minikube delete```
 
