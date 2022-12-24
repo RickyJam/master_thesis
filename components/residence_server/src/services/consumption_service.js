@@ -31,55 +31,55 @@ const ConsumptionService = () => ({
     };
     return { data };
   },
-  getResidanceKitchensConsumption: async (user, toDate = lastDate) => {
+  getResidanceKitchensConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
       return EMPTY_DATA;
     }
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
-    const fromDate = getLastMonthDate(toDate);
+    const fromDate = getLastMonthDate(lastDate);
     const data = {
-      HOMEA: await getKitchenConsumption(HOMEA, authFields, fromDate, toDate),
-      HOMEB: await getKitchenConsumption(HOMEB, authFields, fromDate, toDate),
-      HOMEC: await getKitchenConsumption(HOMEC, authFields, fromDate, toDate),
-      HOMED: await getKitchenConsumption(HOMED, authFields, fromDate, toDate),
-      HOMEE: await getKitchenConsumption(HOMEE, authFields, fromDate, toDate),
-      HOMEF: await getKitchenConsumption(HOMEF, authFields, fromDate, toDate),
+      HOMEA: await getKitchenConsumption(HOMEA, authFields, fromDate, lastDate),
+      HOMEB: await getKitchenConsumption(HOMEB, authFields, fromDate, lastDate),
+      HOMEC: await getKitchenConsumption(HOMEC, authFields, fromDate, lastDate),
+      HOMED: await getKitchenConsumption(HOMED, authFields, fromDate, lastDate),
+      HOMEE: await getKitchenConsumption(HOMEE, authFields, fromDate, lastDate),
+      HOMEF: await getKitchenConsumption(HOMEF, authFields, fromDate, lastDate),
     };
     return { data };
   },
-  getResidanceLaundryConsumption: async (user, toDate = lastDate) => {
+  getResidanceLaundryConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
       return EMPTY_DATA;
     }
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    const fromDate = getLastMonthDate(toDate);
+    const fromDate = getLastMonthDate(lastDate);
     const data = {
-      HOMEA: await getLaundryConsumption(HOMEA, authFields, fromDate, toDate),
-      HOMEB: await getLaundryConsumption(HOMEB, authFields, fromDate, toDate),
-      HOMEC: await getLaundryConsumption(HOMEC, authFields, fromDate, toDate),
-      HOMED: await getLaundryConsumption(HOMED, authFields, fromDate, toDate),
-      HOMEE: await getLaundryConsumption(HOMEE, authFields, fromDate, toDate),
-      HOMEF: await getLaundryConsumption(HOMEF, authFields, fromDate, toDate),
+      HOMEA: await getLaundryConsumption(HOMEA, authFields, fromDate, lastDate),
+      HOMEB: await getLaundryConsumption(HOMEB, authFields, fromDate, lastDate),
+      HOMEC: await getLaundryConsumption(HOMEC, authFields, fromDate, lastDate),
+      HOMED: await getLaundryConsumption(HOMED, authFields, fromDate, lastDate),
+      HOMEE: await getLaundryConsumption(HOMEE, authFields, fromDate, lastDate),
+      HOMEF: await getLaundryConsumption(HOMEF, authFields, fromDate, lastDate),
     };
     return { data };
   },
-  getResidancePowerConsumption: async (user, toDate = lastDate) => {
+  getResidancePowerConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
       return { data: {} };
     }
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
-    const fromDate = getLastMonthDate(toDate);
+    const fromDate = getLastMonthDate(lastDate);
     const data = {
-      HOMEA: await getSolarConsumption(HOMEA, authFields, fromDate, toDate),
-      HOMEB: await getSolarConsumption(HOMEB, authFields, fromDate, toDate),
-      HOMEC: await getSolarConsumption(HOMEC, authFields, fromDate, toDate),
-      HOMED: await getSolarConsumption(HOMED, authFields, fromDate, toDate),
-      HOMEE: await getSolarConsumption(HOMEE, authFields, fromDate, toDate),
-      HOMEF: await getSolarConsumption(HOMEF, authFields, fromDate, toDate),
+      HOMEA: await getSolarConsumption(HOMEA, authFields, fromDate, lastDate),
+      HOMEB: await getSolarConsumption(HOMEB, authFields, fromDate, lastDate),
+      HOMEC: await getSolarConsumption(HOMEC, authFields, fromDate, lastDate),
+      HOMED: await getSolarConsumption(HOMED, authFields, fromDate, lastDate),
+      HOMEE: await getSolarConsumption(HOMEE, authFields, fromDate, lastDate),
+      HOMEF: await getSolarConsumption(HOMEF, authFields, fromDate, lastDate),
     };
     return { data };
   },
