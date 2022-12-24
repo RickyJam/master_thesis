@@ -8,10 +8,8 @@ import {
 import { ResidenceOwner } from "../utils/roles.js";
 import UsersService from "./users_service.js";
 import { mergeAllAuthFields } from "../utils/authorizations_helper.js";
+import { lastDate, getLastMonthDate } from "../utils/date_helper.js";
 
-const { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF } = collections;
-
-const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
 const EMPTY_DATA = { data: {} };
 
 const usersService = UsersService();
@@ -21,14 +19,12 @@ const ConsumptionService = () => ({
     if (user.role !== ResidenceOwner) {
       return EMPTY_DATA;
     }
-    const data = {
-      HOMEA: await getLastTenConsumptionFrom(HOMEA),
-      HOMEB: await getLastTenConsumptionFrom(HOMEB),
-      HOMEC: await getLastTenConsumptionFrom(HOMEC),
-      HOMED: await getLastTenConsumptionFrom(HOMED),
-      HOMEE: await getLastTenConsumptionFrom(HOMEE),
-      HOMEF: await getLastTenConsumptionFrom(HOMEF),
-    };
+
+    const data = {};
+    for (const home of collections) {
+      data[home] = await getLastTenConsumptionFrom(home);
+    }
+
     return { data };
   },
   getResidanceKitchensConsumption: async (user) => {
@@ -41,14 +37,16 @@ const ConsumptionService = () => ({
     const toDate = user.lengthOfStay?.to || lastDate;
     const fromDate = user.lengthOfStay?.from || getLastMonthDate(toDate);
 
-    const data = {
-      HOMEA: await getKitchenConsumption(HOMEA, authFields, fromDate, toDate),
-      HOMEB: await getKitchenConsumption(HOMEB, authFields, fromDate, toDate),
-      HOMEC: await getKitchenConsumption(HOMEC, authFields, fromDate, toDate),
-      HOMED: await getKitchenConsumption(HOMED, authFields, fromDate, toDate),
-      HOMEE: await getKitchenConsumption(HOMEE, authFields, fromDate, toDate),
-      HOMEF: await getKitchenConsumption(HOMEF, authFields, fromDate, toDate),
-    };
+    const data = {};
+    for (const home of collections) {
+      data[home] = await getKitchenConsumption(
+        home,
+        authFields,
+        fromDate,
+        toDate
+      );
+    }
+
     return { data };
   },
   getResidanceLaundryConsumption: async (user) => {
@@ -61,14 +59,17 @@ const ConsumptionService = () => ({
 
     const toDate = user.lengthOfStay?.to || lastDate;
     const fromDate = user.lengthOfStay?.from || getLastMonthDate(toDate);
-    const data = {
-      HOMEA: await getLaundryConsumption(HOMEA, authFields, fromDate, toDate),
-      HOMEB: await getLaundryConsumption(HOMEB, authFields, fromDate, toDate),
-      HOMEC: await getLaundryConsumption(HOMEC, authFields, fromDate, toDate),
-      HOMED: await getLaundryConsumption(HOMED, authFields, fromDate, toDate),
-      HOMEE: await getLaundryConsumption(HOMEE, authFields, fromDate, toDate),
-      HOMEF: await getLaundryConsumption(HOMEF, authFields, fromDate, toDate),
-    };
+
+    const data = {};
+    for (const home of collections) {
+      data[home] = await getLaundryConsumption(
+        home,
+        authFields,
+        fromDate,
+        toDate
+      );
+    }
+
     return { data };
   },
   getResidancePowerConsumption: async (user) => {
@@ -81,22 +82,19 @@ const ConsumptionService = () => ({
 
     const toDate = user.lengthOfStay?.to || lastDate;
     const fromDate = user.lengthOfStay?.from || getLastMonthDate(toDate);
-    const data = {
-      HOMEA: await getSolarConsumption(HOMEA, authFields, fromDate, toDate),
-      HOMEB: await getSolarConsumption(HOMEB, authFields, fromDate, toDate),
-      HOMEC: await getSolarConsumption(HOMEC, authFields, fromDate, toDate),
-      HOMED: await getSolarConsumption(HOMED, authFields, fromDate, toDate),
-      HOMEE: await getSolarConsumption(HOMEE, authFields, fromDate, toDate),
-      HOMEF: await getSolarConsumption(HOMEF, authFields, fromDate, toDate),
-    };
+
+    const data = {};
+    for (const home of collections) {
+      data[home] = await getSolarConsumption(
+        home,
+        authFields,
+        fromDate,
+        toDate
+      );
+    }
+
     return { data };
   },
 });
-
-function getLastMonthDate(startDate) {
-  const lastMonthDate = new Date(startDate);
-  lastMonthDate.setDate(startDate.getDate() - 30);
-  return lastMonthDate;
-}
 
 export default ConsumptionService;

@@ -7,8 +7,7 @@ import {
   getAuthForHome,
   mergeAllAuthFields,
 } from "../utils/authorizations_helper.js";
-
-const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
+import { lastDate, getLastMonthDate } from "../utils/date_helper.js";
 
 const SensorsService = (usersService) => ({
   getHomeSensors: async (home, user) => {
@@ -18,11 +17,14 @@ const SensorsService = (usersService) => ({
       return { data: [] };
     }
 
-    const data = await getLastTenConsumptionFrom(home);
+    const toDate = user.lengthOfStay?.to || lastDate;
+    const fromDate = user.lengthOfStay?.from || getLastMonthDate(toDate);
+
+    const data = await getLastTenConsumptionFrom(home, fromDate, toDate);
 
     return { ...data };
   },
-  getHomeKitchenSensors: async (home, user, toDate = lastDate) => {
+  getHomeKitchenSensors: async (home, user) => {
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
@@ -30,12 +32,15 @@ const SensorsService = (usersService) => ({
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
-    // const fromDate = getLastMonthDate(toDate);
-    const data = await getKitchenConsumption(home, authFields);
+
+    const toDate = user.lengthOfStay?.to || lastDate;
+    const fromDate = user.lengthOfStay?.from || getLastMonthDate(toDate);
+
+    const data = await getKitchenConsumption(home, authFields, fromDate, toDate);
 
     return { data };
   },
-  getHomeLaundrySensors: async (home, user, toDate = lastDate) => {
+  getHomeLaundrySensors: async (home, user) => {
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
@@ -43,17 +48,14 @@ const SensorsService = (usersService) => ({
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
-    // const fromDate = getLastMonthDate(toDate);
-    const data = await getLaundryConsumption(home, authFields);
+
+    const toDate = user.lengthOfStay?.to || lastDate;
+    const fromDate = user.lengthOfStay?.from || getLastMonthDate(toDate);
+
+    const data = await getLaundryConsumption(home, authFields, fromDate, toDate);
 
     return { data };
   },
 });
-
-function getLastMonthDate(startDate) {
-  const lastMonthDate = new Date(startDate);
-  lastMonthDate.setDate(startDate.getDate() - 30);
-  return lastMonthDate;
-}
 
 export default SensorsService;

@@ -156,4 +156,4 @@ function toSearchParams(keys) {
   return searchParams;
 }
 
-export default { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF };
+export default [ HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF ];

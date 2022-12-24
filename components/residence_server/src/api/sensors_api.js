@@ -53,7 +53,7 @@ const SensorsApi = (server) => ({
 });
 
 function validateHomeParam(homeParam) {
-  return Object.values(collections).includes(homeParam);
+  return collections.includes(homeParam);
 }
 
 export const getSensorsPaths = [SENSORS_PATH, KITCHENS_PATH, LAUNDRY_PATH];
