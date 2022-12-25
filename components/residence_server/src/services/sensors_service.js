@@ -4,6 +4,7 @@ import {
   getLaundryConsumption,
 } from "../dao/data_sensors.js";
 import {
+  getAuthAccessTimePermission,
   getAuthForHome,
   mergeAllAuthFields,
 } from "../utils/authorizations_helper.js";
@@ -18,9 +19,20 @@ const SensorsService = (usersService) => ({
     if (!relatedAuths) {
       return EMPTY_DATA;
     }
-    const { toDate, fromDate } = getUserDates(user);
 
-    const data = await getLastTenConsumptionFrom(home, fromDate, toDate);
+    const { toDate, fromDate } = getUserDates(user);
+    const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
+
+    const authFields = mergeAllAuthFields(userAuthorizations);
+
+    const data = await getLastTenConsumptionFrom(
+      home,
+      authFields,
+      fromDate,
+      toDate,
+      accessFrom,
+      accessTo
+    );
 
     return { ...data };
   },
@@ -32,6 +44,7 @@ const SensorsService = (usersService) => ({
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
+    const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
     const { toDate, fromDate } = getUserDates(user);
 
@@ -39,7 +52,9 @@ const SensorsService = (usersService) => ({
       home,
       authFields,
       fromDate,
-      toDate
+      toDate,
+      accessFrom,
+      accessTo
     );
 
     return { data };
@@ -52,6 +67,7 @@ const SensorsService = (usersService) => ({
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
+    const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
     const { toDate, fromDate } = getUserDates(user);
 
@@ -59,7 +75,9 @@ const SensorsService = (usersService) => ({
       home,
       authFields,
       fromDate,
-      toDate
+      toDate,
+      accessFrom,
+      accessTo
     );
 
     return { data };
