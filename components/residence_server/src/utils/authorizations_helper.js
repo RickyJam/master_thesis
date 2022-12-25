@@ -8,3 +8,10 @@ export function mergeAllAuthFields(authorizations) {
 export function getAuthForHome(authorizations, home) {
   return authorizations.find((auth) => auth.home === home) || undefined;
 }
+
+export function getAuthAccessTimePermission(authorization) {
+  return {
+    fromAccess: authorization.accessTimePermission?.from || undefined,
+    toAccess: authorization.accessTimePermission?.to || undefined,
+  };
+}
