@@ -77,13 +77,13 @@ function parseDocument(fromDate, toDate, doc = {}) {
   };
 }
 
-function getAggregationParams(date, lastMonthDate, params) {
+function getAggregationParams(toDate, fromDate, params) {
   return [
     {
       $match: {
         dateTime: {
-          $lt: date,
-          $gte: lastMonthDate,
+          $lt: toDate,
+          $gte: fromDate,
         },
       },
     },
