@@ -10,9 +10,25 @@ const { onDataDB } = db_accessor;
 
 const DESC = -1;
 
-async function getLastTenConsumptionFrom(collectionName) {
+async function getLastTenConsumptionFrom(
+  collectionName,
+  authFields,
+  fromDate,
+  toDate,
+  accessFrom,
+  accessTo
+) {
   return await onDataDB((db) =>
-    db.collection(collectionName).find().limit(10).toArray()
+    db
+      .collection(collectionName)
+      .find({
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      })
+      .limit(10)
+      .toArray()
   );
 }
 
@@ -20,7 +36,9 @@ async function getLaundryConsumption(
   collectionName,
   authFields,
   fromDate,
-  toDate
+  toDate,
+  accessFrom,
+  accessTo
 ) {
   const searchFields = mergeFieldsWithParams(
     authFields,
@@ -29,7 +47,12 @@ async function getLaundryConsumption(
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .find()
+      .find({
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      })
       .project(searchFields)
       .sort({ dateTime: DESC })
       .limit(100)
@@ -41,7 +64,9 @@ async function getSolarConsumption(
   collectionName,
   authFields,
   fromDate,
-  toDate
+  toDate,
+  accessFrom,
+  accessTo
 ) {
   const searchFields = mergeFieldsWithParams(
     authFields,
@@ -50,7 +75,12 @@ async function getSolarConsumption(
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .find()
+      .find({
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      })
       .project(searchFields)
       .sort({ dateTime: DESC })
       .limit(100)
@@ -62,7 +92,9 @@ async function getKitchenConsumption(
   collectionName,
   authFields,
   fromDate,
-  toDate
+  toDate,
+  accessFrom,
+  accessTo
 ) {
   const searchFields = mergeFieldsWithParams(
     authFields,
@@ -71,7 +103,12 @@ async function getKitchenConsumption(
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .find()
+      .find({
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      })
       .project(searchFields)
       .sort({ dateTime: DESC })
       .limit(100)
