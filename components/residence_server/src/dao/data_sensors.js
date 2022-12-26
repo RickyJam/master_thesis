@@ -4,6 +4,7 @@ import {
   getLaundryParams,
   getSolarParams,
   mergeFieldsWithParams,
+  withParam,
 } from "../utils/mongo_helper.js";
 import db_accessor from "db_accessor";
 
@@ -28,6 +29,13 @@ async function getLastTenConsumptionFrom(
   );
 }
 
+function buildSearchParams(authFields, getter, collectionName) {
+  return withParam(
+    "dateTime",
+    mergeFieldsWithParams(authFields, getter(collectionName))
+  );
+}
+
 async function getLaundryConsumption(
   collectionName,
   authFields,
@@ -36,10 +44,12 @@ async function getLaundryConsumption(
   accessFrom,
   accessTo
 ) {
-  const searchFields = mergeFieldsWithParams(
+  const searchFields = buildSearchParams(
     authFields,
-    getLaundryParams(collectionName)
+    getLaundryParams,
+    collectionName
   );
+
   return await onDataDB((db) =>
     db
       .collection(collectionName)
@@ -59,10 +69,12 @@ async function getSolarConsumption(
   accessFrom,
   accessTo
 ) {
-  const searchFields = mergeFieldsWithParams(
+  const searchFields = buildSearchParams(
     authFields,
-    getSolarParams(collectionName)
+    getSolarParams,
+    collectionName
   );
+
   return await onDataDB((db) =>
     db
       .collection(collectionName)
@@ -82,10 +94,12 @@ async function getKitchenConsumption(
   accessFrom,
   accessTo
 ) {
-  const searchFields = mergeFieldsWithParams(
+  const searchFields = buildSearchParams(
     authFields,
-    getKitchenParams(collectionName)
+    getKitchenParams,
+    collectionName
   );
+
   return await onDataDB((db) =>
     db
       .collection(collectionName)
