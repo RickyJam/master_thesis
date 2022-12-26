@@ -15,13 +15,13 @@ async function getLastTenConsumptionFrom(
   authFields,
   fromDate,
   toDate,
-  accessFrom=undefined,
-  accessTo=undefined
+  accessFrom = undefined,
+  accessTo = undefined
 ) {
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .aggregate(buildFilterParams(accessFrom, accessTo))
+      .aggregate(buildFilterParams(accessFrom, accessTo, fromDate, toDate))
       .limit(10)
       .toArray()
   );
@@ -39,9 +39,17 @@ function buildHourFilter(accessFrom, accessTo) {
   return hourFilter;
 }
 
-function buildFilterParams(accessFrom, accessTo) {
+function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
   const hourFilter = buildHourFilter(accessFrom, accessTo);
   const searchFields = [
+    {
+      $match: {
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      },
+    },
     {
       $addFields: {
         hour: { $dateToString: { format: "%H", date: "$dateTime" } },
@@ -77,12 +85,7 @@ async function getLaundryConsumption(
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .find({
-        dateTime: {
-          $gte: fromDate,
-          $lt: toDate,
-        },
-      })
+      .aggregate(buildFilterParams(accessFrom, accessTo, fromDate, toDate))
       .project(searchFields)
       .sort({ dateTime: DESC })
       .limit(100)
@@ -105,12 +108,7 @@ async function getSolarConsumption(
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .find({
-        dateTime: {
-          $gte: fromDate,
-          $lt: toDate,
-        },
-      })
+      .aggregate(buildFilterParams(accessFrom, accessTo, fromDate, toDate))
       .project(searchFields)
       .sort({ dateTime: DESC })
       .limit(100)
