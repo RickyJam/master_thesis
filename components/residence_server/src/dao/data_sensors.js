@@ -13,11 +13,11 @@ const DESC = -1;
 
 async function getLastTenConsumptionFrom(
   collectionName,
-  authFields,
+  _,
   fromDate,
   toDate,
-  accessFrom = undefined,
-  accessTo = undefined
+  accessFrom,
+  accessTo
 ) {
   return await onDataDB((db) =>
     db
