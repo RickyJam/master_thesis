@@ -67,7 +67,7 @@ const HomeD = [
     home: ["homeD"],
     role: "Tenant",
     lengthOfStay: {
-      from: new Date("2015-01-01"),
+      from: new Date("2015-07-21"),
       to: new Date("2015-12-31"),
     },
   },
@@ -77,7 +77,7 @@ const HomeD = [
     role: "Tenant",
     lengthOfStay: {
       from: new Date("2016-01-01"),
-      to: new Date("2016-12-31"),
+      to: new Date("2016-05-09"),
     },
   },
 ];
