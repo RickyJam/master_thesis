@@ -156,6 +156,13 @@ function toSearchParams(keys) {
   return searchParams;
 }
 
+export function withParam(key, params) {
+  return {
+    ...params,
+    [key]: 1
+  }
+}
+
 function buildHourFilter(accessFrom, accessTo) {
   const hourFilter = {};
   if (accessFrom) {
