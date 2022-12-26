@@ -149,15 +149,12 @@ export const mergeFieldsWithParams = (fields, params) => {
 };
 
 function toSearchParams(keys) {
-  const searchParams = {
-    dateTime: 1,
-  };
+  const searchParams = {};
   for (const key of keys) {
     searchParams[key] = 1;
   }
   return searchParams;
 }
-
 
 function buildHourFilter(accessFrom, accessTo) {
   const hourFilter = {};
@@ -202,4 +199,4 @@ export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
   return searchFields;
 }
 
-export default [ HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF ];
+export default [HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF];
