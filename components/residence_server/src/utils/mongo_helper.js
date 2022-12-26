@@ -149,11 +149,57 @@ export const mergeFieldsWithParams = (fields, params) => {
 };
 
 function toSearchParams(keys) {
-  const searchParams = {};
+  const searchParams = {
+    dateTime: 1,
+  };
   for (const key of keys) {
     searchParams[key] = 1;
   }
   return searchParams;
+}
+
+
+function buildHourFilter(accessFrom, accessTo) {
+  const hourFilter = {};
+  if (accessFrom) {
+    hourFilter["$gte"] = `${accessFrom}`;
+  }
+  if (accessTo) {
+    hourFilter["$lte"] = `${accessTo}`;
+  }
+
+  return hourFilter;
+}
+
+export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
+  const hourFilter = buildHourFilter(accessFrom, accessTo);
+  const searchFields = [
+    {
+      $match: {
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      },
+    },
+    {
+      $addFields: {
+        hour: { $dateToString: { format: "%H", date: "$dateTime" } },
+      },
+    },
+  ];
+
+  if (Object.keys(hourFilter).length > 0) {
+    searchFields.push({ $match: { hour: hourFilter } });
+  }
+
+  searchFields.push({
+    $project: {
+      hour: 0,
+    },
+  });
+
+  return searchFields;
 }
 
 export default [ HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF ];

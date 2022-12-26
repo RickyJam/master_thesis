@@ -1,4 +1,5 @@
 import {
+  buildFilterParams,
   getKitchenParams,
   getLaundryParams,
   getSolarParams,
@@ -25,49 +26,6 @@ async function getLastTenConsumptionFrom(
       .limit(10)
       .toArray()
   );
-}
-
-function buildHourFilter(accessFrom, accessTo) {
-  const hourFilter = {};
-  if (accessFrom) {
-    hourFilter["$gte"] = `${accessFrom}`;
-  }
-  if (accessTo) {
-    hourFilter["$lte"] = `${accessTo}`;
-  }
-
-  return hourFilter;
-}
-
-function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
-  const hourFilter = buildHourFilter(accessFrom, accessTo);
-  const searchFields = [
-    {
-      $match: {
-        dateTime: {
-          $gte: fromDate,
-          $lt: toDate,
-        },
-      },
-    },
-    {
-      $addFields: {
-        hour: { $dateToString: { format: "%H", date: "$dateTime" } },
-      },
-    },
-  ];
-
-  if (Object.keys(hourFilter).length > 0) {
-    searchFields.push({ $match: { hour: hourFilter } });
-  }
-
-  searchFields.push({
-    $project: {
-      hour: 0,
-    },
-  });
-
-  return searchFields;
 }
 
 async function getLaundryConsumption(
@@ -131,12 +89,7 @@ async function getKitchenConsumption(
   return await onDataDB((db) =>
     db
       .collection(collectionName)
-      .find({
-        dateTime: {
-          $gte: fromDate,
-          $lt: toDate,
-        },
-      })
+      .aggregate(buildFilterParams(accessFrom, accessTo, fromDate, toDate))
       .project(searchFields)
       .sort({ dateTime: DESC })
       .limit(100)
