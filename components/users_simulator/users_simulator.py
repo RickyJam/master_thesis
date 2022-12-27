@@ -7,11 +7,17 @@ def executor(user):
     print(user)
 
 if __name__ == "__main__":
-    users_process = []
+    user_threads = []
 
     for user in users_list:
         t = threading.Thread(target=executor, args=(user,))
-        users_process.append(t)
         t.start()
+        user_threads.append(t)
     
+
+    for thread in user_threads:
+        thread.join()
+
+
+    print("simulation completed")
     # TODO: quanto andare a avanti?
