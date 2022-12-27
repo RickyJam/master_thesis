@@ -1,16 +1,13 @@
 import threading
-from src import users 
+from src import users, user_thread
 
 users_list = users.users
-
-def executor(user):
-    print(user)
 
 if __name__ == "__main__":
     user_threads = []
 
     for user in users_list:
-        t = threading.Thread(target=executor, args=(user,))
+        t = threading.Thread(target=user_thread.run, args=(user,))
         t.start()
         user_threads.append(t)
     
@@ -20,4 +17,3 @@ if __name__ == "__main__":
 
 
     print("simulation completed")
-    # TODO: quanto andare a avanti?
