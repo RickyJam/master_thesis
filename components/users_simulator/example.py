@@ -28,3 +28,40 @@ if __name__ == "__main__":
 
 	# both threads completely executed
 	print("Done!")
+
+
+
+from datetime import datetime
+
+dateFormat = '%y/%m/%d' # 2014-01-01
+
+class DataRange:
+    fromDate: datetime
+    toDate: datetime
+
+    def __init__(self, fromDate: str, toDate: str) -> None:
+        self.fromDate = datetime.strptime(fromDate, dateFormat)
+        self.toDate = datetime.strptime(toDate, dateFormat)
+
+class User:
+    userId: str
+    home: str 
+    role: str 
+    lengthOfStay: DataRange
+
+    def __init__(self, userId: str, home: str, role: str, lengthOfStay: DataRange) -> None:
+        self.userId = userId
+        self.home = home
+        self.role = role
+        self.lengthOfStay = lengthOfStay
+
+
+
+def createUser(userId, home: str, role: str, fromDate: str, toDate: str):
+    return User(userId,home,role, DataRange(fromDate, toDate))
+
+
+def createUsers(): 
+    return [
+        createUser("homeOwnerA", ["homeA"], "HomeOwner", "2014-01-01", None)
+    ];
