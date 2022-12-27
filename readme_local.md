@@ -10,7 +10,7 @@
 * caso estremo: ```minikube delete```
 
 ## Mongo locale come processo:
-* eseguire start_mongo
+* eseguire ```start_mongo```
 * eseguire ```mongosh``` e poi ```use master```
 * eseguire ```db.createUser({user: "admin", pwd: "password", roles: [{role: "readWrite", db: "master"}]})```
 * uscire scrivendo ```exit```
