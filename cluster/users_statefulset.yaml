@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: database
+      app: users_db
   template:
     metadata:
       labels:
-        app: database
+        app: users_db
         selector: user-statefulset
     spec:
       containers:

@@ -62,7 +62,7 @@
 
   * Generici:
     * ```/residence```
-      * Permette di ottenere le metriche di tutti i sensori di tutte le case del residance.
+      * Permette di ottenere le metriche di tutti i sensori di tutte le case del residence.
       * I dati ritornati sono:
         * tutte le ultime metriche
         * Not Authorized se l'utente non è autorizzato.

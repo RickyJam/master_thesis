@@ -3,35 +3,85 @@ import {
   getKitchenConsumption,
   getLaundryConsumption,
 } from "../dao/data_sensors.js";
+import {
+  getAuthAccessTimePermission,
+  getAuthForHome,
+  mergeAllAuthFields,
+} from "../utils/authorizations_helper.js";
+import { getUserDates } from "../utils/date_helper.js";
 
-const lastDate = new Date(2016, 11, 31, 23, 59, 59, 0);
-const ASC = 1;
-const DESC = -1;
+const EMPTY_DATA = { data: {} };
 
-const SensorsService = () => ({
-  getHomeSensors: async (home) => {
-    const data = await getLastTenConsumptionFrom(home);
+const SensorsService = (usersService) => ({
+  getHomeSensors: async (home, user) => {
+    const userAuthorizations = await usersService.getAuthorizations(user);
+    const relatedAuths = getAuthForHome(userAuthorizations, home);
+    if (!relatedAuths) {
+      return EMPTY_DATA;
+    }
+
+    const { toDate, fromDate } = getUserDates(user);
+    const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
+
+    const authFields = mergeAllAuthFields(userAuthorizations);
+
+    const data = await getLastTenConsumptionFrom(
+      home,
+      authFields,
+      fromDate,
+      toDate,
+      accessFrom,
+      accessTo
+    );
 
     return { ...data };
   },
-  getHomeKitchenSensors: async (home, toDate = lastDate, sort = DESC) => {
-    const fromDate = getLastMonthDate(toDate);
-    const data = await getKitchenConsumption(home);
+  getHomeKitchenSensors: async (home, user) => {
+    const userAuthorizations = await usersService.getAuthorizations(user);
+    const relatedAuths = getAuthForHome(userAuthorizations, home);
+    if (!relatedAuths) {
+      return EMPTY_DATA;
+    }
+
+    const authFields = mergeAllAuthFields(userAuthorizations);
+    const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
+
+    const { toDate, fromDate } = getUserDates(user);
+
+    const data = await getKitchenConsumption(
+      home,
+      authFields,
+      fromDate,
+      toDate,
+      accessFrom,
+      accessTo
+    );
 
     return { data };
   },
-  getHomeLaundrySensors: async (home, toDate = lastDate, sort = DESC) => {
-    const fromDate = getLastMonthDate(toDate);
-    const data = await getLaundryConsumption(home);
+  getHomeLaundrySensors: async (home, user) => {
+    const userAuthorizations = await usersService.getAuthorizations(user);
+    const relatedAuths = getAuthForHome(userAuthorizations, home);
+    if (!relatedAuths) {
+      return EMPTY_DATA;
+    }
+
+    const authFields = mergeAllAuthFields(userAuthorizations);
+    const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
+
+    const { toDate, fromDate } = getUserDates(user);
+
+    const data = await getLaundryConsumption(
+      home,
+      authFields,
+      fromDate,
+      toDate,
+      accessFrom,
+      accessTo
+    );
 
     return { data };
   },
 });
-
-function getLastMonthDate(startDate) {
-  const lastMonthDate = new Date(startDate);
-  lastMonthDate.setDate(startDate.getDate() - 30);
-  return lastMonthDate;
-}
 
 export default SensorsService;

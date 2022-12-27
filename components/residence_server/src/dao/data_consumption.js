@@ -3,49 +3,65 @@ import {
   getKitchenParams,
   getLaundryParams,
   getSolarParams,
+  mergeFieldsWithParams,
 } from "../utils/mongo_helper.js";
-import onMasterDB from "./mongo_access.js";
+import db_accessor from "db_accessor";
+
+const { onDataDB } = db_accessor;
+const DESC = -1;
 
 async function getLastTenConsumptionFrom(collectionName) {
-  return await onMasterDB((db) =>
+  return await onDataDB((db) =>
     db.collection(collectionName).find().limit(10).toArray()
   );
 }
 
-async function getLaundryConsumption(collectionName, sort, fromDate, toDate) {
-  const doc = await onMasterDB((db) =>
+async function getLaundryConsumption(collectionName, fields, fromDate, toDate) {
+  const searchFields = mergeFieldsWithParams(
+    fields,
+    getLaundryParams(collectionName)
+  );
+  const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
-        getAggregationParams(toDate, fromDate, getLaundryParams(collectionName))
+        getAggregationParams(toDate, fromDate, searchFields)
       )
-      .sort({ dateTime: sort })
+      .sort({ dateTime: DESC })
       .toArray()
   );
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getSolarConsumption(collectionName, sort, fromDate, toDate) {
-  const doc = await onMasterDB((db) =>
+async function getSolarConsumption(collectionName, fields, fromDate, toDate) {
+  const searchFields = mergeFieldsWithParams(
+    fields,
+    getSolarParams(collectionName)
+  );
+  const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
-        getAggregationParams(toDate, fromDate, getSolarParams(collectionName))
+        getAggregationParams(toDate, fromDate, searchFields)
       )
-      .sort({ dateTime: sort })
+      .sort({ dateTime: DESC })
       .toArray()
   );
   return parseDocument(fromDate, toDate, doc[0]);
 }
 
-async function getKitchenConsumption(collectionName, sort, fromDate, toDate) {
-  const doc = await onMasterDB((db) =>
+async function getKitchenConsumption(collectionName, fields, fromDate, toDate) {
+  const searchFields = mergeFieldsWithParams(
+    fields,
+    getKitchenParams(collectionName)
+  );
+  const doc = await onDataDB((db) =>
     db
       .collection(collectionName)
       .aggregate(
-        getAggregationParams(toDate, fromDate, getKitchenParams(collectionName))
+        getAggregationParams(toDate, fromDate, searchFields)
       )
-      .sort({ dateTime: sort })
+      .sort({ dateTime: DESC })
       .toArray()
   );
   return parseDocument(fromDate, toDate, doc[0]);
@@ -61,13 +77,13 @@ function parseDocument(fromDate, toDate, doc = {}) {
   };
 }
 
-function getAggregationParams(date, lastMonthDate, params) {
+function getAggregationParams(toDate, fromDate, params) {
   return [
     {
       $match: {
         dateTime: {
-          $lt: date,
-          $gte: lastMonthDate,
+          $lt: toDate,
+          $gte: fromDate,
         },
       },
     },

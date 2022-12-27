@@ -143,4 +143,67 @@ const operate = (params, suffix, operation) => {
 
 export const avgAll = (params) => operate(params, "Avg", operators.avg);
 
-export default { HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF };
+export const mergeFieldsWithParams = (fields, params) => {
+  const keys = Object.keys(params);
+  return toSearchParams(keys.filter((value) => fields.includes(value)));
+};
+
+function toSearchParams(keys) {
+  const searchParams = {};
+  for (const key of keys) {
+    searchParams[key] = 1;
+  }
+  return searchParams;
+}
+
+export function withParam(key, params) {
+  return {
+    ...params,
+    [key]: 1
+  }
+}
+
+function buildHourFilter(accessFrom, accessTo) {
+  const hourFilter = {};
+  if (accessFrom) {
+    hourFilter["$gte"] = `${accessFrom}`;
+  }
+  if (accessTo) {
+    hourFilter["$lte"] = `${accessTo}`;
+  }
+
+  return hourFilter;
+}
+
+export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
+  const hourFilter = buildHourFilter(accessFrom, accessTo);
+  const searchFields = [
+    {
+      $match: {
+        dateTime: {
+          $gte: fromDate,
+          $lt: toDate,
+        },
+      },
+    },
+    {
+      $addFields: {
+        hour: { $dateToString: { format: "%H", date: "$dateTime" } },
+      },
+    },
+  ];
+
+  if (Object.keys(hourFilter).length > 0) {
+    searchFields.push({ $match: { hour: hourFilter } });
+  }
+
+  searchFields.push({
+    $project: {
+      hour: 0,
+    },
+  });
+
+  return searchFields;
+}
+
+export default [HOMEA, HOMEB, HOMEC, HOMED, HOMEE, HOMEF];
