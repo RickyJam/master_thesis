@@ -1,7 +1,7 @@
-import requests
 import threading
 from datetime import datetime
 import random
+from src import http_helper
 
 SECONDS_PER_MINUTE: int = 60
 MILLIS_PER_SECOND: int = 1000
@@ -21,36 +21,6 @@ def __getSecondsToWait() -> float:
 def __randomWait(event: threading.Event):
     event.wait(random.randint(0, 9))
 
-def __doRequest(user: dict):
-    params = {'userId': user["userId"]}
-    try:
-        response = requests.get('http://localhost:3000/residence/power', params=params)
-        print(response)
-    except:
-        print("request failed")
-
-# {   http://localhost:3000/residence/power?userId=residenceOwner
-#   "enviroment": "DEV",
-#   "path": {
-#     "consumption": [
-#       "/residence",
-#       "/residence/kitchens",
-#       "/residence/laundry",
-#       "/residence/power"
-#     ],
-#     "sensors": [
-#       "/residence/:home",
-#       "/residence/:home/kitchens",
-#       "/residence/:home/laundry"
-#     ],
-#     "tests": [
-#       "/users",
-#       "/users/login",
-#       "/users/authorizations"
-#     ]
-#   }
-# }
-
 def run(user: dict, event: threading.Event) -> None:
     __randomWait(event)
 
@@ -61,7 +31,7 @@ def run(user: dict, event: threading.Event) -> None:
     for i in range(0, N_REQS_PER_MINUTE):
         print(f'Esecuzione request {i} from: {user["userId"]}')
 
-        __doRequest(user)
+        http_helper.doRequest(user)
 
         delta = random.randint(1, 4)
         event.wait(millisToWait+delta)
