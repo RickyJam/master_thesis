@@ -21,6 +21,7 @@ def __getSecondsToWait() -> float:
 def __randomWait(event: threading.Event):
     event.wait(random.randint(0, 9))
 
+
 def run(user: dict, event: threading.Event) -> None:
     __randomWait(event)
 
