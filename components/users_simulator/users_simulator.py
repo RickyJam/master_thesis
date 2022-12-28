@@ -3,17 +3,21 @@ from src import users, user_thread
 
 users_list = users.users
 
-if __name__ == "__main__":
-    user_threads = []
+
+def main():
+    event: threading.Event = threading.Event()
+    user_threads: list = []
 
     for user in users_list:
-        t = threading.Thread(target=user_thread.run, args=(user,))
+        t = threading.Thread(target=user_thread.run, args=(user,event,))
         t.start()
         user_threads.append(t)
-    
 
     for thread in user_threads:
         thread.join()
 
-
     print("simulation completed")
+
+
+if __name__ == "__main__":
+    main()

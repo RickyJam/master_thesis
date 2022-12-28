@@ -1,6 +1,8 @@
 import requests
+import threading
 
-def run(user):
+def run(user: dict, event: threading.Event):
     print(user)
-    # TODO: definire un exit point da qui
+    event.wait(1)
     
+    # TODO: definire un exit point da qui
