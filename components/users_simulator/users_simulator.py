@@ -8,7 +8,7 @@ def main():
     user_threads: list = []
 
     for user in users_list:
-        t = threading.Thread(target=user_worker.run, args=(user,event,))
+        t = threading.Thread(target=user_worker.run, args=(user, event,))
         t.start()
         user_threads.append(t)
 
