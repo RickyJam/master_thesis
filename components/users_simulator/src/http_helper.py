@@ -28,21 +28,23 @@ def __getHostUrl() -> str:
         return f'http://{LOCAL_HOST}'
 
 
-def __buildRandomUrl(user):
-    url = urls[random.randint(0, len(urls) - 1)](user["home"][0])
+def __buildRandomUrl(home):
+    url = urls[random.randint(0, len(urls) - 1)](home)
     return f'{__getHostUrl()}{url}'
 
 
-def __buildParams(user: dict) -> dict:
-    return {'userId': user['userId']}
+def __buildParams(userId: str) -> dict:
+    return {'userId': userId}
 
 
 def __doRandomRequest(user: dict) -> None:
-    url = __buildRandomUrl(user)
+    home = (user["home"][0])
+    userId = user['userId']
+    url = __buildRandomUrl(home)
     try:
-        requests.get(url, params=__buildParams(user))
+        requests.get(url, params=__buildParams(userId))
     except:
-        print('request: \'{url}\' failed')
+        print(f'request: \'{url}\' failed')
 
 
 def doRequest(user: dict):
