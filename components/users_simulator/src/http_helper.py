@@ -29,7 +29,7 @@ def __getHostUrl() -> str:
 
 
 def __buildRandomUrl(user):
-    url = urls[random.randint(0, len(urls))](user["home"][0])
+    url = urls[random.randint(0, len(urls) - 1)](user["home"][0])
     return f'{__getHostUrl()}{url}'
 
 
