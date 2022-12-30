@@ -28,8 +28,8 @@ def __getHostUrl() -> str:
         return f'http://{LOCAL_HOST}'
 
 
-def __buildRandomUrl(home):
-    url = urls[random.randint(0, len(urls) - 1)](home)
+def __buildRandomUrl(home: str):
+    url: str = urls[random.randint(0, len(urls) - 1)](home)
     return f'{__getHostUrl()}{url}'
 
 
@@ -37,8 +37,18 @@ def __buildParams(userId: str) -> dict:
     return {'userId': userId}
 
 
+def __homeDrawing(userHome: str) -> str:
+    if random.randint(0, 1) < 0.8:
+        return userHome
+    else:
+        availableHomes: list[str] = ['homeA', 'homeB', 'homeC', 'homeD', 'homeE', 'homeF']
+        availableHomes.remove(userHome)
+        return availableHomes[random.randint(0, len(availableHomes) - 1)]
+
+
 def __doRandomRequest(user: dict) -> None:
-    home = (user["home"][0])
+    userHome = (user["home"][0])
+    home = __homeDrawing(userHome)
     userId = user['userId']
     url = __buildRandomUrl(home)
     try:
