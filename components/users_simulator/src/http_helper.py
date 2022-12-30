@@ -4,7 +4,7 @@ import random
 IS_K8S = False
 
 LOCAL_HOST = 'localhost:3000'
-K8S_HOST = 'resad'  # TODO: completare
+K8S_HOST = 'completare'  # va scritto di volta in volta, cambia ad ogni avvio del cluster
 
 urls: list = [
     # consumption
@@ -38,11 +38,11 @@ def __buildParams(user: dict) -> dict:
 
 
 def __doRandomRequest(user: dict) -> None:
+    url = __buildRandomUrl(user)
     try:
-        url = __buildRandomUrl(user)
         requests.get(url, params=__buildParams(user))
     except:
-        print('request failed')
+        print('request: \'{url}\' failed')
 
 
 def doRequest(user: dict):
