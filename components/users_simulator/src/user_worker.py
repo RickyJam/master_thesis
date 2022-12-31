@@ -1,15 +1,12 @@
 import threading
-from datetime import datetime
 import random
-from src import http_helper
+from src import http_helper, config
 
 SECONDS_PER_MINUTE: int = 60
 MILLIS_PER_SECOND: int = 1000
 
-N_REQS_PER_MINUTE: int = 10
-
 def __getSecondsToWait() -> float:
-    return SECONDS_PER_MINUTE / N_REQS_PER_MINUTE
+    return SECONDS_PER_MINUTE / config.N_REQS_PER_MINUTE
 
 
 def __randomWait(event: threading.Event):
@@ -21,7 +18,7 @@ def run(user: dict, event: threading.Event) -> None:
 
     millisToWait = __getSecondsToWait()
 
-    for i in range(0, N_REQS_PER_MINUTE):
+    for i in range(0, config.N_REQS_PER_MINUTE):
         print(f'Esecuzione request {i} from: {user["userId"]}')
 
         http_helper.doRequest(user)

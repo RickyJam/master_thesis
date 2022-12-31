@@ -1,10 +1,6 @@
 import requests
 import random
-
-IS_K8S = False
-
-LOCAL_HOST = 'localhost:3000'
-K8S_HOST = 'completare'  # va scritto di volta in volta, cambia ad ogni avvio del cluster
+from src import config
 
 urls: list = [
     # consumption
@@ -22,10 +18,10 @@ urls: list = [
 
 
 def __getHostUrl() -> str:
-    if IS_K8S:
-        return f'http://{K8S_HOST}'
+    if config.IS_K8S:
+        return f'http://{config.K8S_HOST}'
     else:
-        return f'http://{LOCAL_HOST}'
+        return f'http://{config.LOCAL_HOST}'
 
 
 def __buildRandomUrl(home: str):
