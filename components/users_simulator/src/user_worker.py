@@ -1,29 +1,29 @@
-import threading
+from threading import Event
 import random
-from src import http_helper, config
+from src.http_helper import doAsyncRequest
+from src.config import N_REQS_PER_MINUTE
 
 SECONDS_PER_MINUTE: int = 60
 MILLIS_PER_SECOND: int = 1000
 
 def __getSecondsToWait() -> float:
-    return SECONDS_PER_MINUTE / config.N_REQS_PER_MINUTE
+    return SECONDS_PER_MINUTE / N_REQS_PER_MINUTE
 
 
-def __randomWait(event: threading.Event):
+def __randomWait(event: Event):
     event.wait(random.randint(0, 9))
 
 
-def run(user: dict, event: threading.Event) -> None:
+def run(user: dict, event: Event) -> None:
     __randomWait(event)
 
     millisToWait = __getSecondsToWait()
 
-    for i in range(0, config.N_REQS_PER_MINUTE):
+    for i in range(0, N_REQS_PER_MINUTE):
         print(f'Esecuzione request {i} from: {user["userId"]}')
 
-        http_helper.doRequest(user)
+        doAsyncRequest(user)
 
-        delta = random.randint(1, 4)
-        event.wait(millisToWait+delta)
+        event.wait(millisToWait)
 
     return
