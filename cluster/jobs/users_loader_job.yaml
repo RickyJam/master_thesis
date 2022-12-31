@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: users-loader-job
+  namespace: master-thesis
+spec:
+  template:
+    spec:
+      subdomain: users-loader-service
+      containers:
+        - name: users-loader-job
+          image: thesis/users_loader
+          imagePullPolicy: Never
+      restartPolicy: Never
+  backoffLimit: 0

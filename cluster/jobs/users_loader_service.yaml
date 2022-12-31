@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-loader-service
+  namespace: master-thesis
+spec:
+  clusterIP: None
+  selector:
+    job-name: users-loader-job
