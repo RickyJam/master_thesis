@@ -9,6 +9,8 @@ resources:
   - persistent_volume.yaml
   - mongo-secret.yaml
   - mongo_service.yaml
+  - users_service.yaml
   - data_statefulset.yaml
+  - users_statefulset.yaml
   - node_service.yaml
   - node_deployment.yaml
