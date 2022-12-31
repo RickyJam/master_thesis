@@ -4,6 +4,7 @@ metadata:
   name: node-server
   namespace: master-thesis
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: node-server
