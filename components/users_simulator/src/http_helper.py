@@ -1,6 +1,7 @@
 import requests
 import random
 from src import config
+from threading import Thread
 
 urls: list = [
     # consumption
@@ -55,3 +56,6 @@ def __doRandomRequest(user: dict) -> None:
 
 def doRequest(user: dict):
     __doRandomRequest(user)
+
+def doAsyncRequest(user: dict):
+    Thread(target=doRequest, args=(user,))
