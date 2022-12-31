@@ -1,14 +1,14 @@
-import threading
+from threading import Event, Thread
 from src import users, user_worker
 
 users_list = users.users
 
 def main():
-    event: threading.Event = threading.Event()
+    event: Event = Event()
     user_threads: list = []
 
     for user in users_list:
-        t = threading.Thread(target=user_worker.run, args=(user, event,))
+        t = Thread(target=user_worker.run, args=(user, event,))
         t.start()
         user_threads.append(t)
 
