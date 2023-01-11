@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # start Minikube container
-minikibe start
+minikube start
 
 # Setting label used by storageClasss
 kubectl label nodes minikube size=large
