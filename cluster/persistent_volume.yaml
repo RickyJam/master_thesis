@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-    name: mongodb-pv
+    name: data-pv
     namespace: master-thesis
 spec:
   capacity:
@@ -61,7 +61,7 @@ spec:
   storageClassName: hostpath
   volumeMode: Filesystem
   capacity:
-    storage: 1Gi
+    storage: 2Gi
   accessModes:
     - ReadOnlyMany
   hostPath:

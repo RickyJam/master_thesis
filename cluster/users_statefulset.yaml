@@ -31,10 +31,10 @@ spec:
             - name: k8-mounts
               mountPath: /etc/k8-mounts
               readOnly: true
-            - name: mongodb-scripts
+            - name: datadb-scripts
               mountPath: /docker-entrypoint-initdb.d
               readOnly: true
-            - name: mongodb-configmap
+            - name: datadb-configmap
               mountPath: /config
               readOnly: true
             - name: users-data
@@ -58,15 +58,15 @@ spec:
               - key: MONGO_MASTER_PASSWORD
                 path: MONGO_MASTER_PASSWORD
                 mode: 0444
-        - name: mongodb-scripts
+        - name: datadb-scripts
           configMap:
-            name: mongodb-configmap
+            name: datadb-configmap
             items:
               - key: ensure-users.js
                 path: ensure-users.js
-        - name: mongodb-configmap
+        - name: datadb-configmap
           configMap:
-            name: mongodb-configmap
+            name: datadb-configmap
             items:
               - key: mongo.conf
                 path: mongo.conf

@@ -7,8 +7,8 @@ resources:
   - config_map.yaml  
   - persistent_volume_claim.yaml
   - persistent_volume.yaml
-  - mongo-secret.yaml
-  - mongo_service.yaml
+  - mongo_secret.yaml
+  - data_service.yaml
   - users_service.yaml
   - data_statefulset.yaml
   - users_statefulset.yaml

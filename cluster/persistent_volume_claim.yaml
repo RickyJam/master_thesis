@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: mongodb-pvc
+  name: datadb-pvc
   namespace: master-thesis
 spec:
   storageClassName: mongodb-storageclass
