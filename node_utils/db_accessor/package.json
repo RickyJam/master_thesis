@@ -1,6 +1,6 @@
 {
   "name": "db_accessor",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Packege used to create mongodb connection with both local and minikube environment",
   "main": "db_accessor.js",
   "type": "module",
