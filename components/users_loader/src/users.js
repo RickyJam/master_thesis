@@ -88,7 +88,7 @@ const HomeE = [
     home: ["homeE"],
     role: "Tenant",
     lengthOfStay: {
-      from: new Date("2016-01-01"),
+      from: new Date("2016-06-09"),
       to: new Date("2016-12-31"),
     },
   },
