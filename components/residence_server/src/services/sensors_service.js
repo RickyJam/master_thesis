@@ -25,7 +25,6 @@ const SensorsService = (usersService) => ({
 
     const authFields = mergeAllAuthFields(userAuthorizations);
 
-    console.log({ toDate, fromDate, accessFrom, accessTo });
     const data = await getLastTenConsumptionFrom(
       home,
       authFields,
