@@ -159,20 +159,28 @@ function toSearchParams(keys) {
 export function withParam(key, params) {
   return {
     ...params,
-    [key]: 1
-  }
+    [key]: 1,
+  };
 }
 
 function buildHourFilter(accessFrom, accessTo) {
-  const hourFilter = {};
-  if (accessFrom) {
-    hourFilter['$gte'] = parseInt(accessFrom);
-  }
-  if (accessTo) {
-    hourFilter['$lte'] = parseInt(accessTo);
+  if (accessFrom && accessTo) {
+    // (min <= hour < max) or (hour === max and minutes === 00)
+    // hourFilter['$gte'] = parseInt(accessFrom);
+    // hourFilter['$lte'] = parseInt(accessTo);
+    // searchFields.push({ $match: { hour: hourFilter } });
+    return {
+      $match: {
+        $or: [
+          { hour: { $gte: parseInt(accessFrom), $lt: parseInt(accessTo) } },
+          { hour: parseInt(accessTo), minutes: 0 },
+          
+        ],
+      },
+    };
   }
 
-  return hourFilter;
+  return undefined;
 }
 
 export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
@@ -189,12 +197,13 @@ export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
     {
       $addFields: {
         hour: { $hour: "$dateTime" },
+        minutes: { $minute: "$dateTime" },
       },
     },
   ];
 
-  if (Object.keys(hourFilter).length > 0) {
-    searchFields.push({ $match: { hour: hourFilter } });
+  if (hourFilter) {
+    searchFields.push(hourFilter);
   }
 
   searchFields.push({
