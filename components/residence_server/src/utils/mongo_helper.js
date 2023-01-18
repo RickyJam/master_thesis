@@ -166,10 +166,10 @@ export function withParam(key, params) {
 function buildHourFilter(accessFrom, accessTo) {
   const hourFilter = {};
   if (accessFrom) {
-    hourFilter["$gte"] = `${accessFrom}`;
+    hourFilter['$gte'] = parseInt(accessFrom);
   }
   if (accessTo) {
-    hourFilter["$lte"] = `${accessTo}`;
+    hourFilter['$lte'] = parseInt(accessTo);
   }
 
   return hourFilter;
@@ -178,17 +178,17 @@ function buildHourFilter(accessFrom, accessTo) {
 export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
   const hourFilter = buildHourFilter(accessFrom, accessTo);
   const searchFields = [
-    {
-      $match: {
-        dateTime: {
-          $gte: fromDate,
-          $lt: toDate,
-        },
-      },
-    },
+    // {
+    //   $match: {
+    //     dateTime: {
+    //       $gte: fromDate,
+    //       $lt: toDate,
+    //     },
+    //   },
+    // },
     {
       $addFields: {
-        hour: { $dateToString: { format: "%H", date: "$dateTime" } },
+        hour: { $hour: "$dateTime" },
       },
     },
   ];
