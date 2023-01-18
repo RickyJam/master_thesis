@@ -20,11 +20,12 @@ const SensorsService = (usersService) => ({
       return EMPTY_DATA;
     }
 
-    const { toDate, fromDate } = getUserDates(user);
+        const { toDate, fromDate } = getUserDates(user, home);
     const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
     const authFields = mergeAllAuthFields(userAuthorizations);
 
+    console.log({ toDate, fromDate, accessFrom, accessTo });
     const data = await getLastTenConsumptionFrom(
       home,
       authFields,
@@ -34,7 +35,7 @@ const SensorsService = (usersService) => ({
       accessTo
     );
 
-    return { ...data };
+    return { data };
   },
   getHomeKitchenSensors: async (home, user) => {
     const userAuthorizations = await usersService.getAuthorizations(user);
@@ -46,7 +47,7 @@ const SensorsService = (usersService) => ({
     const authFields = mergeAllAuthFields(userAuthorizations);
     const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
-    const { toDate, fromDate } = getUserDates(user);
+        const { toDate, fromDate } = getUserDates(user, home);
 
     const data = await getKitchenConsumption(
       home,
@@ -69,7 +70,7 @@ const SensorsService = (usersService) => ({
     const authFields = mergeAllAuthFields(userAuthorizations);
     const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
-    const { toDate, fromDate } = getUserDates(user);
+        const { toDate, fromDate } = getUserDates(user, home);
 
     const data = await getLaundryConsumption(
       home,
