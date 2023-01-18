@@ -11,7 +11,7 @@ export function getAuthForHome(authorizations, home) {
 
 export function getAuthAccessTimePermission(authorization) {
   return {
-    fromAccess: authorization.accessTimePermission?.from || undefined,
-    toAccess: authorization.accessTimePermission?.to || undefined,
+    accessFrom: authorization.accessTimePermission?.from || undefined,
+    accessTo: authorization.accessTimePermission?.to || undefined,
   };
 }
