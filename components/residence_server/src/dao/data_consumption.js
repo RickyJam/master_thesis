@@ -3,6 +3,7 @@ import {
   getKitchenParams,
   getLaundryParams,
   getSolarParams,
+  maxAll,
   mergeFieldsWithParams,
   toSearchParams,
 } from "../utils/mongo_helper.js";
@@ -98,6 +99,7 @@ function getAggregationParams(toDate, fromDate, params) {
       $group: {
         _id: null,
         ...avgAll(params),
+        ...maxAll(params)
       },
     },
   ];
