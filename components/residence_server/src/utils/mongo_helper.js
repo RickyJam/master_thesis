@@ -131,6 +131,7 @@ export function getSolarParams(collection) {
 
 const operators = {
   avg: "avg",
+  max: "max",
 };
 
 const operate = (params, suffix, operation) => {
@@ -142,6 +143,7 @@ const operate = (params, suffix, operation) => {
 };
 
 export const avgAll = (params) => operate(params, "Avg", operators.avg);
+export const maxAll = (params) => operate(params, "Max", operators.max);
 
 export const mergeFieldsWithParams = (fields, params) => {
   const keys = Object.keys(params);
