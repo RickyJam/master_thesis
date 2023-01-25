@@ -4,15 +4,22 @@ import {
   getLaundryParams,
   getSolarParams,
   mergeFieldsWithParams,
+  toSearchParams,
 } from "../utils/mongo_helper.js";
 import db_accessor from "db_accessor";
 
 const { onDataDB } = db_accessor;
 const DESC = -1;
 
-async function getLastTenConsumptionFrom(collectionName) {
+async function getLastTenConsumptionFrom(collectionName, fields) {
   return await onDataDB((db) =>
-    db.collection(collectionName).find().limit(10).toArray()
+    db.collection(collectionName).aggregate([
+      {
+        $project: {
+          ...toSearchParams(fields)
+        },
+      },
+    ]).limit(10).toArray()
   );
 }
 
