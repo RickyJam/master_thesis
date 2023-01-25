@@ -5,7 +5,6 @@ from threading import Thread
 
 urls: list = [
     # consumption
-    lambda _: '/residence/power',
     lambda _: '/residence',
     lambda _: '/residence/kitchens',
     lambda _: '/residence/laundry',
@@ -13,7 +12,7 @@ urls: list = [
 
     # sensors
     lambda home: f'/residence/{home}',
-    lambda home: f'/residence/{home}/kitchens',
+    lambda home: f'/residence/{home}/kitchen',
     lambda home: f'/residence/{home}/laundry',
 ]
 
