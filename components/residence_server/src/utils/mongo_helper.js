@@ -148,7 +148,7 @@ export const mergeFieldsWithParams = (fields, params) => {
   return toSearchParams(keys.filter((value) => fields.includes(value)));
 };
 
-function toSearchParams(keys) {
+export function toSearchParams(keys) {
   const searchParams = {};
   for (const key of keys) {
     searchParams[key] = 1;
