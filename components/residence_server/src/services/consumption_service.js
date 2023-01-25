@@ -7,7 +7,7 @@ import {
 } from "../dao/data_consumption.js";
 import { ResidenceOwner } from "../utils/roles.js";
 import UsersService from "./users_service.js";
-import { mergeAllAuthFields } from "../utils/authorizations_helper.js";
+import { getAuthForHome, mergeAllAuthFields } from "../utils/authorizations_helper.js";
 import { getUserDates } from "../utils/date_helper.js";
 
 const EMPTY_DATA = { data: {} };
@@ -19,12 +19,13 @@ const ConsumptionService = () => ({
     if (user.role !== ResidenceOwner) {
       return EMPTY_DATA;
     }
-
-    const { toDate, fromDate } = getUserDates(user);
+    
+    const userAuthorizations = await usersService.getAuthorizations(user);
 
     const data = {};
     for (const home of collections) {
-      data[home] = await getLastTenConsumptionFrom(home);
+      const relatedAuths = getAuthForHome(userAuthorizations, home);
+      data[home] = await getLastTenConsumptionFrom(home, relatedAuths.fields);
     }
 
     return { data };
