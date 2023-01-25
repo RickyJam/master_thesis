@@ -20,7 +20,7 @@ const SensorsService = (usersService) => ({
       return EMPTY_DATA;
     }
 
-        const { toDate, fromDate } = getUserDates(user, home);
+    const { toDate, fromDate } = getUserDates(user, home);
     const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
     const authFields = mergeAllAuthFields(userAuthorizations);
@@ -46,7 +46,7 @@ const SensorsService = (usersService) => ({
     const authFields = mergeAllAuthFields(userAuthorizations);
     const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
-        const { toDate, fromDate } = getUserDates(user, home);
+    const { toDate, fromDate } = getUserDates(user, home);
 
     const data = await getKitchenConsumption(
       home,
@@ -69,7 +69,7 @@ const SensorsService = (usersService) => ({
     const authFields = mergeAllAuthFields(userAuthorizations);
     const { accessFrom, accessTo } = getAuthAccessTimePermission(relatedAuths);
 
-        const { toDate, fromDate } = getUserDates(user, home);
+    const { toDate, fromDate } = getUserDates(user, home);
 
     const data = await getLaundryConsumption(
       home,
