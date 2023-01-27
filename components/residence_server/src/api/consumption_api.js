@@ -1,4 +1,5 @@
 import ConsumptionService from "../services/consumption_service.js";
+import { handleData } from "../utils/http_helper.js";
 
 const consumptionService = ConsumptionService();
 
@@ -12,25 +13,29 @@ const ConsumptionApi = (server) => ({
     server.get(CONSUMPTION_PATH, async (req, res) => {
       const user = req.user;
       const data = await consumptionService.getResidenceConsumption(user);
-      res.send(data);
+      handleData(res, data);
     });
 
     server.get(KITCHENS_PATH, async (req, res) => {
       const user = req.user;
-      const data = await consumptionService.getResidenceKitchensConsumption(user);
-      res.send(data);
+      const data = await consumptionService.getResidenceKitchensConsumption(
+        user
+      );
+      handleData(res, data);
     });
 
     server.get(LAUNDRY_PATH, async (req, res) => {
       const user = req.user;
-      const data = await consumptionService.getResidenceLaundryConsumption(user);
-      res.send(data);
+      const data = await consumptionService.getResidenceLaundryConsumption(
+        user
+      );
+      handleData(res, data);
     });
 
     server.get(POWER_PATH, async (req, res) => {
       const user = req.user;
       const data = await consumptionService.getResidencePowerConsumption(user);
-      res.send(data);
+      handleData(res, data);
     });
   },
 });
@@ -41,4 +46,5 @@ export const getConsumptionPaths = [
   LAUNDRY_PATH,
   POWER_PATH,
 ];
+
 export default ConsumptionApi;
