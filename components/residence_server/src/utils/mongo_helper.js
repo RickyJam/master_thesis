@@ -211,6 +211,7 @@ export function buildFilterParams(accessFrom, accessTo, fromDate, toDate) {
   searchFields.push({
     $project: {
       hour: 0,
+      minutes: 0,
     },
   });
 
