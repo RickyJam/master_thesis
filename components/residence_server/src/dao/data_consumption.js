@@ -17,6 +17,7 @@ async function getLastTenConsumptionFrom(collectionName, fields) {
     db.collection(collectionName).aggregate([
       {
         $project: {
+          dateTime: 1,
           ...toSearchParams(fields)
         },
       },
