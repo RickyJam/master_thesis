@@ -10,14 +10,12 @@ import {
 } from "../utils/authorizations_helper.js";
 import { getUserDates } from "../utils/date_helper.js";
 
-const EMPTY_DATA = { data: {} };
-
 const SensorsService = (usersService) => ({
   getHomeSensors: async (home, user) => {
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
-      return EMPTY_DATA;
+      return undefined;
     }
 
     const { toDate, fromDate } = getUserDates(user, home);
@@ -40,7 +38,7 @@ const SensorsService = (usersService) => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
-      return EMPTY_DATA;
+      return undefined;
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);
@@ -63,7 +61,7 @@ const SensorsService = (usersService) => ({
     const userAuthorizations = await usersService.getAuthorizations(user);
     const relatedAuths = getAuthForHome(userAuthorizations, home);
     if (!relatedAuths) {
-      return EMPTY_DATA;
+      return undefined;
     }
 
     const authFields = mergeAllAuthFields(userAuthorizations);

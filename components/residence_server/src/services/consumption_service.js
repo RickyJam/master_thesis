@@ -10,14 +10,12 @@ import UsersService from "./users_service.js";
 import { getAuthForHome, mergeAllAuthFields } from "../utils/authorizations_helper.js";
 import { getUserDates } from "../utils/date_helper.js";
 
-const EMPTY_DATA = { data: {} };
-
 const usersService = UsersService();
 
 const ConsumptionService = () => ({
   getResidenceConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
-      return EMPTY_DATA;
+      return undefined;
     }
     
     const userAuthorizations = await usersService.getAuthorizations(user);
@@ -32,7 +30,7 @@ const ConsumptionService = () => ({
   },
   getResidenceKitchensConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
-      return EMPTY_DATA;
+      return undefined;
     }
     const userAuthorizations = await usersService.getAuthorizations(user);
     const authFields = mergeAllAuthFields(userAuthorizations);
@@ -53,7 +51,7 @@ const ConsumptionService = () => ({
   },
   getResidenceLaundryConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
-      return EMPTY_DATA;
+      return undefined;
     }
 
     const userAuthorizations = await usersService.getAuthorizations(user);
@@ -76,7 +74,7 @@ const ConsumptionService = () => ({
   
   getResidencePowerConsumption: async (user) => {
     if (user.role !== ResidenceOwner) {
-      return EMPTY_DATA;
+      return undefined;
     }
 
     const userAuthorizations = await usersService.getAuthorizations(user);
