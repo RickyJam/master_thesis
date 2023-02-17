@@ -167,10 +167,6 @@ export function withParam(key, params) {
 
 function buildHourFilter(accessFrom, accessTo) {
   if (accessFrom && accessTo) {
-    // (min <= hour < max) or (hour === max and minutes === 00)
-    // hourFilter['$gte'] = parseInt(accessFrom);
-    // hourFilter['$lte'] = parseInt(accessTo);
-    // searchFields.push({ $match: { hour: hourFilter } });
     return {
       $match: {
         $or: [
