@@ -4,6 +4,8 @@ import random
 from src import config
 from threading import Thread
 
+TIMEOUT_REQUEST: int = 5
+
 urls: list = [
     # consumption
     lambda _: '/residence',
@@ -51,11 +53,11 @@ def __doRandomRequest(user: dict) -> int:
     url = __buildRandomUrl(home)
     try:
         start = time.perf_counter()
-        requests.get(url, params=__buildParams(userId))
+        requests.get(url, params=__buildParams(userId), timeout=TIMEOUT_REQUEST)
         return time.perf_counter() - start
     except:
         print(f'request: \'{url}\' failed')
-        return 0
+        return TIMEOUT_REQUEST
 
 
 def doRequest(user: dict, results_list: list[int], index) -> int:
