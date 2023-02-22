@@ -6,9 +6,10 @@ users_list = users.users
 def main():
     event: Event = Event()
     user_threads: list = []
+    users_results: list = [None] * len(users_list)
 
-    for user in users_list:
-        t = Thread(target=user_worker.run, args=(user, event,))
+    for i in range(0, len(users_list)):
+        t = Thread(target=user_worker.run, args=(users_list[i], event, users_results, i))
         t.start()
         user_threads.append(t)
 
@@ -16,6 +17,7 @@ def main():
         thread.join()
 
     print("simulation completed")
+    print(users_results)
 
 
 if __name__ == "__main__":
