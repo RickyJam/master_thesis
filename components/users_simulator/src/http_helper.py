@@ -1,4 +1,5 @@
-import requests
+import time
+import pip._vendor.requests as requests
 import random
 from src import config
 from threading import Thread
@@ -37,24 +38,31 @@ def __homeDrawing(userHome: str) -> str:
     if random.randint(0, 1) < 0.8:
         return userHome
     else:
-        availableHomes: list[str] = ['homeA', 'homeB', 'homeC', 'homeD', 'homeE', 'homeF']
+        availableHomes: list[str] = ['homeA', 'homeB',
+                                     'homeC', 'homeD', 'homeE', 'homeF']
         availableHomes.remove(userHome)
         return availableHomes[random.randint(0, len(availableHomes) - 1)]
 
 
-def __doRandomRequest(user: dict) -> None:
+def __doRandomRequest(user: dict) -> int:
     userHome = (user["home"][0])
     home = __homeDrawing(userHome)
     userId = user['userId']
     url = __buildRandomUrl(home)
     try:
+        start = time.perf_counter()
         requests.get(url, params=__buildParams(userId))
+        return time.perf_counter() - start
     except:
         print(f'request: \'{url}\' failed')
+        return 0
 
 
-def doRequest(user: dict):
-    __doRandomRequest(user)
+def doRequest(user: dict, results_list: list[int], index) -> int:
+    results_list[index] = __doRandomRequest(user)
 
-def doAsyncRequest(user: dict):
-    Thread(target=doRequest, args=(user,))
+
+def doAsyncRequest(user: dict, results_list: list[int], index) -> Thread:
+    thread: Thread = Thread(target=doRequest, args=(user, results_list, index))
+    thread.start()
+    return thread
