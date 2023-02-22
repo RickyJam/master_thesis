@@ -17,7 +17,10 @@ def main():
         thread.join()
 
     print("simulation completed")
-    print(users_results)
+    
+    for i in range(0, len(users_results)):
+        print(f'User {i} results:')
+        print(users_results[i])
 
 
 if __name__ == "__main__":
