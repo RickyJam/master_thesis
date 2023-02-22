@@ -19,7 +19,7 @@ def run(user: dict, event: Event, users_results: list[list[int]], userIndex: int
     requestThreads: list[Thread] = []
     resultsList: list[int] = [None] * totalRequests
 
-    # __randomWait(event)
+    __randomWait(event)
 
     millisToWait = __getSecondsToWait()
 
