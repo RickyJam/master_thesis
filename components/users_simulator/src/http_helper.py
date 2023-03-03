@@ -4,7 +4,7 @@ import random
 from src import config
 from threading import Thread
 
-TIMEOUT_REQUEST: int = 5
+TIMEOUT_REQUEST: int = 60
 
 urls: list = [
     # consumption
