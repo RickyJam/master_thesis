@@ -18,9 +18,13 @@ def main():
 
     print("simulation completed")
     
+    failed_request: int = 0
+
     for i in range(0, len(users_results)):
         print(f'User {i} results:')
         print(users_results[i])
+        failed_request += users_results[i].count(60)
+    print(f'Total failed requests: {failed_request}')
 
 
 if __name__ == "__main__":
