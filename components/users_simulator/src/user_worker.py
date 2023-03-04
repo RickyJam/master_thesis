@@ -24,7 +24,7 @@ def run(user: dict, event: Event, users_results: list[list[int]], userIndex: int
     millisToWait = __getSecondsToWait()
 
     for i in range(0, totalRequests):
-        print(f'Esecuzione request {i} from: {user["userId"]}')
+        print(f'Request {i} from: {user["userId"]}')
 
         requestThreads.append(doAsyncRequest(user, resultsList, i))
 
